@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Film Strip Preview — judge each shot</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#010101; color:#F5E6EA; font-family:'Helvetica Neue',Arial,sans-serif; padding:40px 24px; }
+  h1 { font-size:22px; font-weight:800; letter-spacing:-0.02em; margin-bottom:6px; }
+  .sub { font-family:'Courier New',monospace; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:#9b7a87; margin-bottom:36px; }
+  h2 { font-family:'Courier New',monospace; font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:#A35671; margin:44px 0 16px; }
+  .grid { display:flex; flex-wrap:wrap; gap:14px; }
+  .slot { width:480px; }
+  .frame { position:relative; width:480px; height:300px; background:#0a0808; overflow:hidden; }
+  .frame img { width:100%; height:100%; object-fit:cover; opacity:0.85; }
+  .shade { position:absolute; inset:0; background:linear-gradient(to top, rgba(1,1,1,0.35) 0%, transparent 45%); }
+  .num { position:absolute; top:10px; left:10px; background:#A35671; color:#fff; font-weight:800; font-size:13px; padding:4px 10px; font-family:'Courier New',monospace; }
+  .cap { margin-top:8px; }
+  .cap .name { font-size:13px; font-weight:700; color:#F5E6EA; }
+  .cap .file { font-family:'Courier New',monospace; font-size:10px; color:#9b7a87; letter-spacing:0.05em; margin-top:2px; word-break:break-all; }
+</style>
+</head>
+<body>
+
+<h1>Film Strip Preview</h1>
+<p class="sub">Each frame = exact strip crop (480 × 300) · tell me the number + new photo to amend</p>
+
+<h2>Row 1 — scrolls left</h2>
+<div class="grid">
+  <div class="slot"><div class="frame"><img src="/event photos/Sckylers/20250904-20250903-DSC09464.JPG"><div class="shade"></div><span class="num">1</span></div><div class="cap"><div class="name">Sckylers</div><div class="file">20250904-20250903-DSC09464.JPG</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Wegovy/Wegovy.001.jpeg"><div class="shade"></div><span class="num">2</span></div><div class="cap"><div class="name">Wegovy</div><div class="file">Wegovy.001.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Wegovy Tour - Montaza/Wegovy_Montaza_Card-new.png"><div class="shade"></div><span class="num">3</span></div><div class="cap"><div class="name">Wegovy Tour — Montaza</div><div class="file">Wegovy_Montaza_Card-new.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Lipton Appreciation Event/Lipton_15.png"><div class="shade"></div><span class="num">4</span></div><div class="cap"><div class="name">Lipton Appreciation Event</div><div class="file">Lipton_15.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Wegovt Tour - Citadel Saladin/photo-01_fixed.jpg"><div class="shade"></div><span class="num">5</span></div><div class="cap"><div class="name">Wegovy Tour — Citadel Saladin</div><div class="file">photo-01_fixed.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Marriot Residence/Marriot new/Marriot Photo 5.jpg"><div class="shade"></div><span class="num">6</span></div><div class="cap"><div class="name">Marriott Residence</div><div class="file">Marriot Photo 5.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Arabtec/0P9A8044.jpg"><div class="shade"></div><span class="num">7</span></div><div class="cap"><div class="name">Arabtec</div><div class="file">0P9A8044.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Home Town/US501930.JPG"><div class="shade"></div><span class="num">8</span></div><div class="cap"><div class="name">Hometown Project</div><div class="file">US501930.JPG</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Ozempic/Ozempic 1.png"><div class="shade"></div><span class="num">9</span></div><div class="cap"><div class="name">Ozempic Launch</div><div class="file">Ozempic 1.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Food Bank/YASS2677.jpg"><div class="shade"></div><span class="num">10</span></div><div class="cap"><div class="name">Egyptian Food Bank</div><div class="file">YASS2677.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/British/Main Photo.png"><div class="shade"></div><span class="num">11</span></div><div class="cap"><div class="name">British Embassy — Royal Birthday Reception</div><div class="file">Main Photo.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Qatar Embassy - National Day Event/Qatar_1.png"><div class="shade"></div><span class="num">12</span></div><div class="cap"><div class="name">Qatar National Day Celebrations</div><div class="file">Qatar_1.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Medfest 5th/MagedHelal-Studio-708_web.jpg"><div class="shade"></div><span class="num">13</span></div><div class="cap"><div class="name">Medfest Film Festival</div><div class="file">MagedHelal-Studio-708_web.jpg</div></div></div>
+</div>
+
+<h2>Row 2 — scrolls right</h2>
+<div class="grid">
+  <div class="slot"><div class="frame"><img src="/event photos/Signal/0P9A4526.jpg"><div class="shade"></div><span class="num">14</span></div><div class="cap"><div class="name">Signal × UNICEF</div><div class="file">0P9A4526.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Shell STLC/image155-2_web.jpg"><div class="shade"></div><span class="num">15</span></div><div class="cap"><div class="name">Shell STLC Event</div><div class="file">image155-2_web.jpg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Saxenda 4th Annivesrasy/saxenda-photo-09.png"><div class="shade"></div><span class="num">16</span></div><div class="cap"><div class="name">Saxenda 4th Anniversary</div><div class="file">saxenda-photo-09.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Main Marks/image245.jpeg"><div class="shade"></div><span class="num">17</span></div><div class="cap"><div class="name">Main Marks — Moray</div><div class="file">image245.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Direction White/image229.jpeg"><div class="shade"></div><span class="num">18</span></div><div class="cap"><div class="name">Direction White — Arabella</div><div class="file">image229.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Manaj/image309.jpeg"><div class="shade"></div><span class="num">19</span></div><div class="cap"><div class="name">Manaj — Blanks</div><div class="file">image309.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Mondelez/Card.png"><div class="shade"></div><span class="num">20</span></div><div class="cap"><div class="name">Mondelez International</div><div class="file">Card.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Revolve - Town Writers/image297.jpeg"><div class="shade"></div><span class="num">21</span></div><div class="cap"><div class="name">Revolve — Town Writers</div><div class="file">image297.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Obsidier Towers/image216.jpeg"><div class="shade"></div><span class="num">22</span></div><div class="cap"><div class="name">Obsidier Towers</div><div class="file">image216.jpeg</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Egyptian Obesity Summit/image59.png"><div class="shade"></div><span class="num">23</span></div><div class="cap"><div class="name">Egyptian Obesity Summit</div><div class="file">image59.png</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/Notion/DSC04808.JPG"><div class="shade"></div><span class="num">24</span></div><div class="cap"><div class="name">Notion — Town Writers</div><div class="file">DSC04808.JPG</div></div></div>
+  <div class="slot"><div class="frame"><img src="/event photos/LNG 1000 Cargo Celebration/Trophy_LNG_2.JPG"><div class="shade"></div><span class="num">25</span></div><div class="cap"><div class="name">Egyptian LNG — 1000 Cargos</div><div class="file">Trophy_LNG_2.JPG</div></div></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Behance — Shell STLC Event</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a1a; font-family: 'Helvetica Neue', Arial, sans-serif; color: #fff; }
+
+  .behance-bar {
+    background: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .behance-logo { font-size: 22px; font-weight: 900; letter-spacing: -0.05em; color: #1769ff; }
+  .behance-bar-right { display: flex; align-items: center; gap: 20px; }
+  .behance-like { font-size: 12px; color: #777; display: flex; align-items: center; gap: 6px; }
+  .behance-btn { background: #1769ff; color: #fff; border: none; padding: 8px 20px; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 2px; }
+
+  .project { max-width: 1400px; margin: 0 auto; }
+
+  /* Cover */
+  .cover {
+    width: 100%;
+    height: 580px;
+    background: #0a0808;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.65; }
+  .cover-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 52px 56px;
+  }
+  .cover-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #1769ff; margin-bottom: 14px; font-family: 'Courier New', monospace; }
+  .cover-title { font-size: 64px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; color: #fff; margin-bottom: 16px; }
+  .cover-sub { font-size: 13px; color: rgba(255,255,255,0.45); letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Courier New', monospace; }
+
+  /* Meta bar */
+  .meta-bar {
+    background: #111;
+    border-bottom: 1px solid #222;
+    padding: 22px 56px;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .meta-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #555; margin-bottom: 5px; font-family: 'Courier New', monospace; }
+  .meta-value { font-size: 13px; font-weight: 600; color: #ccc; }
+  .meta-divider { width: 1px; height: 36px; background: #222; }
+
+  /* Stats */
+  .stats-row { display: flex; border-bottom: 1px solid #222; }
+  .stat { flex: 1; padding: 30px 0; text-align: center; border-right: 1px solid #222; background: #0e0e0e; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; color: #fff; }
+  .stat-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: #555; margin-top: 6px; font-family: 'Courier New', monospace; }
+
+  /* Text sections */
+  .text-section { padding: 56px 56px 40px; max-width: 760px; border-top: 1px solid #222; }
+  .text-section h3 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; }
+  .text-section p { font-size: 15px; line-height: 1.9; color: #777; }
+
+  /* Section label */
+  .section-label {
+    padding: 44px 56px 20px;
+    font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: #444;
+    border-top: 1px solid #222;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Image layouts */
+  .full-img { width: 100%; display: block; }
+  .full-img img { width: 100%; display: block; max-height: 680px; object-fit: cover; }
+
+  .two-col { display: flex; gap: 3px; }
+  .two-col img { width: 50%; display: block; height: 420px; object-fit: cover; object-position: center 25%; }
+
+  .three-col { display: flex; gap: 3px; }
+  .three-col img { width: 33.333%; display: block; height: 340px; object-fit: cover; object-position: center 25%; }
+
+  .asymmetric { display: flex; gap: 3px; }
+  .asymmetric .big { width: 66%; }
+  .asymmetric .big img { width: 100%; height: 500px; object-fit: cover; object-position: center 25%; display: block; }
+  .asymmetric .small-stack { width: 34%; display: flex; flex-direction: column; gap: 3px; }
+  .asymmetric .small-stack img { width: 100%; height: calc(50% - 1.5px); object-fit: cover; object-position: center 25%; display: block; flex: 1; }
+
+  /* Video block */
+  .video-block {
+    width: 100%; aspect-ratio: 16/9;
+    background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center;
+    border-top: 1px solid #222;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .video-block img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; position: absolute; }
+  .play-btn {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(23,105,255,0.9);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2; font-size: 28px;
+    box-shadow: 0 0 40px rgba(23,105,255,0.4);
+  }
+  .video-label {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); z-index: 2;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* Quote */
+  .quote-block {
+    padding: 56px;
+    background: #0e0e0e;
+    border-top: 1px solid #222;
+    border-left: 3px solid #1769ff;
+  }
+  .quote-block blockquote { font-size: 22px; font-weight: 300; line-height: 1.7; color: #aaa; font-style: italic; }
+  .quote-block cite { display: block; margin-top: 18px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #444; font-style: normal; font-family: 'Courier New', monospace; }
+
+  /* Engagement */
+  .engagement-bar {
+    padding: 28px 56px;
+    display: flex; gap: 16px; align-items: center;
+    border-top: 1px solid #222; background: #111;
+  }
+  .eng-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: #1a1a1a; border: 1px solid #2a2a2a; color: #bbb;
+    padding: 10px 22px; font-size: 12px; cursor: pointer; border-radius: 2px; font-weight: 600;
+  }
+  .eng-views { font-size: 11px; color: #444; margin-left: auto; letter-spacing: 0.1em; font-family: 'Courier New', monospace; }
+
+  /* Creator */
+  .creator-card {
+    padding: 36px 56px;
+    display: flex; gap: 20px; align-items: center;
+    border-top: 1px solid #222; background: #111;
+  }
+  .creator-avatar {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(135deg, #A35671, #3d1a25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; color: #fff; flex-shrink: 0; letter-spacing: -0.02em;
+  }
+  .creator-name { font-size: 15px; font-weight: 700; color: #fff; }
+  .creator-title { font-size: 11px; color: #555; margin-top: 3px; font-family: 'Courier New', monospace; letter-spacing: 0.08em; }
+  .follow-btn {
+    margin-left: auto;
+    background: transparent; border: 1px solid #1769ff; color: #1769ff;
+    padding: 9px 28px; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 2px;
+  }
+
+  .preview-note {
+    text-align: center; padding: 18px;
+    font-size: 10px; color: #333; letter-spacing: 0.15em; text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+</head>
+<body>
+
+<!-- Behance bar -->
+<div class="behance-bar">
+  <div class="behance-logo">Bē</div>
+  <div class="behance-bar-right">
+    <div class="behance-like">♥ 842 &nbsp;|&nbsp; 👁 12.4K</div>
+    <button class="behance-btn">Follow</button>
+  </div>
+</div>
+
+<div class="project">
+
+  <!-- Cover — strong stage shot -->
+  <div class="cover">
+    <img src="/event photos/Shell STLC/GRGS9530_web.jpg" alt="Shell STLC Event" />
+    <div class="cover-overlay">
+      <p class="cover-tag">Corporate Event · Sales Conference · 2024</p>
+      <h1 class="cover-title">Shell STLC Event</h1>
+      <p class="cover-sub">Cairo Hyatt &nbsp;·&nbsp; Full Production &nbsp;·&nbsp; Blue Ocean Media</p>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="meta-bar">
+    <div>
+      <div class="meta-label">Client</div>
+      <div class="meta-value">Shell Egypt</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div>
+      <div class="meta-label">Category</div>
+      <div class="meta-value">Sales Conference</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div>
+      <div class="meta-label">Location</div>
+      <div class="meta-value">Cairo Hyatt</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div>
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2024</div>
+    </div>
+    <div class="meta-divider"></div>
+    <div>
+      <div class="meta-label">Services</div>
+      <div class="meta-value">Event Production · Photography · Videography</div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Attendees</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Days</div></div>
+    <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Photos</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Highlight Film</div></div>
+  </div>
+
+  <!-- Brief -->
+  <div class="text-section">
+    <h3>The Brief</h3>
+    <p>Shell's 2024 Short Term Lubricants Conference brought together distributors and regional leaders at Cairo's Hyatt for two days of strategy, recognition, and connection. Our role was to capture every moment — from the opening keynote to the awards ceremony — and deliver a complete visual story.</p>
+  </div>
+
+  <!-- Full width opener -->
+  <div class="full-img">
+    <img src="/event photos/Shell STLC/GRGS9717_web.jpg" alt="" />
+  </div>
+
+  <!-- Section: Stage -->
+  <div class="section-label">Stage &amp; Presentations</div>
+
+  <div class="asymmetric">
+    <div class="big"><img src="/event photos/Shell STLC/image155-2_web.jpg" alt="" /></div>
+    <div class="small-stack">
+      <img src="/event photos/Shell STLC/image154-2_web.jpg" alt="" />
+      <img src="/event photos/Shell STLC/DSC00526_web.jpg" alt="" />
+    </div>
+  </div>
+
+  <!-- 2 col -->
+  <div class="two-col" style="margin-top:3px;">
+    <img src="/event photos/Shell STLC/DSC00559_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/076B0970_web.jpg" alt="" />
+  </div>
+
+  <!-- Video -->
+  <div class="video-block">
+    <img src="/event photos/Shell STLC/GRGS9587_web.jpg" alt="" />
+    <div class="play-btn">▶</div>
+    <div class="video-label">Highlight Film — Shell STLC Event</div>
+  </div>
+
+  <!-- Section: Crowd -->
+  <div class="section-label">Atmosphere &amp; Networking</div>
+
+  <div class="three-col">
+    <img src="/event photos/Shell STLC/GRGS9511_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/GRGS9592_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/GRGS9598_web.jpg" alt="" />
+  </div>
+
+  <div class="full-img" style="margin-top:3px;">
+    <img src="/event photos/Shell STLC/076B1255_web.jpg" alt="" />
+  </div>
+
+  <!-- Section: Details -->
+  <div class="section-label">Details &amp; Coverage</div>
+
+  <div class="two-col">
+    <img src="/event photos/Shell STLC/DSC00860_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/DSC00865_web.jpg" alt="" />
+  </div>
+
+  <div class="three-col" style="margin-top:3px;">
+    <img src="/event photos/Shell STLC/076B0922_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/076B1300_web.jpg" alt="" />
+    <img src="/event photos/Shell STLC/076B1426_web.jpg" alt="" />
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-block">
+    <blockquote>"Every frame was intentional. Every moment preserved."</blockquote>
+    <cite>— Blue Ocean Media · Creative Direction</cite>
+  </div>
+
+  <!-- Section: Awards -->
+  <div class="section-label">Awards &amp; Closing</div>
+
+  <div class="asymmetric">
+    <div class="small-stack">
+      <img src="/event photos/Shell STLC/DSC00874_web.jpg" alt="" />
+      <img src="/event photos/Shell STLC/DSC00919_web.jpg" alt="" />
+    </div>
+    <div class="big"><img src="/event photos/Shell STLC/GRGS0070_web.jpg" alt="" /></div>
+  </div>
+
+  <!-- Closing text -->
+  <div class="text-section">
+    <h3>The Delivery</h3>
+    <p>A complete visual archive — photography, highlight film, and real-time coverage. Everything the client needed for internal communications, regional presentations, and social media — delivered on time, on brand.</p>
+  </div>
+
+  <!-- Engagement -->
+  <div class="engagement-bar">
+    <button class="eng-btn">♥ Appreciate &nbsp; 842</button>
+    <button class="eng-btn">💬 Comment &nbsp; 34</button>
+    <button class="eng-btn">🔗 Share</button>
+    <div class="eng-views">12,418 Views</div>
+  </div>
+
+  <!-- Creator -->
+  <div class="creator-card">
+    <div class="creator-avatar">BO</div>
+    <div>
+      <div class="creator-name">Blue Ocean Media</div>
+      <div class="creator-title">Creative Production · Cairo, Egypt</div>
+    </div>
+    <button class="follow-btn">+ Follow</button>
+  </div>
+
+</div>
+
+<div class="preview-note">Preview mockup — Blue Ocean Media · Behance Sample</div>
+
+</body>
+</html>

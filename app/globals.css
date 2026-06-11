@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Suisse Int'l — load via system if installed, else fall back to Inter/Helvetica */
+@font-face {
+  font-family: 'SuisseIntl';
+  src: local('Suisse Int\'l'), local('SuisseIntl'), local('Suisse Intl');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+.font-suisse {
+  font-family: 'SuisseIntl', 'Helvetica Neue', 'Arial', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+:root {
+  --background: #010101;
+  --foreground: #f5e6ea;
+  --primary: #A35671;
+  --primary-foreground: #ffffff;
+  --secondary: #291F23;
+  --secondary-foreground: #f5e6ea;
+  --muted: #291F23;
+  --muted-foreground: #c49aaa;
+  --accent: #A35671;
+  --accent-foreground: #ffffff;
+  --border: rgba(163, 86, 113, 0.15);
+  --input: rgba(163, 86, 113, 0.12);
+  --ring: #A35671;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope, 'Manrope', ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-mono, 'IBM Plex Mono', ui-monospace, monospace);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope, 'Manrope', ui-sans-serif, system-ui, sans-serif);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Global cursor ── */
+* { cursor: none !important; }
+
+/* ── Global nav links ── */
+.gnav-link {
+    font-family: var(--font-manrope, Manrope, sans-serif);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: rgba(245,230,234,0.9);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+.gnav-link:hover { opacity: 1; color: #F5E6EA; }
+.gnav-link.active { color: #A35671; opacity: 1; }
+
+/* ── Logo scroll ── */
+@keyframes logo-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.logo-scroll-track {
+    animation: logo-scroll 60s linear infinite;
+}
+.logo-scroll-track:hover {
+    animation-duration: 180s;
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+.animate-marquee {
+    animation: marquee var(--duration, 30s) linear infinite;
+    will-change: transform;
+    transition: animation-duration 0.6s ease;
+}
+.animate-marquee-reverse {
+    animation: marquee-reverse var(--duration, 30s) linear infinite;
+    will-change: transform;
+    transition: animation-duration 0.6s ease;
+}
+.marquee-slowdown:hover .animate-marquee {
+    animation-duration: 120s;
+}
+.marquee-slowdown:hover .animate-marquee-reverse {
+    animation-duration: 120s;
+}
+
+/* ── Testimonials slider ── */
+@keyframes x-slider {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-x-slider {
+    animation: x-slider 32s linear infinite;
+}
+.animate-x-slider:hover {
+    animation-play-state: paused;
+}
