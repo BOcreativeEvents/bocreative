@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
+import { LogoGrid } from '@/components/ui/logo-grid'
 
 const C = {
     black:    '#010101',
@@ -119,6 +120,9 @@ export default function BOPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Client logos */}
+            <LogoGrid />
 
             {/* CTA */}
             <div className='text-center py-24'>
