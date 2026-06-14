@@ -31,8 +31,32 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BlueOcean | Experience Architecture in Motion™",
-  description: "BlueOcean — Strategy · Experience Design · Orchestration. Established 2009.",
+  metadataBase: new URL("https://bocreative.me"),
+  title: "BO Creative — Experience Architecture in Motion™",
+  description: "BO Creative — Strategy · Experience Design · Orchestration. A brand experience partner since 2009.",
+  openGraph: {
+    type: "website",
+    siteName: "BO Creative",
+    title: "BO Creative — Experience Architecture in Motion™",
+    description: "BO Creative — Strategy · Experience Design · Orchestration. A brand experience partner since 2009.",
+    url: "https://bocreative.me",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dwlznbqoi/image/upload/c_fill,w_1200,h_630,g_auto/Events/Sckylers/20250904-20250903-DSC09464.JPG",
+        width: 1200,
+        height: 630,
+        alt: "BO Creative — Experience Architecture in Motion",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BO Creative — Experience Architecture in Motion™",
+    description: "BO Creative — Strategy · Experience Design · Orchestration. A brand experience partner since 2009.",
+    images: [
+      "https://res.cloudinary.com/dwlznbqoi/image/upload/c_fill,w_1200,h_630,g_auto/Events/Sckylers/20250904-20250903-DSC09464.JPG",
+    ],
+  },
 };
 
 export default function RootLayout({
