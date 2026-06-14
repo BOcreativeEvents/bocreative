@@ -133,6 +133,42 @@ export default function BOPage() {
                 </div>
             </div>
 
+            {/* Client logo grid — Trusted By */}
+            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-20 sm:py-28'>
+                <div className='flex items-center justify-between mb-12'
+                    style={{ borderTop: `1px solid ${C.line}`, paddingTop: '48px' }}>
+                    <p style={{ ...MONO, color: C.rose }}>Trusted By</p>
+                    <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
+                </div>
+
+                <div className='grid grid-cols-4 lg:grid-cols-5' style={{ gap: '36px 0' }}>
+                    {CLIENTS.map((c, i) => (
+                        <motion.div
+                            key={c.name}
+                            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: i * 0.04 }}
+                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 8px' }}>
+                            <img
+                                src={`/clients/${c.file}`}
+                                alt={c.name}
+                                style={{
+                                    height: '52px',
+                                    width: '100%',
+                                    maxWidth: '150px',
+                                    objectFit: 'contain',
+                                    filter: 'brightness(0) invert(1)',
+                                    opacity: 0.28,
+                                    transition: 'opacity 0.3s',
+                                }}
+                                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.7' }}
+                                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.28' }}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
             {/* Stats */}
             <div style={{ borderTop: `1px solid rgba(255,255,255,0.2)`, borderBottom: `1px solid rgba(255,255,255,0.2)`, backgroundColor: C.crimson }}>
                 <div className='mx-auto max-w-[1480px]'>
@@ -148,42 +184,6 @@ export default function BOPage() {
                             </motion.div>
                         ))}
                     </div>
-                </div>
-            </div>
-
-            {/* Client logo grid — Trusted By */}
-            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-20 sm:py-28'>
-                <div className='flex items-center justify-between mb-12'
-                    style={{ borderTop: `1px solid ${C.line}`, paddingTop: '48px' }}>
-                    <p style={{ ...MONO, color: C.rose }}>Trusted By</p>
-                    <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
-                </div>
-
-                <div className='grid grid-cols-4 lg:grid-cols-5' style={{ gap: '28px 0' }}>
-                    {CLIENTS.map((c, i) => (
-                        <motion.div
-                            key={c.name}
-                            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: i * 0.04 }}
-                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 8px' }}>
-                            <img
-                                src={`/clients/${c.file}`}
-                                alt={c.name}
-                                style={{
-                                    height: '38px',
-                                    width: '100%',
-                                    maxWidth: '110px',
-                                    objectFit: 'contain',
-                                    filter: 'brightness(0) invert(1)',
-                                    opacity: 0.28,
-                                    transition: 'opacity 0.3s',
-                                }}
-                                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.7' }}
-                                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.28' }}
-                            />
-                        </motion.div>
-                    ))}
                 </div>
             </div>
 
