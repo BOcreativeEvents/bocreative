@@ -129,34 +129,27 @@ export function MomentumTemplate() {
                             <Image src="/logo.png" alt="BlueOcean" width={320} height={160} className="h-12 sm:h-20 w-auto object-contain" priority />
                         </Link>
 
-                        {/* Mobile — inline nav beside the logo */}
-                        <nav className="flex sm:hidden items-center gap-2.5 ml-4 flex-wrap justify-end">
-                            {navLinks.map((l) => (
-                                <Link key={l.label} href={l.href}
-                                    style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.08em', textTransform: 'uppercase', color: C.offWhite, fontWeight: 700, opacity: 0.9, whiteSpace: 'nowrap' }}>
-                                    {l.label}
-                                </Link>
-                            ))}
-                        </nav>
-
+                        {/* Desktop nav */}
                         <nav className="hidden lg:flex items-center gap-9 mt-7 ml-auto">
                             {navLinks.map((l) => (
                                 <Link key={l.label} href={l.href}
                                     style={{ ...T.label, color: C.offWhite, fontWeight: 700, opacity: 0.9, fontSize: '13px' }}
                                     className="transition-opacity duration-300 hover:opacity-100">
-                                    {l.href === '/bo'
-                                        ? <><span>The</span><span style={{ marginLeft: '3px' }}>BO</span></>
-                                        : l.label}
+                                    {l.label}
                                 </Link>
                             ))}
                         </nav>
 
-                        {/* Burger — tablet only */}
-                        <div className="hidden sm:flex items-center lg:hidden">
-                            <button onClick={() => setMenuOpen(!menuOpen)} className="p-2" style={{ color: C.offWhite }}>
-                                {menuOpen ? <X size={20} /> : <Menu size={20} />}
-                            </button>
-                        </div>
+                        {/* Hamburger — mobile + tablet */}
+                        <button
+                            className="flex lg:hidden flex-col gap-[5px] p-2 ml-2"
+                            onClick={() => setMenuOpen(o => !o)}
+                            aria-label="Menu"
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', flexShrink: 0 }}>
+                            <span style={{ display: 'block', width: '22px', height: '1.5px', background: C.offWhite, transition: 'all 0.3s', transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none' }} />
+                            <span style={{ display: 'block', width: '22px', height: '1.5px', background: C.offWhite, transition: 'all 0.3s', opacity: menuOpen ? 0 : 1 }} />
+                            <span style={{ display: 'block', width: '22px', height: '1.5px', background: C.offWhite, transition: 'all 0.3s', transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none' }} />
+                        </button>
                     </div>
 
                 </div>
@@ -164,9 +157,9 @@ export function MomentumTemplate() {
                 <AnimatePresence>
                     {menuOpen && (
                         <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
-                            className="hidden sm:block lg:hidden overflow-hidden"
+                            className="lg:hidden overflow-hidden"
                             style={{ backgroundColor: C.crimson, borderTop: `1px solid ${C.line}` }}>
-                            <div className="px-6 py-8 flex flex-col gap-6">
+                            <div className="px-6 py-8 flex flex-col items-end gap-6">
                                 {navLinks.map((l) => (
                                     <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
                                         style={{ ...T.label, color: C.offWhite, fontWeight: 700 }}>{l.label}</Link>
