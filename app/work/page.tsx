@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowUpRight, MapPin } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
@@ -24,7 +24,15 @@ const FEATURED_PATTERN = new Set([0, 3, 7, 10, 14, 17])
 
 export default function WorkPage() {
     const [active, setActive] = useState(ALL)
+    const [isMobile, setIsMobile] = useState(false)
     const filtered = active === ALL ? events : events.filter(e => e.category === active)
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768)
+        check()
+        window.addEventListener('resize', check)
+        return () => window.removeEventListener('resize', check)
+    }, [])
 
     return (
         <div style={{ backgroundColor: C.black, color: C.offWhite, fontFamily: 'var(--font-manrope, Manrope, sans-serif)', minHeight: '100vh' }}>
@@ -59,8 +67,8 @@ export default function WorkPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
-                    className='flex flex-wrap gap-2'
-                    style={{ borderBottom: `1px solid ${C.line}`, paddingBottom: '20px' }}>
+                    className='flex gap-2'
+                    style={{ borderBottom: `1px solid ${C.line}`, paddingBottom: '20px', overflowX: 'auto', flexWrap: isMobile ? 'nowrap' : 'wrap', scrollbarWidth: 'none' }}>
                     {categories.map((cat) => {
                         const isActive = active === cat
                         return (
@@ -76,6 +84,7 @@ export default function WorkPage() {
                                     color: isActive ? '#fff' : C.muted,
                                     transition: 'all 0.25s ease',
                                     cursor: 'none',
+                                    flexShrink: 0,
                                 }}
                                 onMouseEnter={e => { if (!isActive) { e.currentTarget.style.borderColor = C.rose; e.currentTarget.style.color = C.offWhite } }}
                                 onMouseLeave={e => { if (!isActive) { e.currentTarget.style.borderColor = 'rgba(163,86,113,0.25)'; e.currentTarget.style.color = C.muted } }}>
@@ -101,14 +110,14 @@ export default function WorkPage() {
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(3, 1fr)',
-                        gridAutoRows: '480px',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gridAutoRows: isMobile ? '320px' : '480px',
                         gap: '0',
                     }}>
                     {filtered.map((event, i) => {
-                        const isFeatured = active === ALL && FEATURED_PATTERN.has(i)
+                        const isFeatured = !isMobile && active === ALL && FEATURED_PATTERN.has(i)
                         return (
-                            <WorkCard key={event.slug} event={event} index={i} featured={isFeatured} />
+                            <WorkCard key={event.slug} event={event} index={i} featured={isFeatured} isMobile={isMobile} />
                         )
                     })}
                 </motion.div>
@@ -129,7 +138,7 @@ export default function WorkPage() {
     )
 }
 
-function WorkCard({ event, index, featured }: { event: EventData; index: number; featured: boolean }) {
+function WorkCard({ event, index, featured, isMobile }: { event: EventData; index: number; featured: boolean; isMobile: boolean }) {
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -144,28 +153,38 @@ function WorkCard({ event, index, featured }: { event: EventData; index: number;
                 className='relative overflow-hidden flex flex-col justify-end'
                 style={{ height: '100%', backgroundColor: '#080808', display: 'flex' }}>
 
-                {/* Image — slow zoom in on enter */}
+                {/* Image */}
                 {event.img && (
-                    <motion.div
-                        className='absolute inset-0 overflow-hidden'
-                        style={{
-                            transformOrigin: event.imgPosition ?? 'center center',
-                        }}>
-                        <motion.img
-                            src={event.img}
-                            alt={event.title}
-                            initial={{ scale: 1.08 }}
-                            whileInView={{ scale: event.imgScale ?? 1.0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                            className='absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700'
-                            style={{
-                                opacity: 0.8,
-                                objectPosition: event.imgPosition ?? 'center center',
-                                transform: event.imgRotate ? `rotate(${event.imgRotate}deg)` : undefined,
-                            }}
-                        />
-                    </motion.div>
+                    <div className='absolute inset-0 overflow-hidden'
+                        style={{ transformOrigin: event.imgPosition ?? 'center center' }}>
+                        {isMobile ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                src={event.img}
+                                alt={event.title}
+                                className='absolute inset-0 w-full h-full object-cover'
+                                style={{
+                                    opacity: 0.8,
+                                    objectPosition: event.imgPosition ?? 'center center',
+                                }}
+                            />
+                        ) : (
+                            <motion.img
+                                src={event.img}
+                                alt={event.title}
+                                initial={{ scale: 1.08 }}
+                                whileInView={{ scale: event.imgScale ?? 1.0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                                className='absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700'
+                                style={{
+                                    opacity: 0.8,
+                                    objectPosition: event.imgPosition ?? 'center center',
+                                    transform: event.imgRotate ? `rotate(${event.imgRotate}deg)` : undefined,
+                                }}
+                            />
+                        )}
+                    </div>
                 )}
 
                 {/* Grain overlay */}

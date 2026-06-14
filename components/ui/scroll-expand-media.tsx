@@ -42,6 +42,15 @@ export default function ScrollExpandMedia({
     }, [expanded])
 
     useEffect(() => {
+        // On mobile: skip the scroll-to-expand interaction entirely
+        if (isMobile) {
+            setProgress(1)
+            setExpanded(true)
+            expandedRef.current = true
+            setShowContent(true)
+            return
+        }
+
         const update = (delta: number) => {
             const next = Math.min(Math.max(progressRef.current + delta, 0), 1)
             setProgress(next)
@@ -101,18 +110,46 @@ export default function ScrollExpandMedia({
             window.removeEventListener('touchmove', onTouchMove)
             window.removeEventListener('scroll', onScroll)
         }
-    }, [])
+    }, [isMobile])
 
-    const w = isMobile
-        ? `${Math.min(300 + progress * 700, window.innerWidth || 390)}px`
-        : `${300 + progress * 1300}px`
-    const h = isMobile
-        ? `${350 + progress * 300}px`
-        : `${380 + progress * 450}px`
+    // ── Mobile layout: static hero image + title + content immediately ──
+    if (isMobile) {
+        return (
+            <div>
+                {/* Hero image — 60svh */}
+                <div className='relative overflow-hidden' style={{ height: '60svh' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        src={bgImageSrc}
+                        alt=''
+                        className='w-full h-full object-cover object-center'
+                    />
+                    <div className='absolute inset-0' style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.7) 100%)' }} />
+                    {/* Title centered over image */}
+                    <div className='absolute inset-0 flex flex-col items-center justify-center px-6 text-center'>
+                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '10px' }}>
+                            {date}
+                        </p>
+                        <h1 className='font-extrabold text-white'
+                            style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)', letterSpacing: '-0.04em', lineHeight: 0.95 }}>
+                            {title}
+                        </h1>
+                    </div>
+                </div>
+
+                {/* Content immediately below — no scroll needed */}
+                {children}
+            </div>
+        )
+    }
+
+    // ── Desktop layout: scroll-to-expand ──
+    const w = `${300 + progress * 1300}px`
+    const h = `${380 + progress * 450}px`
 
     const firstWord = title?.split(' ')[0] ?? ''
     const rest = title?.split(' ').slice(1).join(' ') ?? ''
-    const tx = progress * (isMobile ? 140 : 130)
+    const tx = progress * 130
 
     return (
         <div className='overflow-x-hidden'>
