@@ -526,30 +526,6 @@ export default function EventPageClient({ event }: { event: EventData }) {
                             </motion.p>
                         </div>
 
-                        {/* Storyboard — above videos */}
-                        {event.storyboard && (
-                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-16'>
-                                <div className='flex flex-col lg:flex-row gap-12 lg:gap-20 items-start'>
-                                    <div className='lg:w-[280px] flex-shrink-0'>
-                                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#A35671', marginBottom: '20px' }}>
-                                            {event.storyboardCaption ?? 'Creative Brief · Pre-Production'}
-                                        </p>
-                                        <h3 style={{ fontSize: 'clamp(1.4rem, 3vw, 2.2rem)', fontWeight: 800, letterSpacing: '-0.035em', lineHeight: 1.05, color: '#F5E6EA', marginBottom: '16px' }}>
-                                            The Vision<br />Before the Stage
-                                        </h3>
-                                        <p style={{ fontSize: '14px', lineHeight: 1.75, color: '#9b7a87' }}>
-                                            Every BlueOcean experience begins on paper. This storyboard captures the creative direction that shaped the Wegovy launch — before a single light was rigged or a stage was built.
-                                        </p>
-                                        <div style={{ width: '1px', height: '48px', backgroundColor: 'rgba(163,86,113,0.3)', marginTop: '28px' }} />
-                                    </div>
-                                    <div className='flex-1'>
-                                        <img src={event.storyboard} alt='Wegovy Storyboard'
-                                            style={{ width: '100%', display: 'block', filter: 'sepia(0.08) contrast(1.05)' }} />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
                         {/* Year sections (multi-year projects like Qatar National Day) */}
                         {event.yearSections ? (
                             <div className='mb-10'>
