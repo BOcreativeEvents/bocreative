@@ -73,8 +73,8 @@ export default function BOPage() {
                         </motion.p>
 
                         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
-                            className='mt-8 font-extrabold'
-                            style={{ fontSize: '46px', lineHeight: 1.4, color: C.offWhite }}>
+                            className='mt-4 sm:mt-8 font-extrabold'
+                            style={{ fontSize: 'clamp(1.7rem, 6vw, 46px)', lineHeight: 1.2, color: C.offWhite }}>
                             Designing Experiences.<br />
                             <span style={{ color: C.rose }}>Creating Signature Moments.</span>
                         </motion.p>

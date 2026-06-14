@@ -190,7 +190,7 @@ export function MomentumTemplate() {
                     {/* Mono label */}
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }}
                         style={{ ...T.label, fontSize: '12px', fontWeight: 900, color: '#888888' }}>
-                        <span style={{ fontSize: '15px', fontWeight: 300 }}>[ESTABLISHED 2009]</span><br /><span style={{ fontWeight: 700, fontSize: '18px', color: '#aaaaaa' }}>BRAND EXPERIENCE PARTNER</span>
+                        <span style={{ fontSize: '15px', fontWeight: 300 }}>[ESTABLISHED 2009]</span><br /><span className="text-[13px] sm:text-[18px]" style={{ fontWeight: 700, color: '#aaaaaa' }}>BRAND EXPERIENCE PARTNER</span>
                     </motion.p>
 
                     {/* Main headline */}

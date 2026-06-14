@@ -51,10 +51,10 @@ export function LogoGrid({ badge = 'Our Clients' }: LogoGridProps = {}) {
         <div style={{ backgroundColor: '#010101', borderBottom: `1px solid ${LINE}` }}>
 
             {/* Header bar */}
-            <div className="flex items-center justify-between" style={{ padding: '12px 24px', borderBottom: `1px solid ${LINE}` }}>
-                <span style={MONO}>© Success Stories With</span>
-                <span style={MONO}>(BO® · 2009)</span>
-                <span style={MONO}>{badge}</span>
+            <div className="flex items-center justify-between gap-3" style={{ padding: '10px 24px', borderBottom: `1px solid ${LINE}` }}>
+                <span style={MONO} className="!text-[9px] sm:!text-[11px]">© Success Stories With</span>
+                <span style={MONO} className="!text-[9px] sm:!text-[11px] hidden sm:inline">(BO® · 2009)</span>
+                <span style={MONO} className="!text-[9px] sm:!text-[11px]">{badge}</span>
             </div>
 
             {/* Scrolling logo strip */}
