@@ -114,39 +114,54 @@ function FeaturedVideo({ src, soundOn, onToggle }: { src: string; soundOn: boole
     )
 }
 
-/* ── 3-column reel strip ──────────────────────────────────────────────────── */
+/* ── Reel strip — 1 col on mobile, 3/4 cols on desktop ───────────────────── */
 function VideoStrip({ videos, soundIdx, onToggle }: { videos: string[]; soundIdx: number | null; onToggle: (i: number) => void }) {
-    const toggle = (i: number) => onToggle(i)
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768)
+        check()
+        window.addEventListener('resize', check)
+        return () => window.removeEventListener('resize', check)
+    }, [])
 
     return (
         <motion.div
             className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            {/* Smart grid: ≤3 → single row | 6/9/12 → 3 cols | 4/8/12 → 4 cols */}
-            {(() => {
-                const n = videos.length
-                if (n <= 3) {
-                    return (
-                        <div className='grid' style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gap: '16px' }}>
-                            {videos.map((src, i) => (
-                                <VideoReel key={i} src={src} index={i} soundOn={soundIdx === i} onToggle={() => toggle(i)} />
-                            ))}
+            {isMobile ? (
+                /* Mobile: single column, one reel per row */
+                <div className='flex flex-col' style={{ gap: '16px' }}>
+                    {videos.map((src, i) => (
+                        <VideoReel key={i} src={src} index={i} soundOn={soundIdx === i} onToggle={() => onToggle(i)} />
+                    ))}
+                </div>
+            ) : (
+                /* Desktop: 3 cols for ≤6 videos, 4 cols for 8 */
+                (() => {
+                    const n = videos.length
+                    if (n <= 3) {
+                        return (
+                            <div className='grid' style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gap: '16px' }}>
+                                {videos.map((src, i) => (
+                                    <VideoReel key={i} src={src} index={i} soundOn={soundIdx === i} onToggle={() => onToggle(i)} />
+                                ))}
+                            </div>
+                        )
+                    }
+                    const cols = n % 4 === 0 ? 4 : 3
+                    return Array.from({ length: Math.ceil(n / cols) }, (_, rowIdx) => (
+                        <div key={rowIdx} className='grid' style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '16px', marginBottom: '16px' }}>
+                            {videos.slice(rowIdx * cols, rowIdx * cols + cols).map((src, i) => {
+                                const globalIdx = rowIdx * cols + i
+                                return (
+                                    <VideoReel key={globalIdx} src={src} index={globalIdx} soundOn={soundIdx === globalIdx} onToggle={() => onToggle(globalIdx)} />
+                                )
+                            })}
                         </div>
-                    )
-                }
-                const cols = n % 3 === 0 ? 3 : n % 4 === 0 ? 4 : n % 3 === 1 ? 4 : 3
-                return Array.from({ length: Math.ceil(n / cols) }, (_, rowIdx) => (
-                    <div key={rowIdx} className='grid' style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '16px', marginBottom: '16px' }}>
-                        {videos.slice(rowIdx * cols, rowIdx * cols + cols).map((src, i) => {
-                            const globalIdx = rowIdx * cols + i
-                            return (
-                                <VideoReel key={globalIdx} src={src} index={globalIdx} soundOn={soundIdx === globalIdx} onToggle={() => toggle(globalIdx)} />
-                            )
-                        })}
-                    </div>
-                ))
-            })()}
+                    ))
+                })()
+            )}
         </motion.div>
     )
 }

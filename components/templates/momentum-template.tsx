@@ -197,7 +197,7 @@ export function MomentumTemplate() {
                     {/* Mono label */}
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }}
                         style={{ ...T.label, fontSize: '12px', fontWeight: 900, color: '#888888' }}>
-                        Established 2009 · Strategy · Experience Design · Orchestration
+                        <span style={{ fontSize: '15px', fontWeight: 300 }}>[ESTABLISHED 2009]</span><br /><span style={{ fontWeight: 700, fontSize: '18px', color: '#aaaaaa' }}>BRAND EXPERIENCE PARTNER</span>
                     </motion.p>
 
                     {/* Main headline */}
@@ -281,12 +281,12 @@ export function MomentumTemplate() {
                 {/* CTA below the strip */}
                 <div className="mx-auto max-w-[1480px] px-6 lg:px-10 mt-12 flex justify-center">
                     <Link href="/work"
-                        className="group flex items-center gap-4 transition-all duration-300"
-                        style={{ border: `2px solid #333`, padding: '22px 56px', color: '#888', backgroundColor: '#1a1a1a' }}
-                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.rose; e.currentTarget.style.borderColor = C.rose; e.currentTarget.style.color = '#fff' }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1a1a1a'; e.currentTarget.style.borderColor = '#333'; e.currentTarget.style.color = '#888' }}>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '18px', letterSpacing: '0.22em', textTransform: 'uppercase' as const, color: 'inherit', fontWeight: 800 }}>See All Projects</span>
-                        <ArrowUpRight size={20} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        className="group inline-flex items-center gap-2 transition-all duration-300"
+                        style={{ ...T.label, color: C.rose, border: `1px solid ${C.rose}`, padding: '14px 28px', fontWeight: 800 }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.rose; e.currentTarget.style.color = '#fff' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = C.rose }}>
+                        See All Projects
+                        <ArrowUpRight size={12} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Link>
                 </div>
             </section>
@@ -306,7 +306,7 @@ export function MomentumTemplate() {
                                 viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.12 }}
                                 className="flex flex-col items-center justify-center py-14 px-6 text-center"
                                 style={{ backgroundColor: C.black }}>
-                                <span className="font-extrabold leading-none mb-2" style={{ fontSize: 'clamp(2.8rem, 5vw, 5.5rem)', color: C.rose, letterSpacing: '-0.04em' }}>{s.num}</span>
+                                <span className="font-extrabold leading-none mb-2" style={{ fontSize: 'clamp(3.36rem, 6vw, 6.6rem)', color: C.rose, letterSpacing: '-0.04em' }}>{s.num}</span>
                                 <span style={{ ...T.label, color: C.muted, opacity: 0.7 }}>{s.label}</span>
                             </motion.div>
                         ))}
@@ -331,7 +331,7 @@ export function MomentumTemplate() {
                         Ready to make<br />it matter?
                     </motion.h2>
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.35 }}>
-                        <Link href="mailto:hello@blueocean.com"
+                        <Link href="/connect"
                             className="inline-flex items-center gap-2 transition-all duration-300 group"
                             style={{ ...T.label, color: 'white', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 28px' }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.12)' }}

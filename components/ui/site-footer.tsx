@@ -95,8 +95,8 @@ export default function SiteFooter() {
                         </ul>
                     </div>
 
-                    {/* Link columns */}
-                    <div className='grid grid-cols-2 md:grid-cols-3 gap-10 flex-1'>
+                    {/* Link columns — homepage only */}
+                    {pathname === '/' && <div className='grid grid-cols-2 md:grid-cols-3 gap-10 flex-1'>
                         {sections.map((section) => (
                             <div key={section.title}>
                                 <p style={{ ...MONO, fontSize: '10px', color: C.rose, marginBottom: '20px' }}>
@@ -116,7 +116,7 @@ export default function SiteFooter() {
                                 </ul>
                             </div>
                         ))}
-                    </div>
+                    </div>}
                 </div>
 
                 {/* Bottom bar */}

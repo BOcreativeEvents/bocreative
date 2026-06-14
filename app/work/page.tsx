@@ -53,11 +53,6 @@ export default function WorkPage() {
                                 Selected<br /><span style={{ color: C.rose }}>Experiences</span>
                             </motion.h1>
                         </div>
-                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.3 }}
-                            style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 800, letterSpacing: '-0.04em', color: 'rgba(163,86,113,0.15)', lineHeight: 1 }}>
-                            {events.length}<br />
-                            <span style={{ fontSize: '10px', letterSpacing: '0.18em', color: C.muted, fontWeight: 400 }}>EXPERIENCES</span>
-                        </motion.p>
                     </div>
                 </div>
             </div>
