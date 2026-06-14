@@ -5,10 +5,11 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const LINKS = [
-    { label: 'Selected Experiences', href: '/work' },
-    { label: 'Framework', href: '/#framework' },
-    { label: 'Careers',   href: '/careers' },
-    { label: 'Connect',   href: '/connect' },
+    { label: 'About',        href: '/#about' },
+    { label: 'Capabilities', href: '/#capabilities' },
+    { label: 'Work',         href: '/work' },
+    { label: 'Careers',      href: '/careers' },
+    { label: 'Connect',      href: '/connect' },
 ]
 
 export default function GlobalNav() {

@@ -20,7 +20,7 @@ const T = {
     body:  { fontSize: '15px', lineHeight: 1.8, color: C.muted },
 }
 
-function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') }
+function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
 function VideoReel({ src, index, soundOn, onToggle }: {
