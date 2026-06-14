@@ -171,9 +171,9 @@ export function MomentumTemplate() {
             </header>
 
             {/* ── HERO ────────────────────────────────────────────────────── */}
-            <section className="relative sm:min-h-[100svh] flex flex-col justify-end overflow-hidden"
+            <section className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden"
                 style={{ borderBottom: `1px solid ${C.line}`, isolation: 'isolate' }}>
-                <div className="relative w-full h-[62svh] sm:h-auto sm:absolute sm:inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+                <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
                     <div className="absolute inset-0" style={{ zIndex: 2, background: `linear-gradient(to bottom, rgba(1,1,1,0.45) 0%, rgba(1,1,1,0.15) 40%, rgba(1,1,1,0.92) 100%)` }} />
                     <iframe
                         src="https://player.vimeo.com/video/1122589285?autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0&transparent=0&app_id=122963"
@@ -185,7 +185,7 @@ export function MomentumTemplate() {
                     />
                 </div>
 
-                <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10 mt-[-12.4svh] sm:mt-0 pb-10 sm:pb-20 lg:pb-24 w-full" style={{ zIndex: 10 }}>
+                <div className="relative mx-auto max-w-[1480px] px-6 lg:px-10 pb-10 sm:pb-20 lg:pb-24 w-full" style={{ zIndex: 10 }}>
 
                     {/* Mono label */}
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }}
