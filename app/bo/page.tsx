@@ -3,7 +3,37 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
-import { LogoGrid } from '@/components/ui/logo-grid'
+
+const CLIENTS = [
+    { name: 'Novo Nordisk',    file: 'novo-nordisk.png'   },
+    { name: 'Unilever',        file: 'unilever.png'       },
+    { name: 'Coca-Cola',       file: 'coca-cola.png'      },
+    { name: 'British Embassy', file: 'british-embassy.png'},
+    { name: 'Shell',           file: 'shell.png'          },
+    { name: 'WHO',             file: 'who.png'            },
+    { name: 'Hero',            file: 'hero.png'           },
+    { name: 'Knorr',           file: 'knorr.png'          },
+    { name: 'Sunsilk',         file: 'sunsilk.png'        },
+    { name: 'Marriott',        file: 'marriott.png'       },
+    { name: 'Lipton',          file: 'lipton.png'         },
+    { name: 'Main Marks',      file: 'main-marks.png'     },
+    { name: 'Kuehne+Nagel',    file: 'kuehne-nagel.png'   },
+    { name: 'Pirelli',         file: 'pirelli.png'        },
+    { name: 'Dreem',           file: 'dreem.png'          },
+    { name: 'Direction White', file: 'direction-white.png'},
+    { name: 'MSC',             file: 'msc.png'            },
+    { name: 'Town Writers',    file: 'town-writers.png'   },
+    { name: 'Bayer',           file: 'bayer.png'          },
+    { name: 'Egyptian LNG',    file: 'egyptian-lng.png'   },
+    { name: 'GIECO',           file: 'gieco.png'          },
+    { name: 'Dove',            file: 'dove.png'           },
+    { name: 'Clear',           file: 'clear.png'          },
+    { name: 'Groupe Savencia', file: 'savencia.png'       },
+    { name: 'Mondelēz',        file: 'mondelez.png'       },
+    { name: 'Signal',          file: 'signal.png'         },
+    { name: 'Medfest Egypt',   file: 'medfest.png'        },
+    { name: 'Amreyah Cement',  file: 'amreyah-cement.png' },
+]
 
 const C = {
     black:    '#010101',
@@ -121,8 +151,41 @@ export default function BOPage() {
                 </div>
             </div>
 
-            {/* Client logos */}
-            <LogoGrid />
+            {/* Client logo grid — Trusted By */}
+            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-20 sm:py-28'>
+                <div className='flex items-center justify-between mb-12'
+                    style={{ borderTop: `1px solid ${C.line}`, paddingTop: '48px' }}>
+                    <p style={{ ...MONO, color: C.rose }}>Trusted By</p>
+                    <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
+                </div>
+
+                <div className='grid grid-cols-4 lg:grid-cols-5' style={{ gap: '28px 0' }}>
+                    {CLIENTS.map((c, i) => (
+                        <motion.div
+                            key={c.name}
+                            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: i * 0.04 }}
+                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 8px' }}>
+                            <img
+                                src={`/clients/${c.file}`}
+                                alt={c.name}
+                                style={{
+                                    height: '38px',
+                                    width: '100%',
+                                    maxWidth: '110px',
+                                    objectFit: 'contain',
+                                    filter: 'brightness(0) invert(1)',
+                                    opacity: 0.28,
+                                    transition: 'opacity 0.3s',
+                                }}
+                                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.7' }}
+                                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.28' }}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
 
             {/* CTA */}
             <div className='text-center py-24'>
