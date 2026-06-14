@@ -25,10 +25,11 @@ const sections = [
     {
         title: 'Navigate',
         links: [
-            { name: 'Selected Experiences', href: '/work' },
-            { name: 'The BO Framework',     href: '/#framework' },
-            { name: 'Careers',              href: '/careers' },
-            { name: 'Connect',              href: '/connect' },
+            { name: 'About',        href: '/bo' },
+            { name: 'Capabilities', href: '/#framework' },
+            { name: 'Work',         href: '/work' },
+            { name: 'Careers',      href: '/careers' },
+            { name: 'Connect',      href: '/connect' },
         ],
     },
     {

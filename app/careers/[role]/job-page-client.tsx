@@ -1,14 +1,12 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Paperclip } from 'lucide-react'
 import { motion } from 'motion/react'
 import { Job } from '@/lib/jobs'
 
 const C = {
     black:    '#010101',
-    crimson:  '#0F0B0B',
     rose:     '#A35671',
     offWhite: '#F5E6EA',
     muted:    '#9b7a87',
@@ -31,31 +29,23 @@ const inputStyle = {
 export default function JobPageClient({ job }: { job: Job }) {
     const [submitted, setSubmitted] = useState(false)
     const [form, setForm] = useState({ name: '', email: '', phone: '', portfolio: '', message: '' })
+    const [cvFile, setCvFile] = useState<File | null>(null)
+    const fileRef = useRef<HTMLInputElement>(null)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
+        const subject = encodeURIComponent(`Application: ${job.title}`)
+        const body = encodeURIComponent(
+            `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || '—'}\nPortfolio: ${form.portfolio || '—'}\nCV/Resume: ${cvFile ? cvFile.name : '—'}\n\n${form.message}`
+        )
+        window.location.href = `mailto:info@bocreative.me?subject=${subject}&body=${body}`
         setSubmitted(true)
     }
 
     return (
         <div style={{ backgroundColor: C.black, color: C.offWhite, fontFamily: 'var(--font-manrope, Manrope, sans-serif)', minHeight: '100vh' }}>
 
-            {/* Nav */}
-            <header className='fixed top-0 left-0 right-0 z-50'
-                style={{ borderBottom: `1px solid ${C.line}`, backgroundColor: 'rgba(1,1,1,0.96)', backdropFilter: 'blur(24px)' }}>
-                <div className='mx-auto max-w-[1480px] px-6 lg:px-10 flex items-center justify-between h-[68px]'>
-                    <Link href='/templates/momentum'>
-                        <Image src='/logo.png' alt='BlueOcean' width={120} height={60} className='h-12 w-auto object-contain' priority />
-                    </Link>
-                    <Link href='/careers'
-                        className='inline-flex items-center gap-2 transition-opacity hover:opacity-100'
-                        style={{ ...MONO, color: C.muted, opacity: 0.7 }}>
-                        <ArrowLeft size={11} /> All Roles
-                    </Link>
-                </div>
-            </header>
-
-            <div className='pt-[68px] min-h-screen grid grid-cols-1 lg:grid-cols-2'>
+            <div className='pt-[64px] min-h-screen grid grid-cols-1 lg:grid-cols-2'>
 
                 {/* Left — job info */}
                 <div className='flex flex-col justify-center px-6 lg:px-16 py-24 lg:py-0'
@@ -88,6 +78,11 @@ export default function JobPageClient({ job }: { job: Job }) {
                                 </div>
                             ))}
                         </div>
+                        <Link href='/careers'
+                            className='inline-flex items-center gap-2 mt-4 transition-opacity hover:opacity-100'
+                            style={{ ...MONO, color: C.muted, opacity: 0.7 }}>
+                            ← All Openings
+                        </Link>
                     </motion.div>
                 </div>
 
@@ -96,7 +91,7 @@ export default function JobPageClient({ job }: { job: Job }) {
                     {submitted ? (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
                             className='text-center'>
-                            <p style={{ ...MONO, color: C.rose, marginBottom: '16px' }}>Application Received</p>
+                            <p style={{ ...MONO, color: C.rose, marginBottom: '16px' }}>Application Sent</p>
                             <h2 className='font-extrabold mb-4' style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', letterSpacing: '-0.03em', color: C.offWhite }}>
                                 Thank you for applying.
                             </h2>
@@ -108,7 +103,7 @@ export default function JobPageClient({ job }: { job: Job }) {
                                 style={{ ...MONO, color: C.rose, border: `1px solid ${C.rose}`, padding: '12px 24px' }}
                                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = C.rose; e.currentTarget.style.color = '#fff' }}
                                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = C.rose }}>
-                                View More Roles <ArrowUpRight size={11} />
+                                View More Openings <ArrowUpRight size={11} />
                             </Link>
                         </motion.div>
                     ) : (
@@ -133,6 +128,24 @@ export default function JobPageClient({ job }: { job: Job }) {
                             <input type='url' placeholder='Portfolio or LinkedIn URL'
                                 value={form.portfolio} onChange={(e) => setForm({ ...form, portfolio: e.target.value })}
                                 style={inputStyle} className='placeholder-[#666666]' />
+
+                            {/* CV / Resume upload */}
+                            <div>
+                                <input
+                                    ref={fileRef}
+                                    type='file'
+                                    accept='.pdf,.doc,.docx'
+                                    style={{ display: 'none' }}
+                                    onChange={(e) => setCvFile(e.target.files?.[0] ?? null)}
+                                />
+                                <button type='button'
+                                    onClick={() => fileRef.current?.click()}
+                                    className='flex items-center gap-3 w-full transition-colors duration-200'
+                                    style={{ ...inputStyle, cursor: 'pointer', color: cvFile ? C.offWhite : '#666666', textAlign: 'left' }}>
+                                    <Paperclip size={14} style={{ color: C.rose, flexShrink: 0 }} />
+                                    {cvFile ? cvFile.name : 'Attach CV / Resume (PDF, DOC)'}
+                                </button>
+                            </div>
 
                             <textarea placeholder='Tell us why you want to join BO Creative and what makes you a great fit for this role.'
                                 value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
