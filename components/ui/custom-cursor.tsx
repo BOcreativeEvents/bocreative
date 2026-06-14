@@ -17,7 +17,11 @@ export default function CustomCursor() {
     const [activeMode, setActiveMode] = useState(false)
     const [hidden, setHidden]         = useState(true)
 
-    useEffect(() => { setMounted(true) }, [])
+    useEffect(() => {
+        // Don't show the custom cursor on touch / mobile devices
+        if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return
+        setMounted(true)
+    }, [])
 
     useEffect(() => {
         if (!mounted) return

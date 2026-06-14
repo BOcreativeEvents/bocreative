@@ -233,16 +233,16 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                     )}
 
                     {/* Location — always visible */}
-                    <div className='flex items-center gap-2 mb-3 translate-y-0 group-hover:-translate-y-1 transition-transform duration-500'>
+                    <div className={`flex items-center gap-2 mb-3 ${isMobile ? '' : 'translate-y-0 group-hover:-translate-y-1 transition-transform duration-500'}`}>
                         <MapPin size={10} style={{ color: 'rgba(255,255,255,0.35)' }} />
                         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>
                             {event.location}
                         </span>
                     </div>
 
-                    {/* Title — slides up on hover */}
-                    <div style={{ overflow: 'hidden' }}>
-                        <h3 className='font-extrabold text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-500'
+                    {/* Title — static on mobile, slides up on hover on desktop */}
+                    <div style={{ overflow: isMobile ? 'visible' : 'hidden' }}>
+                        <h3 className={`font-extrabold text-white ${isMobile ? '' : 'translate-y-2 group-hover:translate-y-0 transition-transform duration-500'}`}
                             style={{
                                 fontSize: featured ? 'clamp(1.6rem, 3vw, 2.6rem)' : 'clamp(1.1rem, 1.8vw, 1.7rem)',
                                 letterSpacing: '-0.03em',
@@ -252,11 +252,11 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                         </h3>
                     </div>
 
-                    {/* Arrow — appears on hover */}
-                    <div className='mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-75'>
+                    {/* Arrow — appears on hover (desktop only) */}
+                    {!isMobile && <div className='mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-75'>
                         <div style={{ height: '1px', width: '24px', backgroundColor: 'rgba(163,86,113,0.6)' }} />
                         <ArrowUpRight size={13} style={{ color: C.rose }} />
-                    </div>
+                    </div>}
                 </div>
             </Link>
         </motion.div>

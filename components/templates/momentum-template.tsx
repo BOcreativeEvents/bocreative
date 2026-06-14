@@ -194,7 +194,7 @@ export function MomentumTemplate() {
                     </motion.p>
 
                     {/* Main headline */}
-                    <motion.h1 className="mt-6 font-extrabold font-suisse" style={{ fontSize: 'clamp(3.4rem, 8vw, 8rem)', lineHeight: 0.9, letterSpacing: '-0.04em', color: C.offWhite }}>
+                    <motion.h1 className="mt-3 sm:mt-6 font-extrabold font-suisse" style={{ fontSize: 'clamp(2.2rem, 8vw, 8rem)', lineHeight: 0.9, letterSpacing: '-0.04em', color: C.offWhite }}>
                         {['Experience', 'Architecture', 'in', 'Motion'].map((word, i) => (
                             <React.Fragment key={word + i}>
                                 {word === 'in' && <br className="sm:hidden" />}
@@ -214,7 +214,7 @@ export function MomentumTemplate() {
                         className="mt-6 mb-6 sm:mt-10 sm:mb-8" style={{ height: '2px', backgroundColor: C.line, maxWidth: '672px' }} />
 
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.1 }}
-                        className="max-w-2xl" style={{ ...T.body, fontSize: '17px' }}>
+                        className="max-w-2xl text-[14px] sm:text-[17px]" style={{ ...T.body }}>
                         We transform business objectives into meaningful experiences aligning insight, creativity, and orchestration to create impact far beyond the room.
                     </motion.p>
 
