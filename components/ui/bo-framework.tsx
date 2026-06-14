@@ -19,25 +19,25 @@ const services = [
         number: "01",
         title: "Experience Strategy",
         description:
-            "We transform business objectives into meaningful audience experiences. Starting with deep understanding of your brand, audience, and goals, we build the strategic foundation that shapes every creative decision, from concept to execution.",
+            "Transforming business objectives into experience platforms that align audiences, brands, and ambitions.",
     },
     {
         number: "02",
         title: "Creative Direction",
         description:
-            "We shape environments, content, and interactions that bring brands to life. Every spatial, visual, and sensory element is crafted with precision, from stage architecture and scenic design to brand environments that feel inevitable.",
+            "Designing environments, stories, and interactions that bring brands to life.",
     },
     {
         number: "03",
         title: "Signature Moments",
         description:
-            "We design the moments that define the experience and stay in memory. Product reveals, launch activations, opening sequences, and immersive installations, each one engineered to create emotional impact that outlasts the event itself.",
+            "Crafting the moments people remember long after the experience ends.",
     },
     {
         number: "04",
         title: "Experience Orchestration",
         description:
-            "We align creative, technical, and operational disciplines into one seamless experience. Technical production, multimedia direction, lighting, audio, show calling, and event management, all unified under a single creative vision.",
+            "Aligning creative, technical, and operational disciplines under one vision.",
     },
 ];
 
@@ -57,14 +57,14 @@ export function BOFramework() {
                             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
                             viewport={{ once: true }} transition={{ duration: 0.8 }}
                             style={{ ...MONO, fontSize: '12px', color: ROSE, display: "block", marginBottom: "14px" }}>
-                            What We Do
+                            Capabilities
                         </motion.p>
                         <motion.h2
                             initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                             className="font-extrabold font-suisse"
                             style={{ fontSize: "clamp(1.8rem, 4vw, 4rem)", letterSpacing: "-0.035em", lineHeight: 1, color: "#F5E6EA" }}>
-                            The<br />BO Experience<br /><span style={{ color: ROSE }}>Framework</span>
+                            Building Experiences<br /><span style={{ color: ROSE }}>With Intent</span>
                         </motion.h2>
                     </div>
                 </div>

@@ -36,11 +36,11 @@ const T = {
 
 /* ── Data ─────────────────────────────────────────────────────────────────── */
 const navLinks = [
-    { label: 'The BO', href: '/bo' },
-    { label: 'Framework', href: '#framework' },
-    { label: 'Work',      href: '#work' },
-    { label: 'Careers',   href: '/careers' },
-    { label: 'Connect',   href: '/connect' },
+    { label: 'About',        href: '/bo' },
+    { label: 'Capabilities', href: '#framework' },
+    { label: 'Work',         href: '#work' },
+    { label: 'Careers',      href: '/careers' },
+    { label: 'Connect',      href: '/connect' },
 ]
 
 const featuredWork = [
@@ -222,7 +222,7 @@ export function MomentumTemplate() {
 
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.1 }}
                         className="max-w-2xl" style={{ ...T.body, fontSize: '17px' }}>
-                        We transform business objectives into meaningful experiences through strategy, creative direction, signature moments, and seamless orchestration.
+                        We transform business objectives into meaningful experiences aligning insight, creativity, and orchestration to create impact far beyond the room.
                     </motion.p>
 
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 1.3 }}
