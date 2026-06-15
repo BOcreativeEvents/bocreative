@@ -43,6 +43,7 @@ next-env.d.ts
 # large media — host on Cloudinary, not in git
 /public/event photos/
 /public/event videos/
+/public/Website_home_video.mp4
 
 # raw camera files
 *.ARW
