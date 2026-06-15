@@ -96,23 +96,36 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
     )
 }
 
-/* ── Desktop cols by count: 1→1, 3→3, 4→2, 6→3, 8→4, >8→4, else→3 ─────── */
-function desktopColClass(count: number): string {
-    if (count === 1) return 'md:grid-cols-1'
-    if (count === 3) return 'md:grid-cols-3'
-    if (count === 4) return 'md:grid-cols-4'
-    if (count === 6) return 'md:grid-cols-3'
-    if (count >= 8)  return 'md:grid-cols-4'
-    return 'md:grid-cols-3'
+function getGridColumns(count: number): string {
+    if (count === 1) return '1fr'
+    if (count === 3) return 'repeat(3, 1fr)'
+    if (count === 4) return 'repeat(4, 1fr)'
+    if (count === 6) return 'repeat(3, 1fr)'
+    if (count === 8) return 'repeat(4, 1fr)'
+    if (count > 8)   return 'repeat(4, 1fr)'
+    return 'repeat(3, 1fr)'
 }
 
 /* ── Unified video grid ───────────────────────────────────────────────────── */
 function VideoStrip({ videos, videoPosters }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'>; videoPosters?: Record<string, string> }) {
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768)
+        check()
+        window.addEventListener('resize', check)
+        return () => window.removeEventListener('resize', check)
+    }, [])
+
     if (videos.length === 0) return null
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                <div className={`grid grid-cols-1 ${desktopColClass(videos.length)}`} style={{ gap: '16px' }}>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : getGridColumns(videos.length),
+                    gap: '16px',
+                    width: '100%',
+                }}>
                     {videos.map((src, i) => (
                         <VideoReel key={src} src={src} index={i} poster={videoPosters?.[src]} />
                     ))}
