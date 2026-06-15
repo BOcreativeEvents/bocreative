@@ -27,40 +27,40 @@ function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoI
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
 function VideoReel({ src, index }: { src: string; index: number }) {
-    const [aspect, setAspect] = useState<string>('16/9')
-
     return (
         <motion.div
-            className='relative overflow-hidden'
-            style={{ aspectRatio: aspect, backgroundColor: '#050505' }}
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}>
 
-            {isVimeo(src) ? (
-                <iframe
-                    src={vimeoSrc(src)}
-                    className='absolute inset-0 w-full h-full'
-                    style={{ border: 0 }}
-                    allow='autoplay; fullscreen; picture-in-picture'
-                    allowFullScreen
-                    title={`reel-${index}`}
-                />
-            ) : (
-                <video
-                    src={src}
-                    controls playsInline
-                    onLoadedMetadata={e => {
-                        const v = e.currentTarget
-                        setAspect(v.videoWidth >= v.videoHeight ? '16/9' : '9/16')
-                    }}
-                    className='absolute inset-0 w-full h-full object-contain'
-                    style={{ backgroundColor: '#050505' }}
-                />
-            )}
+            {/* 16:9 responsive wrapper — identical for Vimeo and native video */}
+            <div style={{
+                position: 'relative',
+                paddingBottom: '56.25%',
+                height: 0,
+                overflow: 'hidden',
+                borderRadius: '8px',
+                backgroundColor: '#050505',
+            }}>
+                {isVimeo(src) ? (
+                    <iframe
+                        src={vimeoSrc(src)}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                        allow='autoplay; fullscreen; picture-in-picture'
+                        allowFullScreen
+                        title={`reel-${index}`}
+                    />
+                ) : (
+                    <video
+                        src={src}
+                        controls playsInline
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#050505' }}
+                    />
+                )}
+            </div>
 
-            {/* Index badge top-left — hidden when controls are active */}
-            <div className='absolute top-4 left-4 pointer-events-none'
-                style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.45)' }}>
+            {/* Index label below the card */}
+            <div className='mt-2 px-1'
+                style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.3)' }}>
                 {String(index + 1).padStart(2, '0')}
             </div>
         </motion.div>
@@ -71,23 +71,30 @@ function VideoReel({ src, index }: { src: string; index: number }) {
 function FeaturedVideo({ src }: { src: string }) {
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
-            {isVimeo(src) ? (
-                <iframe
-                    src={vimeoSrc(src)}
-                    className='w-full'
-                    style={{ display: 'block', aspectRatio: '16/9', border: 0 }}
-                    allow='autoplay; fullscreen; picture-in-picture'
-                    allowFullScreen
-                    title='featured-video'
-                />
-            ) : (
-                <video
-                    src={src}
-                    controls playsInline
-                    className='w-full'
-                    style={{ display: 'block', aspectRatio: '16/9', objectFit: 'contain', backgroundColor: '#050505' }}
-                />
-            )}
+            <div style={{
+                position: 'relative',
+                paddingBottom: '56.25%',
+                height: 0,
+                overflow: 'hidden',
+                borderRadius: '8px',
+                backgroundColor: '#050505',
+            }}>
+                {isVimeo(src) ? (
+                    <iframe
+                        src={vimeoSrc(src)}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                        allow='autoplay; fullscreen; picture-in-picture'
+                        allowFullScreen
+                        title='featured-video'
+                    />
+                ) : (
+                    <video
+                        src={src}
+                        controls playsInline
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#050505' }}
+                    />
+                )}
+            </div>
         </div>
     )
 }
