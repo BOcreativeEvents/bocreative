@@ -111,7 +111,7 @@ function VideoStrip({ videos, videoAspects, videoPosters }: { videos: string[]; 
             {landscape.length > 0 && (
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
                     style={{ marginBottom: portrait.length > 0 ? '32px' : 0 }}>
-                    <div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '24px', width: '100%' }}>
+                    <div className='grid grid-cols-1' style={{ gap: '24px', width: '100%' }}>
                         {landscape.map((src, i) => (
                             <VideoReel key={src} src={src} index={i} portrait={false} poster={videoPosters?.[src]} />
                         ))}
