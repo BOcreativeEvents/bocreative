@@ -100,7 +100,7 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
 function desktopColClass(count: number): string {
     if (count === 1) return 'md:grid-cols-1'
     if (count === 3) return 'md:grid-cols-3'
-    if (count === 4) return 'md:grid-cols-2'
+    if (count === 4) return 'md:grid-cols-4'
     if (count === 6) return 'md:grid-cols-3'
     if (count >= 8)  return 'md:grid-cols-4'
     return 'md:grid-cols-3'
