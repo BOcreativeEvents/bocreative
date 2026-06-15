@@ -21,6 +21,7 @@ export interface EventData {
     yearSections?: { year: string; video: string }[]  // multi-year projects: each year gets its own video section
     featuredVideos?: string[]  // multiple full-width videos stacked vertically
     aspect?: 'portrait' | 'landscape'  // override per-event aspect ratio detection
+    portraitVideos?: string[]           // explicit list of video URLs to force as portrait
 }
 
 export const events: EventData[] = [
@@ -32,6 +33,7 @@ export const events: EventData[] = [
         year: '2025',
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/20250904-20250903-DSC09464.JPG',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/Old/Sckylers.003.jpeg',
+        portraitVideos: ['https://vimeo.com/1200593190'],
         gallery: [
             // ── Videos (reels strip) ──
             'https://vimeo.com/1200593190',

@@ -22,17 +22,38 @@ const T = {
 
 function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') || s.includes('vimeo.com') }
 function isVimeo(src: string) { return /vimeo\.com/.test(src) }
-function isPortrait(src: string) { return src.includes('/video/upload/') && src.toLowerCase().includes('story') }
+function isPortraitHint(src: string, portraitVideos?: string[]) {
+    if (portraitVideos?.includes(src)) return true
+    return src.includes('/video/upload/') && src.toLowerCase().includes('story')
+}
 function vimeoId(src: string) { const m = src.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m ? m[1] : '' }
 function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoId(src)}?autoplay=1&loop=1&controls=1&title=0&byline=0&portrait=0&dnt=1` }
-function videoSrc(src: string) {
-    if (!isVimeo(src) && src.includes('/video/upload/') && !/\.(mp4|mov|webm)$/i.test(src)) return src + '.mp4'
+function nativeSrc(src: string) {
+    if (src.includes('/video/upload/') && !/\.(mp4|mov|webm)$/i.test(src)) return src + '.mp4'
     return src
 }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
-function VideoReel({ src, index, portrait }: { src: string; index: number; portrait: boolean }) {
+function VideoReel({ src, index, forcePortrait }: { src: string; index: number; forcePortrait: boolean }) {
+    const iframeRef = useRef<HTMLIFrameElement>(null)
+    const [portrait, setPortrait] = useState(forcePortrait)
+
+    // Vimeo: detect dimensions via @vimeo/player SDK
+    useEffect(() => {
+        if (!isVimeo(src) || !iframeRef.current) return
+        let cancelled = false
+        import('@vimeo/player').then(({ default: Player }) => {
+            if (cancelled || !iframeRef.current) return
+            const player = new Player(iframeRef.current)
+            Promise.all([player.getVideoWidth(), player.getVideoHeight()]).then(([w, h]) => {
+                if (!cancelled) setPortrait(h > w)
+            }).catch(() => {})
+        })
+        return () => { cancelled = true }
+    }, [src])
+
     const paddingBottom = portrait ? '177.78%' : '56.25%'
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
@@ -44,6 +65,7 @@ function VideoReel({ src, index, portrait }: { src: string; index: number; portr
             }}>
                 {isVimeo(src) ? (
                     <iframe
+                        ref={iframeRef}
                         src={vimeoSrc(src)}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
                         allow='autoplay; fullscreen; picture-in-picture'
@@ -52,8 +74,12 @@ function VideoReel({ src, index, portrait }: { src: string; index: number; portr
                     />
                 ) : (
                     <video
-                        src={videoSrc(src)}
+                        src={nativeSrc(src)}
                         controls playsInline
+                        onLoadedMetadata={(e) => {
+                            const v = e.currentTarget
+                            setPortrait(v.videoHeight > v.videoWidth)
+                        }}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                 )}
@@ -85,7 +111,7 @@ function FeaturedVideo({ src }: { src: string }) {
                     />
                 ) : (
                     <video
-                        src={videoSrc(src)}
+                        src={nativeSrc(src)}
                         controls playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#050505' }}
                     />
@@ -95,17 +121,18 @@ function FeaturedVideo({ src }: { src: string }) {
     )
 }
 
-/* ── Reel strip — separate grids for landscape and portrait ──────────────── */
-function VideoStrip({ videos }: { videos: string[] }) {
-    const landscape = videos.filter(s => !isPortrait(s))
-    const portrait  = videos.filter(s => isPortrait(s))
+/* ── Reel strip — separate grids for landscape vs portrait ───────────────── */
+function VideoStrip({ videos, portraitVideos }: { videos: string[]; portraitVideos?: string[] }) {
+    const landscape = videos.filter(s => !isPortraitHint(s, portraitVideos))
+    const portrait  = videos.filter(s => isPortraitHint(s, portraitVideos))
     return (
-        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6' style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'>
             {landscape.length > 0 && (
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+                    style={{ marginBottom: portrait.length > 0 ? '24px' : 0 }}>
                     <div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '24px', width: '100%' }}>
                         {landscape.map((src, i) => (
-                            <VideoReel key={src} src={src} index={i} portrait={false} />
+                            <VideoReel key={src} src={src} index={i} forcePortrait={false} />
                         ))}
                     </div>
                 </motion.div>
@@ -114,7 +141,7 @@ function VideoStrip({ videos }: { videos: string[] }) {
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                     <div className='grid grid-cols-2 md:grid-cols-4' style={{ gap: '16px', width: '100%' }}>
                         {portrait.map((src, i) => (
-                            <VideoReel key={src} src={src} index={landscape.length + i} portrait={true} />
+                            <VideoReel key={src} src={src} index={landscape.length + i} forcePortrait={true} />
                         ))}
                     </div>
                 </motion.div>
@@ -522,7 +549,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                             <>
                                 {videos.length > 0 && (
                                     <div className='mb-10'>
-                                        <VideoStrip videos={videos} />
+                                        <VideoStrip videos={videos} portraitVideos={event.portraitVideos} />
                                     </div>
                                 )}
                                 {event.featuredVideo && (
