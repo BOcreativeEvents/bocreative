@@ -21,6 +21,7 @@ export interface EventData {
     yearSections?: { year: string; video: string }[]  // multi-year projects: each year gets its own video section
     featuredVideos?: string[]  // multiple full-width videos stacked vertically
     videoAspects?: Record<string, 'portrait' | 'landscape'>  // per-video aspect override, keyed by gallery URL
+    videoPosters?: Record<string, string>  // per-video poster image URL, keyed by gallery URL
 }
 
 export const events: EventData[] = [
@@ -33,14 +34,17 @@ export const events: EventData[] = [
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/20250904-20250903-DSC09464.JPG',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/Old/Sckylers.003.jpeg',
         videoAspects: {
-            'https://vimeo.com/1200593190': 'portrait',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/sckylers/sckylers-01.mp4': 'portrait',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-recap-2': 'landscape',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-3': 'portrait',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-5': 'portrait',
         },
+        videoPosters: {
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/sckylers/sckylers-01.mp4': 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/blueocean/events/sckylers/sckylers-01-poster.jpg',
+        },
         gallery: [
             // ── Videos (reels strip) ──
-            'https://vimeo.com/1200593190',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/sckylers/sckylers-01.mp4',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-recap-2',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-3',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-5',
@@ -83,13 +87,16 @@ export const events: EventData[] = [
         year: '2026',
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.001.jpeg',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.002.jpeg',
-        featuredVideo: 'https://vimeo.com/1156571565',
+        featuredVideo: 'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/wegovy/wegovy-featured.mp4',
         videoAspects: {
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-1': 'landscape',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-2': 'landscape',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-3': 'landscape',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-4': 'landscape',
-            'https://vimeo.com/1156571565': 'landscape',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/wegovy/wegovy-featured.mp4': 'landscape',
+        },
+        videoPosters: {
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/events/wegovy/wegovy-featured.mp4': 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/blueocean/events/wegovy/wegovy-featured-poster.jpg',
         },
         gallery: [
             // ── Reels ──

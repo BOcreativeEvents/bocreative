@@ -35,7 +35,7 @@ function nativeSrc(src: string) {
 }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
-function VideoReel({ src, index, portrait }: { src: string; index: number; portrait: boolean }) {
+function VideoReel({ src, index, portrait, poster }: { src: string; index: number; portrait: boolean; poster?: string }) {
     const paddingBottom = portrait ? '177.78%' : '56.25%'
     return (
         <motion.div
@@ -58,6 +58,7 @@ function VideoReel({ src, index, portrait }: { src: string; index: number; portr
                 ) : (
                     <video
                         src={nativeSrc(src)}
+                        poster={poster}
                         controls playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
@@ -72,7 +73,7 @@ function VideoReel({ src, index, portrait }: { src: string; index: number; portr
 }
 
 /* ── Featured full-width video ───────────────────────────────────────────── */
-function FeaturedVideo({ src }: { src: string }) {
+function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
             <div style={{
@@ -91,8 +92,9 @@ function FeaturedVideo({ src }: { src: string }) {
                 ) : (
                     <video
                         src={nativeSrc(src)}
+                        poster={poster}
                         controls playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#050505' }}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#050505' }}
                     />
                 )}
             </div>
@@ -101,7 +103,7 @@ function FeaturedVideo({ src }: { src: string }) {
 }
 
 /* ── Reel strip — landscape 2-col, portrait 3-col, never mixed ───────────── */
-function VideoStrip({ videos, videoAspects }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'> }) {
+function VideoStrip({ videos, videoAspects, videoPosters }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'>; videoPosters?: Record<string, string> }) {
     const landscape = videos.filter(s => getAspect(s, videoAspects) === 'landscape')
     const portrait  = videos.filter(s => getAspect(s, videoAspects) === 'portrait')
     return (
@@ -111,7 +113,7 @@ function VideoStrip({ videos, videoAspects }: { videos: string[]; videoAspects?:
                     style={{ marginBottom: portrait.length > 0 ? '32px' : 0 }}>
                     <div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '24px', width: '100%' }}>
                         {landscape.map((src, i) => (
-                            <VideoReel key={src} src={src} index={i} portrait={false} />
+                            <VideoReel key={src} src={src} index={i} portrait={false} poster={videoPosters?.[src]} />
                         ))}
                     </div>
                 </motion.div>
@@ -125,7 +127,7 @@ function VideoStrip({ videos, videoAspects }: { videos: string[]; videoAspects?:
                     )}
                     <div className='grid grid-cols-2 md:grid-cols-3' style={{ gap: '16px', width: '100%' }}>
                         {portrait.map((src, i) => (
-                            <VideoReel key={src} src={src} index={landscape.length + i} portrait={true} />
+                            <VideoReel key={src} src={src} index={landscape.length + i} portrait={true} poster={videoPosters?.[src]} />
                         ))}
                     </div>
                 </motion.div>
@@ -562,11 +564,11 @@ export default function EventPageClient({ event }: { event: EventData }) {
                                 <>
                                     {videos.length > 0 && (
                                         <div className='mb-10'>
-                                            <VideoStrip videos={videos} videoAspects={event.videoAspects} />
+                                            <VideoStrip videos={videos} videoAspects={event.videoAspects} videoPosters={event.videoPosters} />
                                         </div>
                                     )}
                                     {event.featuredVideo && (
-                                        <FeaturedVideo src={event.featuredVideo} />
+                                        <FeaturedVideo src={event.featuredVideo} poster={event.videoPosters?.[event.featuredVideo]} />
                                     )}
                                 </>
                             )}
