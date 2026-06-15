@@ -544,30 +544,6 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         </div>
                     </div>
 
-                    {/* ── Photo Gallery ────────────────────────────────────── */}
-                    {photos.length > 0 && (
-                        <div className='py-20'>
-                            {/* Section label + optional anchor to films */}
-                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-12 flex items-center justify-between'>
-                                <p style={{ ...T.label, color: C.rose }}>Event Gallery</p>
-                                {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
-                                    <a href='#films'
-                                        style={{
-                                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em',
-                                            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
-                                            textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s',
-                                        }}
-                                        onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
-                                        ↓ Event Films
-                                    </a>
-                                )}
-                            </div>
-
-                            <EditorialGallery photos={photos} title={event.title} />
-                        </div>
-                    )}
-
                     {/* ── Films / Video Section ──────────────────────────────── */}
                     {(videos.length > 0 || event.featuredVideo || event.featuredVideos) && (
                         <div id='films' className='pb-20' style={{ borderTop: `1px solid ${C.line}` }}>
@@ -599,6 +575,30 @@ export default function EventPageClient({ event }: { event: EventData }) {
                                     )}
                                 </>
                             )}
+                        </div>
+                    )}
+
+                    {/* ── Photo Gallery ────────────────────────────────────── */}
+                    {photos.length > 0 && (
+                        <div className='py-20'>
+                            {/* Section label + optional anchor to films */}
+                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-12 flex items-center justify-between'>
+                                <p style={{ ...T.label, color: C.rose }}>Event Gallery</p>
+                                {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
+                                    <a href='#films'
+                                        style={{
+                                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em',
+                                            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
+                                            textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s',
+                                        }}
+                                        onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
+                                        ↓ Event Films
+                                    </a>
+                                )}
+                            </div>
+
+                            <EditorialGallery photos={photos} title={event.title} />
                         </div>
                     )}
 
