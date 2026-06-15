@@ -175,12 +175,12 @@ export function MomentumTemplate() {
                 style={{ borderBottom: `1px solid ${C.line}`, isolation: 'isolate' }}>
                 <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
                     <div className="absolute inset-0" style={{ zIndex: 2, background: `linear-gradient(to bottom, rgba(1,1,1,0.45) 0%, rgba(1,1,1,0.15) 40%, rgba(1,1,1,0.92) 100%)` }} />
-                    <iframe
-                        src="https://player.vimeo.com/video/1122589285?background=1&dnt=1"
+                    <video
+                        src="/videos/hero.mp4"
+                        poster="/videos/hero-poster.jpg"
+                        autoPlay loop muted playsInline
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto aspect-video min-w-full sm:w-[177.78vh] sm:min-w-full sm:h-[56.25vw] sm:min-h-full"
-                        style={{ opacity: 0.6, border: 'none', pointerEvents: 'none', zIndex: 1 }}
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        title="BlueOcean showreel"
+                        style={{ opacity: 0.6, pointerEvents: 'none', zIndex: 1, objectFit: 'cover' }}
                     />
                 </div>
 
