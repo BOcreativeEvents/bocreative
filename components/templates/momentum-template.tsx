@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, ChevronDown, MapPin, Menu, X } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, MapPin, Menu, X, Volume2, VolumeX } from 'lucide-react'
 import { motion, useScroll, AnimatePresence } from 'motion/react'
 import { LogoGrid } from '@/components/ui/logo-grid'
 import { Marquee } from '@/components/ui/marquee'
@@ -105,7 +105,18 @@ const socialLinks = [
 export function MomentumTemplate() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const [soundOn, setSoundOn] = useState(false)
+    const heroVideoRef = useRef<HTMLVideoElement>(null)
     const { scrollY } = useScroll()
+
+    const toggleSound = () => {
+        const v = heroVideoRef.current
+        if (!v) return
+        const next = !soundOn
+        v.muted = !next
+        if (next) v.play().catch(() => {})
+        setSoundOn(next)
+    }
 
     useEffect(() => {
         const unsub = scrollY.on('change', (v) => setScrolled(v > 40))
@@ -176,6 +187,7 @@ export function MomentumTemplate() {
                 <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
                     <div className="absolute inset-0" style={{ zIndex: 2, background: `linear-gradient(to bottom, rgba(1,1,1,0.45) 0%, rgba(1,1,1,0.15) 40%, rgba(1,1,1,0.92) 100%)` }} />
                     <video
+                        ref={heroVideoRef}
                         src="/videos/hero.mp4"
                         poster="/videos/hero-poster.jpg"
                         autoPlay loop muted playsInline
@@ -231,6 +243,34 @@ export function MomentumTemplate() {
                     <span style={{ ...T.label, writingMode: 'vertical-rl', fontSize: '9px', color: C.muted, opacity: 0.5 }}>Scroll</span>
                     <div style={{ width: '1px', height: '48px', backgroundColor: C.line }} />
                 </div>
+
+                {/* Sound toggle — bottom-left, visible on all screen sizes */}
+                <button
+                    onClick={toggleSound}
+                    aria-label={soundOn ? 'Mute video' : 'Unmute video'}
+                    className="absolute bottom-8 left-6 lg:left-10 flex items-center gap-2 group"
+                    style={{ zIndex: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <div
+                        className="flex items-center justify-center transition-all duration-300"
+                        style={{
+                            width: '36px',
+                            height: '36px',
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255,255,255,0.08)',
+                            border: '1px solid rgba(255,255,255,0.15)',
+                            backdropFilter: 'blur(12px)',
+                        }}
+                        onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.16)' }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.08)' }}>
+                        {soundOn
+                            ? <Volume2 size={14} color="rgba(255,255,255,0.85)" />
+                            : <VolumeX size={14} color="rgba(255,255,255,0.5)" />
+                        }
+                    </div>
+                    <span style={{ ...T.label, fontSize: '9px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.14em' }}>
+                        {soundOn ? 'SOUND ON' : 'SOUND OFF'}
+                    </span>
+                </button>
             </section>
 
             {/* ── THIN DIVIDER ────────────────────────────────────────────── */}
