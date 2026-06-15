@@ -569,7 +569,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                     )}
 
                     {/* ── Films / Video Section ──────────────────────────────── */}
-                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
+                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos) && (
                         <div id='films' className='pb-20' style={{ borderTop: `1px solid ${C.line}` }}>
                             {/* Section label */}
                             <div className='mx-auto max-w-[1480px] px-6 lg:px-10 pt-16 mb-12'>
@@ -581,26 +581,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                                 </motion.p>
                             </div>
 
-                            {event.yearSections ? (
-                                <div className='mb-10'>
-                                    {event.yearSections.map((section) => (
-                                        <div key={section.year} className='mb-2'>
-                                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
-                                                <span style={{
-                                                    fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
-                                                    textTransform: 'uppercase', color: C.rose,
-                                                }}>Edition</span>
-                                                <span style={{
-                                                    fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800,
-                                                    letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite,
-                                                }}>{section.year}</span>
-                                                <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
-                                            </div>
-                                            <FeaturedVideo src={section.video} />
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : event.featuredVideos ? (
+                            {event.featuredVideos ? (
                                 <div className='mb-10'>
                                     {event.featuredVideos.map((src) => (
                                         <FeaturedVideo key={src} src={src} />
@@ -623,6 +604,19 @@ export default function EventPageClient({ event }: { event: EventData }) {
 
                 </div>
             </ScrollExpandMedia>
+
+            {/* ── yearSections — outside ScrollExpandMedia, always visible ── */}
+            {event.yearSections && event.yearSections.length > 0 && (
+                <div id='films' style={{ backgroundColor: C.black, padding: '0 40px', marginBottom: '80px' }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '32px', color: C.offWhite }}>EVENT FILMS</p>
+                    {event.yearSections.map((section) => (
+                        <div key={section.year} style={{ marginBottom: '48px' }}>
+                            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '12px', color: C.offWhite }}>Edition {section.year}</p>
+                            <FeaturedVideo src={section.video} />
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {/* ── Next Project teaser ── */}
             <ProjectNav current={event} />
