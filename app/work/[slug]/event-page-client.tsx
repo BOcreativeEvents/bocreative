@@ -605,14 +605,31 @@ export default function EventPageClient({ event }: { event: EventData }) {
                 </div>
             </ScrollExpandMedia>
 
-            {/* ── yearSections — outside ScrollExpandMedia, always visible ── */}
             {event.yearSections && event.yearSections.length > 0 && (
-                <div id='films' style={{ backgroundColor: C.black, padding: '0 40px', marginBottom: '80px' }}>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '32px', color: C.offWhite }}>EVENT FILMS</p>
-                    {event.yearSections.map((section) => (
+                <div id='films' style={{ padding: '0 40px 80px' }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '32px' }}>EVENT FILMS</p>
+                    {event.yearSections.map((section: { year: string; video: string }) => (
                         <div key={section.year} style={{ marginBottom: '48px' }}>
-                            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '12px', color: C.offWhite }}>Edition {section.year}</p>
-                            <FeaturedVideo src={section.video} />
+                            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '12px' }}>Edition {section.year}</p>
+                            {section.video.includes('vimeo.com') ? (
+                                <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
+                                    <iframe
+                                        src={section.video}
+                                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                                        frameBorder={0}
+                                        allow='autoplay; fullscreen; picture-in-picture'
+                                        allowFullScreen
+                                    />
+                                </div>
+                            ) : (
+                                <video
+                                    controls
+                                    playsInline
+                                    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
+                                >
+                                    <source src={section.video.endsWith('.mp4') ? section.video : section.video + '.mp4'} type='video/mp4' />
+                                </video>
+                            )}
                         </div>
                     ))}
                 </div>
