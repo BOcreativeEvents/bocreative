@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-import Image from 'next/image'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { ArrowLeft, ArrowUpRight, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'motion/react'
@@ -22,9 +21,11 @@ const T = {
 
 function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') || s.includes('vimeo.com') }
 function isVimeo(src: string) { return /vimeo\.com/.test(src) }
-function isPortraitHint(src: string, portraitVideos?: string[]) {
-    if (portraitVideos?.includes(src)) return true
-    return src.includes('/video/upload/') && src.toLowerCase().includes('story')
+function getAspect(src: string, videoAspects?: Record<string, 'portrait' | 'landscape'>): 'portrait' | 'landscape' {
+    if (videoAspects?.[src]) return videoAspects[src]
+    // fallback heuristic: Cloudinary "story" filenames are portrait
+    if (src.includes('/video/upload/') && src.toLowerCase().includes('story')) return 'portrait'
+    return 'landscape'
 }
 function vimeoId(src: string) { const m = src.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m ? m[1] : '' }
 function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoId(src)}?autoplay=1&loop=1&controls=1&title=0&byline=0&portrait=0&dnt=1` }
@@ -34,26 +35,8 @@ function nativeSrc(src: string) {
 }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
-function VideoReel({ src, index, forcePortrait }: { src: string; index: number; forcePortrait: boolean }) {
-    const iframeRef = useRef<HTMLIFrameElement>(null)
-    const [portrait, setPortrait] = useState(forcePortrait)
-
-    // Vimeo: detect dimensions via @vimeo/player SDK
-    useEffect(() => {
-        if (!isVimeo(src) || !iframeRef.current) return
-        let cancelled = false
-        import('@vimeo/player').then(({ default: Player }) => {
-            if (cancelled || !iframeRef.current) return
-            const player = new Player(iframeRef.current)
-            Promise.all([player.getVideoWidth(), player.getVideoHeight()]).then(([w, h]) => {
-                if (!cancelled) setPortrait(h > w)
-            }).catch(() => {})
-        })
-        return () => { cancelled = true }
-    }, [src])
-
+function VideoReel({ src, index, portrait }: { src: string; index: number; portrait: boolean }) {
     const paddingBottom = portrait ? '177.78%' : '56.25%'
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
@@ -65,9 +48,9 @@ function VideoReel({ src, index, forcePortrait }: { src: string; index: number; 
             }}>
                 {isVimeo(src) ? (
                     <iframe
-                        ref={iframeRef}
                         src={vimeoSrc(src)}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                        frameBorder={0}
                         allow='autoplay; fullscreen; picture-in-picture'
                         allowFullScreen
                         title={`reel-${index}`}
@@ -76,10 +59,6 @@ function VideoReel({ src, index, forcePortrait }: { src: string; index: number; 
                     <video
                         src={nativeSrc(src)}
                         controls playsInline
-                        onLoadedMetadata={(e) => {
-                            const v = e.currentTarget
-                            setPortrait(v.videoHeight > v.videoWidth)
-                        }}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                 )}
@@ -97,14 +76,14 @@ function FeaturedVideo({ src }: { src: string }) {
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
             <div style={{
-                position: 'relative', width: '100%',
-                paddingBottom: '56.25%',
+                position: 'relative', width: '100%', paddingBottom: '56.25%',
                 height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505',
             }}>
                 {isVimeo(src) ? (
                     <iframe
                         src={vimeoSrc(src)}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                        frameBorder={0}
                         allow='autoplay; fullscreen; picture-in-picture'
                         allowFullScreen
                         title='featured-video'
@@ -121,27 +100,32 @@ function FeaturedVideo({ src }: { src: string }) {
     )
 }
 
-/* ── Reel strip — separate grids for landscape vs portrait ───────────────── */
-function VideoStrip({ videos, portraitVideos }: { videos: string[]; portraitVideos?: string[] }) {
-    const landscape = videos.filter(s => !isPortraitHint(s, portraitVideos))
-    const portrait  = videos.filter(s => isPortraitHint(s, portraitVideos))
+/* ── Reel strip — landscape 2-col, portrait 3-col, never mixed ───────────── */
+function VideoStrip({ videos, videoAspects }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'> }) {
+    const landscape = videos.filter(s => getAspect(s, videoAspects) === 'landscape')
+    const portrait  = videos.filter(s => getAspect(s, videoAspects) === 'portrait')
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'>
             {landscape.length > 0 && (
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-                    style={{ marginBottom: portrait.length > 0 ? '24px' : 0 }}>
+                    style={{ marginBottom: portrait.length > 0 ? '32px' : 0 }}>
                     <div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '24px', width: '100%' }}>
                         {landscape.map((src, i) => (
-                            <VideoReel key={src} src={src} index={i} forcePortrait={false} />
+                            <VideoReel key={src} src={src} index={i} portrait={false} />
                         ))}
                     </div>
                 </motion.div>
             )}
             {portrait.length > 0 && (
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                    <div className='grid grid-cols-2 md:grid-cols-4' style={{ gap: '16px', width: '100%' }}>
+                    {landscape.length > 0 && (
+                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '16px' }}>
+                            Stories
+                        </p>
+                    )}
+                    <div className='grid grid-cols-2 md:grid-cols-3' style={{ gap: '16px', width: '100%' }}>
                         {portrait.map((src, i) => (
-                            <VideoReel key={src} src={src} index={landscape.length + i} forcePortrait={true} />
+                            <VideoReel key={src} src={src} index={landscape.length + i} portrait={true} />
                         ))}
                     </div>
                 </motion.div>
@@ -519,49 +503,64 @@ export default function EventPageClient({ event }: { event: EventData }) {
                             </motion.p>
                         </div>
 
-                        {/* Year sections (multi-year projects like Qatar National Day) */}
-                        {event.yearSections ? (
-                            <div className='mb-10'>
-                                {event.yearSections.map((section) => (
-                                    <div key={section.year} className='mb-2'>
-                                        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
-                                            <span style={{
-                                                fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
-                                                textTransform: 'uppercase', color: C.rose,
-                                            }}>Edition</span>
-                                            <span style={{
-                                                fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800,
-                                                letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite,
-                                            }}>{section.year}</span>
-                                            <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
+                        {/* Video section — anchor target */}
+                        <div id='films'>
+                            {event.yearSections ? (
+                                <div className='mb-10'>
+                                    {event.yearSections.map((section) => (
+                                        <div key={section.year} className='mb-2'>
+                                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
+                                                <span style={{
+                                                    fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
+                                                    textTransform: 'uppercase', color: C.rose,
+                                                }}>Edition</span>
+                                                <span style={{
+                                                    fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800,
+                                                    letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite,
+                                                }}>{section.year}</span>
+                                                <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
+                                            </div>
+                                            <FeaturedVideo src={section.video} />
                                         </div>
-                                        <FeaturedVideo src={section.video} />
-                                    </div>
-                                ))}
-                            </div>
-                        ) : event.featuredVideos ? (
-                            <div className='mb-10'>
-                                {event.featuredVideos.map((src) => (
-                                    <FeaturedVideo key={src} src={src} />
-                                ))}
-                            </div>
-                        ) : (
-                            <>
-                                {videos.length > 0 && (
-                                    <div className='mb-10'>
-                                        <VideoStrip videos={videos} portraitVideos={event.portraitVideos} />
-                                    </div>
-                                )}
-                                {event.featuredVideo && (
-                                    <FeaturedVideo src={event.featuredVideo} />
-                                )}
-                            </>
-                        )}
+                                    ))}
+                                </div>
+                            ) : event.featuredVideos ? (
+                                <div className='mb-10'>
+                                    {event.featuredVideos.map((src) => (
+                                        <FeaturedVideo key={src} src={src} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <>
+                                    {videos.length > 0 && (
+                                        <div className='mb-10'>
+                                            <VideoStrip videos={videos} videoAspects={event.videoAspects} />
+                                        </div>
+                                    )}
+                                    {event.featuredVideo && (
+                                        <FeaturedVideo src={event.featuredVideo} />
+                                    )}
+                                </>
+                            )}
+                        </div>
 
-                        {/* Divider between videos and photos */}
+                        {/* Divider + anchor before photos */}
                         {(videos.length > 0 || event.featuredVideo) && photos.length > 0 && (
                             <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
-                                <div style={{ height: '1px', backgroundColor: 'rgba(180,180,180,0.15)' }} />
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                                    <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(180,180,180,0.15)' }} />
+                                    <a href='#films'
+                                        style={{
+                                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em',
+                                            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
+                                            textDecoration: 'none', whiteSpace: 'nowrap',
+                                            transition: 'color 0.2s',
+                                        }}
+                                        onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
+                                        ↑ Event Films
+                                    </a>
+                                </div>
                             </div>
                         )}
 

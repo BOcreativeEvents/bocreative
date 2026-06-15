@@ -20,8 +20,7 @@ export interface EventData {
     partnershipBadge?: string  // if set, shows a gold trust badge with custom text
     yearSections?: { year: string; video: string }[]  // multi-year projects: each year gets its own video section
     featuredVideos?: string[]  // multiple full-width videos stacked vertically
-    aspect?: 'portrait' | 'landscape'  // override per-event aspect ratio detection
-    portraitVideos?: string[]           // explicit list of video URLs to force as portrait
+    videoAspects?: Record<string, 'portrait' | 'landscape'>  // per-video aspect override, keyed by gallery URL
 }
 
 export const events: EventData[] = [
@@ -33,7 +32,12 @@ export const events: EventData[] = [
         year: '2025',
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/20250904-20250903-DSC09464.JPG',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/Old/Sckylers.003.jpeg',
-        portraitVideos: ['https://vimeo.com/1200593190'],
+        videoAspects: {
+            'https://vimeo.com/1200593190': 'portrait',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-recap-2': 'landscape',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-3': 'portrait',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-5': 'portrait',
+        },
         gallery: [
             // ── Videos (reels strip) ──
             'https://vimeo.com/1200593190',
@@ -80,6 +84,13 @@ export const events: EventData[] = [
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.001.jpeg',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.002.jpeg',
         featuredVideo: 'https://vimeo.com/1156571565',
+        videoAspects: {
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-1': 'landscape',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-2': 'landscape',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-3': 'landscape',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-4': 'landscape',
+            'https://vimeo.com/1156571565': 'landscape',
+        },
         gallery: [
             // ── Reels ──
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-1',
