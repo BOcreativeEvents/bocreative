@@ -686,7 +686,7 @@ export const events: EventData[] = [
             // ── Videos (shown first as reels) ──
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/british-reel-2',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/british-reel-3',
-            'https://vimeo.com/1200595424',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1781542055/KBP_reel_1_i8zztw.mp4',
             // ── Production / Stage ──
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/British/1Y6A2383.jpg',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/British/1Y6A2525.jpg',
@@ -746,8 +746,8 @@ export const events: EventData[] = [
         bgImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Qatar Embassy - National Day Event/Qatar_1.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Qatar Embassy - National Day Event/qatar Photos/1Y6A4249.jpg',
         yearSections: [
-            { year: '2025', video: 'https://vimeo.com/1200598396' },
-            { year: '2024', video: 'https://vimeo.com/1068634591' },
+            { year: '2025', video: 'https://res.cloudinary.com/dwlznbqoi/video/upload/v1781541938/Qatar_national_day_celebration__2025_cl_hwwxnm.mp4' },
+            { year: '2024', video: 'https://res.cloudinary.com/dwlznbqoi/video/upload/v1781541948/Qatar_national_day_celebration__2024_cl_eaycsj.mp4' },
             { year: '2022', video: 'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/qatar-2022' },
         ],
         gallery: [
