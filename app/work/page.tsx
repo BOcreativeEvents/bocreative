@@ -157,6 +157,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                             <img
                                 src={event.img}
                                 alt={event.title}
+                                loading="lazy"
                                 className='absolute inset-0 w-full h-full object-cover'
                                 style={{
                                     opacity: 0.8,
@@ -167,6 +168,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                             <motion.img
                                 src={event.img}
                                 alt={event.title}
+                                loading="lazy"
                                 initial={{ scale: 1.08 }}
                                 whileInView={{ scale: event.imgScale ?? 1.0 }}
                                 viewport={{ once: true }}

@@ -176,11 +176,10 @@ export function MomentumTemplate() {
                 <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
                     <div className="absolute inset-0" style={{ zIndex: 2, background: `linear-gradient(to bottom, rgba(1,1,1,0.45) 0%, rgba(1,1,1,0.15) 40%, rgba(1,1,1,0.92) 100%)` }} />
                     <iframe
-                        src="https://player.vimeo.com/video/1122589285?autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&autopause=0&transparent=0&app_id=122963"
+                        src="https://player.vimeo.com/video/1122589285?background=1&dnt=1"
                         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-auto aspect-video min-w-full sm:w-[177.78vh] sm:min-w-full sm:h-[56.25vw] sm:min-h-full"
                         style={{ opacity: 0.6, border: 'none', pointerEvents: 'none', zIndex: 1 }}
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                        allowFullScreen referrerPolicy="strict-origin-when-cross-origin"
+                        allow="autoplay; fullscreen; picture-in-picture"
                         title="BlueOcean showreel"
                     />
                 </div>
@@ -423,7 +422,7 @@ function StripCard({ event }: { event: typeof events[0] }) {
         <div className="relative overflow-hidden flex-shrink-0"
             style={{ width: '480px', height: '600px', backgroundColor: '#0a0808' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={event.stripImg ?? event.img} alt=""
+            <img src={event.stripImg ?? event.img} alt="" loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ opacity: 0.85, objectPosition: event.stripPosition ?? event.imgPosition ?? 'center center' }} />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(1,1,1,0.35) 0%, transparent 45%)' }} />

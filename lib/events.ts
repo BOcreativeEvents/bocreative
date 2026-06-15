@@ -33,7 +33,7 @@ export const events: EventData[] = [
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/Old/Sckylers.003.jpeg',
         gallery: [
             // ── Videos (reels strip) ──
-            '/event videos/Sckylers/SCKYLERS FINAL .mp4',
+            'https://vimeo.com/1200593190',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-recap-2',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-3',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/sckylers-story-5',
@@ -76,7 +76,7 @@ export const events: EventData[] = [
         year: '2026',
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.001.jpeg',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Wegovy/Wegovy.002.jpeg',
-        featuredVideo: '/event videos/Wegovy/WEGOVY_Aftermovie_V10_Horizontal.MP4',
+        featuredVideo: 'https://vimeo.com/1156571565',
         gallery: [
             // ── Reels ──
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/wegovy-1',
@@ -665,7 +665,7 @@ export const events: EventData[] = [
             // ── Videos (shown first as reels) ──
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/british-reel-2',
             'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/british-reel-3',
-            '/event videos/British/SnapInsta.to_AQOFVtmyki2RfCsAzDnlBXnwM7E-zqBURdWFP7WZT1frPohfy9R11pm8phx5YVofPEtxOKVna9mGnP9sYHWUaVpMJyQ8FyO18sJPQgY.mp4',
+            'https://vimeo.com/1200595424',
             // ── Production / Stage ──
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/British/1Y6A2383.jpg',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/British/1Y6A2525.jpg',
@@ -725,8 +725,8 @@ export const events: EventData[] = [
         bgImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Qatar Embassy - National Day Event/Qatar_1.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Qatar Embassy - National Day Event/qatar Photos/1Y6A4249.jpg',
         yearSections: [
-            { year: '2025', video: '/event videos/Qatar Embassy - National Day Event/Qatar_national_day_celebration__2025.mp4' },
-            { year: '2024', video: '/event videos/Qatar Embassy - National Day Event/Qatar_national_day_celebration__2024.mp4' },
+            { year: '2025', video: 'https://vimeo.com/1200598396' },
+            { year: '2024', video: 'https://vimeo.com/1068634591' },
             { year: '2022', video: 'https://res.cloudinary.com/dwlznbqoi/video/upload/blueocean/qatar-2022' },
         ],
         gallery: [

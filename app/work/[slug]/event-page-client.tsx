@@ -20,7 +20,10 @@ const T = {
     body:  { fontSize: '15px', lineHeight: 1.8, color: C.muted },
 }
 
-function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') }
+function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') || s.includes('vimeo.com') }
+function isVimeo(src: string) { return /vimeo\.com/.test(src) }
+function vimeoId(src: string) { const m = src.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m ? m[1] : '' }
+function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoId(src)}?autoplay=1&loop=1&muted=1&controls=1&title=0&byline=0&portrait=0&dnt=1` }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
 function VideoReel({ src, index, soundOn, onToggle }: {
@@ -47,33 +50,46 @@ function VideoReel({ src, index, soundOn, onToggle }: {
             style={{ aspectRatio: aspect, backgroundColor: '#050505' }}
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            onClick={onToggle}>
+            onClick={isVimeo(src) ? undefined : onToggle}>
 
-            <video
-                ref={ref}
-                src={src}
-                autoPlay muted loop playsInline
-                onLoadedMetadata={onMeta}
-                className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]'
-            />
+            {isVimeo(src) ? (
+                <iframe
+                    src={vimeoSrc(src)}
+                    className='absolute inset-0 w-full h-full'
+                    style={{ border: 0 }}
+                    allow='autoplay; fullscreen; picture-in-picture'
+                    allowFullScreen
+                    title={`reel-${index}`}
+                />
+            ) : (
+                <video
+                    ref={ref}
+                    src={src}
+                    autoPlay muted loop playsInline
+                    onLoadedMetadata={onMeta}
+                    className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]'
+                />
+            )}
 
             {/* Dark overlay on hover */}
-            <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300' />
+            <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 pointer-events-none' />
 
             {/* Index badge top-left */}
-            <div className='absolute top-4 left-4'
+            <div className='absolute top-4 left-4 pointer-events-none'
                 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.45)' }}>
                 0{index + 1}
             </div>
 
-            {/* Sound toggle */}
-            <div className='absolute bottom-4 right-4' onClick={onToggle}
-                style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
-                {soundOn
-                    ? <Volume2 size={22} style={{ color: C.rose }} />
-                    : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
-                }
-            </div>
+            {/* Sound toggle — only for native video (Vimeo has its own controls) */}
+            {!isVimeo(src) && (
+                <div className='absolute bottom-4 right-4' onClick={onToggle}
+                    style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
+                    {soundOn
+                        ? <Volume2 size={22} style={{ color: C.rose }} />
+                        : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
+                    }
+                </div>
+            )}
         </motion.div>
     )
 }
@@ -90,26 +106,36 @@ function FeaturedVideo({ src, soundOn, onToggle }: { src: string; soundOn: boole
         if (soundOn) v.play().catch(() => {})
     }, [soundOn])
 
-    const toggle = () => onToggle()
-
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10 relative group'>
-            <video
-                ref={ref}
-                src={src}
-                autoPlay muted loop playsInline
-                className='w-full'
-                style={{ display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
-            />
-            {/* Sound toggle */}
-            <div className='absolute bottom-6 right-10'
-                onClick={toggle}
-                style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
-                {soundOn
-                    ? <Volume2 size={22} style={{ color: C.rose }} />
-                    : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
-                }
-            </div>
+            {isVimeo(src) ? (
+                <iframe
+                    src={vimeoSrc(src)}
+                    className='w-full'
+                    style={{ display: 'block', aspectRatio: '16/9', border: 0 }}
+                    allow='autoplay; fullscreen; picture-in-picture'
+                    allowFullScreen
+                    title='featured-video'
+                />
+            ) : (
+                <>
+                    <video
+                        ref={ref}
+                        src={src}
+                        autoPlay muted loop playsInline
+                        className='w-full'
+                        style={{ display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
+                    />
+                    <div className='absolute bottom-6 right-10'
+                        onClick={onToggle}
+                        style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
+                        {soundOn
+                            ? <Volume2 size={22} style={{ color: C.rose }} />
+                            : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
+                        }
+                    </div>
+                </>
+            )}
         </div>
     )
 }
