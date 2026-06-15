@@ -20,7 +20,7 @@ const T = {
 }
 
 function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') || s.includes('vimeo.com') }
-function isVimeo(src: string) { return /vimeo\.com/.test(src) }
+function isVimeo(src: string) { return src.includes('vimeo.com') }
 function getAspect(src: string, videoAspects?: Record<string, 'portrait' | 'landscape'>): 'portrait' | 'landscape' {
     if (videoAspects?.[src]) return videoAspects[src]
     // fallback heuristic: Cloudinary "story" filenames are portrait
@@ -92,6 +92,61 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                     style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
                 />
             )}
+        </div>
+    )
+}
+
+function YearSectionGrid({ sections, videoPosters }: {
+    sections: { year: string; video: string }[]
+    videoPosters?: Record<string, string>
+}) {
+    const [isMobile, setIsMobile] = useState(false)
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768)
+        check()
+        window.addEventListener('resize', check)
+        return () => window.removeEventListener('resize', check)
+    }, [])
+
+    return (
+        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '1fr' : `repeat(${sections.length}, 1fr)`,
+                gap: '16px',
+            }}>
+                {sections.map((section, i) => (
+                    <motion.div key={section.year}
+                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0 }}
+                        transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        style={{ width: '100%', minWidth: 0 }}>
+                        {section.video.includes('vimeo.com') ? (
+                            <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
+                                <iframe
+                                    src={vimeoSrc(section.video)}
+                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                                    frameBorder={0}
+                                    allow='autoplay; fullscreen; picture-in-picture'
+                                    allowFullScreen
+                                    title={`edition-${section.year}`}
+                                />
+                            </div>
+                        ) : (
+                            <video
+                                src={nativeSrc(section.video)}
+                                poster={videoPosters?.[section.video]}
+                                controls playsInline
+                                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
+                            />
+                        )}
+                        <div className='mt-2 px-1'
+                            style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.3)' }}>
+                            {section.year}
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
         </div>
     )
 }
@@ -365,9 +420,9 @@ function EditorialGallery({ photos, title }: { photos: (string | null)[]; title:
             <div className='flex flex-col mx-auto max-w-[1480px] px-6 lg:px-10'>
                 {chunks.map((chunk, ci) => (
                     <motion.div key={ci}
-                        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-60px' }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: ci * 0.04 }}>
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0 }}
+                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: ci * 0.03 }}>
 
                         {chunk.type === 'trio' && (() => {
                             const [large, s1, s2] = chunk.items
@@ -535,24 +590,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                             </div>
 
                             {event.yearSections ? (
-                                <div className='mb-10'>
-                                    {event.yearSections.map((section) => (
-                                        <div key={section.year} className='mb-2'>
-                                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
-                                                <span style={{
-                                                    fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
-                                                    textTransform: 'uppercase', color: C.rose,
-                                                }}>Edition</span>
-                                                <span style={{
-                                                    fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800,
-                                                    letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite,
-                                                }}>{section.year}</span>
-                                                <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
-                                            </div>
-                                            <FeaturedVideo src={section.video} />
-                                        </div>
-                                    ))}
-                                </div>
+                                <YearSectionGrid sections={event.yearSections} videoPosters={event.videoPosters} />
                             ) : event.featuredVideos ? (
                                 <div className='mb-10'>
                                     {event.featuredVideos.map((src) => (
