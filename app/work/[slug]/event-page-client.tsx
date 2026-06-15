@@ -419,10 +419,7 @@ function EditorialGallery({ photos, title }: { photos: (string | null)[]; title:
         <>
             <div className='flex flex-col mx-auto max-w-[1480px] px-6 lg:px-10'>
                 {chunks.map((chunk, ci) => (
-                    <motion.div key={ci}
-                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0 }}
-                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: ci * 0.03 }}>
+                    <div key={ci}>
 
                         {chunk.type === 'trio' && (() => {
                             const [large, s1, s2] = chunk.items
@@ -482,7 +479,7 @@ function EditorialGallery({ photos, title }: { photos: (string | null)[]; title:
                             <PhotoItem src={chunk.items[0]} alt={`${title}`}
                                 onClick={chunk.items[0] ? () => setLightboxIdx(getRealIdx(chunk.items[0])) : undefined} />
                         )}
-                    </motion.div>
+                    </div>
                 ))}
             </div>
 
@@ -552,12 +549,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         <div className='py-20'>
                             {/* Section label + optional anchor to films */}
                             <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-12 flex items-center justify-between'>
-                                <motion.p
-                                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }} transition={{ duration: 0.7 }}
-                                    style={{ ...T.label, color: C.rose }}>
-                                    Event Gallery
-                                </motion.p>
+                                <p style={{ ...T.label, color: C.rose }}>Event Gallery</p>
                                 {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
                                     <a href='#films'
                                         style={{
@@ -576,22 +568,14 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         </div>
                     )}
 
-                    {/* ── Films / Video Section ──────────────────────────────── */}
-                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
+                    {/* ── Films / Video Section (non-yearSections events) ───── */}
+                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos) && !event.yearSections && (
                         <div id='films' className='pb-20' style={{ borderTop: `1px solid ${C.line}` }}>
-                            {/* Section label */}
                             <div className='mx-auto max-w-[1480px] px-6 lg:px-10 pt-16 mb-12'>
-                                <motion.p
-                                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                                    viewport={{ once: true }} transition={{ duration: 0.7 }}
-                                    style={{ ...T.label, color: C.rose }}>
-                                    Event Films
-                                </motion.p>
+                                <p style={{ ...T.label, color: C.rose }}>Event Films</p>
                             </div>
 
-                            {event.yearSections ? (
-                                <YearSectionGrid sections={event.yearSections} videoPosters={event.videoPosters} />
-                            ) : event.featuredVideos ? (
+                            {event.featuredVideos ? (
                                 <div className='mb-10'>
                                     {event.featuredVideos.map((src) => (
                                         <FeaturedVideo key={src} src={src} />
@@ -614,6 +598,41 @@ export default function EventPageClient({ event }: { event: EventData }) {
 
                 </div>
             </ScrollExpandMedia>
+
+            {/* ── yearSections films — outside ScrollExpandMedia so never gated by showContent ── */}
+            {event.yearSections && event.yearSections.length > 0 && (
+                <section id='films' style={{ backgroundColor: C.black, padding: '60px 0', borderTop: `1px solid ${C.line}` }}>
+                    <div className='mx-auto max-w-[1480px] px-6 lg:px-10'>
+                        <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '24px', fontFamily: 'var(--font-mono)', color: C.offWhite }}>EVENT FILMS</p>
+                        <div style={{
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(${Math.min(event.yearSections.length, 3)}, 1fr)`,
+                            gap: '16px',
+                            width: '100%',
+                        }}>
+                            {event.yearSections.map((section) => (
+                                <div key={section.year}>
+                                    {section.video.includes('vimeo.com') ? (
+                                        <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
+                                            <iframe
+                                                src={`https://player.vimeo.com/video/${section.video.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1]}?controls=1&title=0&byline=0&portrait=0&dnt=1`}
+                                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                                                allowFullScreen
+                                                allow='autoplay; fullscreen; picture-in-picture'
+                                            />
+                                        </div>
+                                    ) : (
+                                        <video controls playsInline style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}>
+                                            <source src={section.video.endsWith('.mp4') ? section.video : section.video + '.mp4'} type='video/mp4' />
+                                        </video>
+                                    )}
+                                    <p style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.4, marginTop: '8px', fontFamily: 'var(--font-mono)', color: C.offWhite }}>{section.year}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* ── Next Project teaser ── */}
             <ProjectNav current={event} />
