@@ -30,11 +30,13 @@ function VideoReel({ src, index }: { src: string; index: number }) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}>
+            viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{ width: '100%', minWidth: 0 }}>
 
-            {/* 16:9 responsive wrapper — identical for Vimeo and native video */}
+            {/* 16:9 padding-bottom trick — percentage is relative to own width */}
             <div style={{
                 position: 'relative',
+                width: '100%',
                 paddingBottom: '56.25%',
                 height: 0,
                 overflow: 'hidden',
@@ -53,7 +55,7 @@ function VideoReel({ src, index }: { src: string; index: number }) {
                     <video
                         src={src}
                         controls playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#050505' }}
+                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                 )}
             </div>
@@ -99,25 +101,14 @@ function FeaturedVideo({ src }: { src: string }) {
     )
 }
 
-/* ── Reel strip — 1 col on mobile, 3/4 cols on desktop ───────────────────── */
+/* ── Reel strip — 1 col mobile, 2 cols desktop ────────────────────────────── */
 function VideoStrip({ videos }: { videos: string[] }) {
-    const [isMobile, setIsMobile] = useState(false)
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 768)
-        check()
-        window.addEventListener('resize', check)
-        return () => window.removeEventListener('resize', check)
-    }, [])
-
     return (
         <motion.div
             className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <div className='grid' style={{
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                gap: '24px',
-            }}>
+            <div className='grid grid-cols-1 md:grid-cols-2' style={{ gap: '24px', width: '100%' }}>
                 {videos.map((src, i) => (
                     <VideoReel key={i} src={src} index={i} />
                 ))}
