@@ -491,20 +491,48 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         </div>
                     </div>
 
-                    {/* Gallery */}
-                    <div className='py-20'>
-                        {/* Label */}
-                        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-12'>
-                            <motion.p
-                                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }} transition={{ duration: 0.7 }}
-                                style={{ ...T.label, color: C.rose }}>
-                                Event Gallery
-                            </motion.p>
-                        </div>
+                    {/* ── Photo Gallery ────────────────────────────────────── */}
+                    {photos.length > 0 && (
+                        <div className='py-20'>
+                            {/* Section label + optional anchor to films */}
+                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-12 flex items-center justify-between'>
+                                <motion.p
+                                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }} transition={{ duration: 0.7 }}
+                                    style={{ ...T.label, color: C.rose }}>
+                                    Event Gallery
+                                </motion.p>
+                                {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
+                                    <a href='#films'
+                                        style={{
+                                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em',
+                                            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
+                                            textDecoration: 'none', whiteSpace: 'nowrap', transition: 'color 0.2s',
+                                        }}
+                                        onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
+                                        ↓ Event Films
+                                    </a>
+                                )}
+                            </div>
 
-                        {/* Video section — anchor target */}
-                        <div id='films'>
+                            <EditorialGallery photos={photos} title={event.title} />
+                        </div>
+                    )}
+
+                    {/* ── Films / Video Section ──────────────────────────────── */}
+                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
+                        <div id='films' className='pb-20' style={{ borderTop: `1px solid ${C.line}` }}>
+                            {/* Section label */}
+                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 pt-16 mb-12'>
+                                <motion.p
+                                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }} transition={{ duration: 0.7 }}
+                                    style={{ ...T.label, color: C.rose }}>
+                                    Event Films
+                                </motion.p>
+                            </div>
+
                             {event.yearSections ? (
                                 <div className='mb-10'>
                                     {event.yearSections.map((section) => (
@@ -543,30 +571,7 @@ export default function EventPageClient({ event }: { event: EventData }) {
                                 </>
                             )}
                         </div>
-
-                        {/* Divider + anchor before photos */}
-                        {(videos.length > 0 || event.featuredVideo) && photos.length > 0 && (
-                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                                    <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(180,180,180,0.15)' }} />
-                                    <a href='#films'
-                                        style={{
-                                            fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em',
-                                            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
-                                            textDecoration: 'none', whiteSpace: 'nowrap',
-                                            transition: 'color 0.2s',
-                                        }}
-                                        onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-                                        onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
-                                        ↑ Event Films
-                                    </a>
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Photos editorial grid */}
-                        {photos.length > 0 && <EditorialGallery photos={photos} title={event.title} />}
-                    </div>
+                    )}
 
                 </div>
             </ScrollExpandMedia>
