@@ -20,6 +20,7 @@ export interface EventData {
     partnershipBadge?: string  // if set, shows a gold trust badge with custom text
     yearSections?: { year: string; video: string }[]  // multi-year projects: each year gets its own video section
     featuredVideos?: string[]  // multiple full-width videos stacked vertically
+    aspect?: 'portrait' | 'landscape'  // override per-event aspect ratio detection
 }
 
 export const events: EventData[] = [
