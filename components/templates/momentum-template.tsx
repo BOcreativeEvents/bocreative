@@ -188,7 +188,7 @@ export function MomentumTemplate() {
                     <div className="absolute inset-0" style={{ zIndex: 2, background: `linear-gradient(to bottom, rgba(1,1,1,0.45) 0%, rgba(1,1,1,0.15) 40%, rgba(1,1,1,0.92) 100%)` }} />
                     <video
                         ref={heroVideoRef}
-                        src="https://res.cloudinary.com/dwlznbqoi/video/upload/q_auto,vc_h264/hero/hero-hq.mp4"
+                        src="https://res.cloudinary.com/dwlznbqoi/video/upload/hero/hero-hq.mp4"
                         poster="https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/hero/hero-poster.jpg"
                         autoPlay loop muted playsInline
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6, pointerEvents: 'none', zIndex: 1 }}
