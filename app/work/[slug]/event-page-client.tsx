@@ -114,35 +114,14 @@ function VideoStrip({ videos }: { videos: string[] }) {
             className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            {isMobile ? (
-                <div className='flex flex-col' style={{ gap: '16px' }}>
-                    {videos.map((src, i) => (
-                        <VideoReel key={i} src={src} index={i} />
-                    ))}
-                </div>
-            ) : (
-                (() => {
-                    const n = videos.length
-                    if (n <= 3) {
-                        return (
-                            <div className='grid' style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gap: '16px' }}>
-                                {videos.map((src, i) => (
-                                    <VideoReel key={i} src={src} index={i} />
-                                ))}
-                            </div>
-                        )
-                    }
-                    const cols = n % 4 === 0 ? 4 : 3
-                    return Array.from({ length: Math.ceil(n / cols) }, (_, rowIdx) => (
-                        <div key={rowIdx} className='grid' style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '16px', marginBottom: '16px' }}>
-                            {videos.slice(rowIdx * cols, rowIdx * cols + cols).map((src, i) => {
-                                const globalIdx = rowIdx * cols + i
-                                return <VideoReel key={globalIdx} src={src} index={globalIdx} />
-                            })}
-                        </div>
-                    ))
-                })()
-            )}
+            <div className='grid' style={{
+                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                gap: '24px',
+            }}>
+                {videos.map((src, i) => (
+                    <VideoReel key={i} src={src} index={i} />
+                ))}
+            </div>
         </motion.div>
     )
 }
