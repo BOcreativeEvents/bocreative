@@ -35,18 +35,15 @@ function nativeSrc(src: string) {
 }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
-function VideoReel({ src, index, portrait, poster }: { src: string; index: number; portrait: boolean; poster?: string }) {
-    const paddingBottom = portrait ? '177.78%' : '56.25%'
+function VideoReel({ src, index, poster }: { src: string; index: number; poster?: string }) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{ width: '100%', minWidth: 0 }}>
-            <div style={{
-                position: 'relative', width: '100%', paddingBottom,
-                height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505',
-            }}>
-                {isVimeo(src) ? (
+            {isVimeo(src) ? (
+                // Vimeo iframes have no natural dimensions — use 16:9 container
+                <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
                     <iframe
                         src={vimeoSrc(src)}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
@@ -55,15 +52,15 @@ function VideoReel({ src, index, portrait, poster }: { src: string; index: numbe
                         allowFullScreen
                         title={`reel-${index}`}
                     />
-                ) : (
-                    <video
-                        src={nativeSrc(src)}
-                        poster={poster}
-                        controls playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                )}
-            </div>
+                </div>
+            ) : (
+                <video
+                    src={nativeSrc(src)}
+                    poster={poster}
+                    controls playsInline
+                    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
+                />
+            )}
             <div className='mt-2 px-1'
                 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.3)' }}>
                 {String(index + 1).padStart(2, '0')}
@@ -76,11 +73,8 @@ function VideoReel({ src, index, portrait, poster }: { src: string; index: numbe
 function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
-            <div style={{
-                position: 'relative', width: '100%', paddingBottom: '56.25%',
-                height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505',
-            }}>
-                {isVimeo(src) ? (
+            {isVimeo(src) ? (
+                <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
                     <iframe
                         src={vimeoSrc(src)}
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
@@ -89,49 +83,41 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                         allowFullScreen
                         title='featured-video'
                     />
-                ) : (
-                    <video
-                        src={nativeSrc(src)}
-                        poster={poster}
-                        controls playsInline
-                        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', backgroundColor: '#050505' }}
-                    />
-                )}
-            </div>
+                </div>
+            ) : (
+                <video
+                    src={nativeSrc(src)}
+                    poster={poster}
+                    controls playsInline
+                    style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
+                />
+            )}
         </div>
     )
 }
 
-/* ── Reel strip — landscape 2-col, portrait 3-col, never mixed ───────────── */
-function VideoStrip({ videos, videoAspects, videoPosters }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'>; videoPosters?: Record<string, string> }) {
-    const landscape = videos.filter(s => getAspect(s, videoAspects) === 'landscape')
-    const portrait  = videos.filter(s => getAspect(s, videoAspects) === 'portrait')
+/* ── Desktop cols by count: 1→1, 3→3, 4→2, 6→3, 8→4, >8→4, else→3 ─────── */
+function desktopColClass(count: number): string {
+    if (count === 1) return 'md:grid-cols-1'
+    if (count === 3) return 'md:grid-cols-3'
+    if (count === 4) return 'md:grid-cols-2'
+    if (count === 6) return 'md:grid-cols-3'
+    if (count >= 8)  return 'md:grid-cols-4'
+    return 'md:grid-cols-3'
+}
+
+/* ── Unified video grid ───────────────────────────────────────────────────── */
+function VideoStrip({ videos, videoPosters }: { videos: string[]; videoAspects?: Record<string, 'portrait' | 'landscape'>; videoPosters?: Record<string, string> }) {
+    if (videos.length === 0) return null
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-6'>
-            {landscape.length > 0 && (
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-                    style={{ marginBottom: portrait.length > 0 ? '32px' : 0 }}>
-                    <div className='grid grid-cols-1' style={{ gap: '24px', width: '100%' }}>
-                        {landscape.map((src, i) => (
-                            <VideoReel key={src} src={src} index={i} portrait={false} poster={videoPosters?.[src]} />
-                        ))}
-                    </div>
-                </motion.div>
-            )}
-            {portrait.length > 0 && (
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                    {landscape.length > 0 && (
-                        <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: '16px' }}>
-                            Stories
-                        </p>
-                    )}
-                    <div className='grid grid-cols-2 md:grid-cols-3' style={{ gap: '16px', width: '100%' }}>
-                        {portrait.map((src, i) => (
-                            <VideoReel key={src} src={src} index={landscape.length + i} portrait={true} poster={videoPosters?.[src]} />
-                        ))}
-                    </div>
-                </motion.div>
-            )}
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <div className={`grid grid-cols-1 ${desktopColClass(videos.length)}`} style={{ gap: '16px' }}>
+                    {videos.map((src, i) => (
+                        <VideoReel key={src} src={src} index={i} poster={videoPosters?.[src]} />
+                    ))}
+                </div>
+            </motion.div>
         </div>
     )
 }
