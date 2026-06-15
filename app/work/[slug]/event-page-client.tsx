@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, ArrowUpRight, MapPin, Volume2, VolumeX, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, MapPin, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'motion/react'
 import ScrollExpandMedia from '@/components/ui/scroll-expand-media'
 import { EventData, events } from '@/lib/events'
@@ -23,34 +23,18 @@ const T = {
 function isVideo(src: string) { const s = src.toLowerCase(); return s.endsWith('.mp4') || s.endsWith('.mov') || s.endsWith('.webm') || s.includes('/video/upload/') || s.includes('vimeo.com') }
 function isVimeo(src: string) { return /vimeo\.com/.test(src) }
 function vimeoId(src: string) { const m = src.match(/vimeo\.com\/(?:video\/)?(\d+)/); return m ? m[1] : '' }
-function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoId(src)}?autoplay=1&loop=1&muted=1&controls=1&title=0&byline=0&portrait=0&dnt=1` }
+function vimeoSrc(src: string) { return `https://player.vimeo.com/video/${vimeoId(src)}?autoplay=1&loop=1&controls=1&title=0&byline=0&portrait=0&dnt=1` }
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
-function VideoReel({ src, index, soundOn, onToggle }: {
-    src: string; index: number; soundOn: boolean; onToggle: () => void
-}) {
-    const ref = useRef<HTMLVideoElement>(null)
-    const [aspect, setAspect] = useState<string>('9/16')
-
-    const onMeta = () => {
-        const v = ref.current
-        if (!v) return
-        setAspect(v.videoWidth >= v.videoHeight ? '16/9' : '9/16')
-    }
-
-    useEffect(() => {
-        if (!ref.current) return
-        ref.current.muted = !soundOn
-        if (soundOn) ref.current.play().catch(() => {})
-    }, [soundOn])
+function VideoReel({ src, index }: { src: string; index: number }) {
+    const [aspect, setAspect] = useState<string>('16/9')
 
     return (
         <motion.div
-            className='relative overflow-hidden cursor-pointer group'
+            className='relative overflow-hidden'
             style={{ aspectRatio: aspect, backgroundColor: '#050505' }}
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            onClick={isVimeo(src) ? undefined : onToggle}>
+            viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}>
 
             {isVimeo(src) ? (
                 <iframe
@@ -63,51 +47,30 @@ function VideoReel({ src, index, soundOn, onToggle }: {
                 />
             ) : (
                 <video
-                    ref={ref}
                     src={src}
-                    autoPlay muted loop playsInline
-                    onLoadedMetadata={onMeta}
-                    className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]'
+                    controls playsInline
+                    onLoadedMetadata={e => {
+                        const v = e.currentTarget
+                        setAspect(v.videoWidth >= v.videoHeight ? '16/9' : '9/16')
+                    }}
+                    className='absolute inset-0 w-full h-full object-contain'
+                    style={{ backgroundColor: '#050505' }}
                 />
             )}
 
-            {/* Dark overlay on hover */}
-            <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 pointer-events-none' />
-
-            {/* Index badge top-left */}
+            {/* Index badge top-left — hidden when controls are active */}
             <div className='absolute top-4 left-4 pointer-events-none'
                 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.45)' }}>
-                0{index + 1}
+                {String(index + 1).padStart(2, '0')}
             </div>
-
-            {/* Sound toggle — only for native video (Vimeo has its own controls) */}
-            {!isVimeo(src) && (
-                <div className='absolute bottom-4 right-4' onClick={onToggle}
-                    style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
-                    {soundOn
-                        ? <Volume2 size={22} style={{ color: C.rose }} />
-                        : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
-                    }
-                </div>
-            )}
         </motion.div>
     )
 }
 
-/* ── Featured full-width video with sound toggle ─────────────────────────── */
-function FeaturedVideo({ src, soundOn, onToggle }: { src: string; soundOn: boolean; onToggle: () => void }) {
-    const ref = useRef<HTMLVideoElement>(null)
-
-    useEffect(() => {
-        const v = ref.current
-        if (!v) return
-        v.muted = !soundOn
-        v.volume = soundOn ? 1 : 0
-        if (soundOn) v.play().catch(() => {})
-    }, [soundOn])
-
+/* ── Featured full-width video ───────────────────────────────────────────── */
+function FeaturedVideo({ src }: { src: string }) {
     return (
-        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10 relative group'>
+        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
             {isVimeo(src) ? (
                 <iframe
                     src={vimeoSrc(src)}
@@ -118,30 +81,19 @@ function FeaturedVideo({ src, soundOn, onToggle }: { src: string; soundOn: boole
                     title='featured-video'
                 />
             ) : (
-                <>
-                    <video
-                        ref={ref}
-                        src={src}
-                        autoPlay muted loop playsInline
-                        className='w-full'
-                        style={{ display: 'block', aspectRatio: '16/9', objectFit: 'cover' }}
-                    />
-                    <div className='absolute bottom-6 right-10'
-                        onClick={onToggle}
-                        style={{ padding: '10px', cursor: 'pointer', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.8))' }}>
-                        {soundOn
-                            ? <Volume2 size={22} style={{ color: C.rose }} />
-                            : <VolumeX size={22} style={{ color: 'rgba(255,255,255,0.7)' }} />
-                        }
-                    </div>
-                </>
+                <video
+                    src={src}
+                    controls playsInline
+                    className='w-full'
+                    style={{ display: 'block', aspectRatio: '16/9', objectFit: 'contain', backgroundColor: '#050505' }}
+                />
             )}
         </div>
     )
 }
 
 /* ── Reel strip — 1 col on mobile, 3/4 cols on desktop ───────────────────── */
-function VideoStrip({ videos, soundIdx, onToggle }: { videos: string[]; soundIdx: number | null; onToggle: (i: number) => void }) {
+function VideoStrip({ videos }: { videos: string[] }) {
     const [isMobile, setIsMobile] = useState(false)
     useEffect(() => {
         const check = () => setIsMobile(window.innerWidth < 768)
@@ -156,21 +108,19 @@ function VideoStrip({ videos, soundIdx, onToggle }: { videos: string[]; soundIdx
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 0.6 }}>
             {isMobile ? (
-                /* Mobile: single column, one reel per row */
                 <div className='flex flex-col' style={{ gap: '16px' }}>
                     {videos.map((src, i) => (
-                        <VideoReel key={i} src={src} index={i} soundOn={soundIdx === i} onToggle={() => onToggle(i)} />
+                        <VideoReel key={i} src={src} index={i} />
                     ))}
                 </div>
             ) : (
-                /* Desktop: 3 cols for ≤6 videos, 4 cols for 8 */
                 (() => {
                     const n = videos.length
                     if (n <= 3) {
                         return (
                             <div className='grid' style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gap: '16px' }}>
                                 {videos.map((src, i) => (
-                                    <VideoReel key={i} src={src} index={i} soundOn={soundIdx === i} onToggle={() => onToggle(i)} />
+                                    <VideoReel key={i} src={src} index={i} />
                                 ))}
                             </div>
                         )
@@ -180,9 +130,7 @@ function VideoStrip({ videos, soundIdx, onToggle }: { videos: string[]; soundIdx
                         <div key={rowIdx} className='grid' style={{ gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '16px', marginBottom: '16px' }}>
                             {videos.slice(rowIdx * cols, rowIdx * cols + cols).map((src, i) => {
                                 const globalIdx = rowIdx * cols + i
-                                return (
-                                    <VideoReel key={globalIdx} src={src} index={globalIdx} soundOn={soundIdx === globalIdx} onToggle={() => onToggle(globalIdx)} />
-                                )
+                                return <VideoReel key={globalIdx} src={src} index={globalIdx} />
                             })}
                         </div>
                     ))
@@ -500,12 +448,6 @@ export default function EventPageClient({ event }: { event: EventData }) {
     const videos = event.gallery.filter((s): s is string => !!s && isVideo(s))
     const photos = event.gallery.filter(s => !s || !isVideo(s))
 
-    // Global sound state — only one video can have sound at a time
-    // 'featured' = featured video, number = reel index, null = all muted
-    const [activeSound, setActiveSound] = useState<number | 'featured' | string | null>(null)
-    const toggleReel = (i: number) => setActiveSound(prev => prev === i ? null : i)
-    const toggleFeatured = () => setActiveSound(prev => prev === 'featured' ? null : 'featured')
-
     return (
         <div style={{ backgroundColor: C.black, color: C.offWhite, fontFamily: 'var(--font-manrope, Manrope, sans-serif)' }}>
 
@@ -570,9 +512,8 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         {/* Year sections (multi-year projects like Qatar National Day) */}
                         {event.yearSections ? (
                             <div className='mb-10'>
-                                {event.yearSections.map((section, i) => (
+                                {event.yearSections.map((section) => (
                                     <div key={section.year} className='mb-2'>
-                                        {/* Year label */}
                                         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
                                             <span style={{
                                                 fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
@@ -584,47 +525,25 @@ export default function EventPageClient({ event }: { event: EventData }) {
                                             }}>{section.year}</span>
                                             <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
                                         </div>
-                                        {/* Video */}
-                                        <FeaturedVideo
-                                            src={section.video}
-                                            soundOn={activeSound === `year-${i}`}
-                                            onToggle={() => setActiveSound(prev => prev === `year-${i}` ? null : `year-${i}`)}
-                                        />
+                                        <FeaturedVideo src={section.video} />
                                     </div>
                                 ))}
                             </div>
                         ) : event.featuredVideos ? (
-                            /* Multiple stacked full-width videos */
                             <div className='mb-10'>
-                                {event.featuredVideos.map((src, i) => (
-                                    <FeaturedVideo
-                                        key={src}
-                                        src={src}
-                                        soundOn={activeSound === `fv-${i}`}
-                                        onToggle={() => setActiveSound(prev => prev === `fv-${i}` ? null : `fv-${i}`)}
-                                    />
+                                {event.featuredVideos.map((src) => (
+                                    <FeaturedVideo key={src} src={src} />
                                 ))}
                             </div>
                         ) : (
                             <>
-                                {/* Reels strip */}
                                 {videos.length > 0 && (
                                     <div className='mb-10'>
-                                        <VideoStrip
-                                            videos={videos}
-                                            soundIdx={typeof activeSound === 'number' ? activeSound : null}
-                                            onToggle={toggleReel}
-                                        />
+                                        <VideoStrip videos={videos} />
                                     </div>
                                 )}
-
-                                {/* Featured full-width video (below reels) */}
                                 {event.featuredVideo && (
-                                    <FeaturedVideo
-                                        src={event.featuredVideo}
-                                        soundOn={activeSound === 'featured'}
-                                        onToggle={toggleFeatured}
-                                    />
+                                    <FeaturedVideo src={event.featuredVideo} />
                                 )}
                             </>
                         )}
