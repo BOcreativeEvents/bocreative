@@ -568,14 +568,39 @@ export default function EventPageClient({ event }: { event: EventData }) {
                         </div>
                     )}
 
-                    {/* ── Films / Video Section (non-yearSections events) ───── */}
-                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos) && !event.yearSections && (
+                    {/* ── Films / Video Section ──────────────────────────────── */}
+                    {(videos.length > 0 || event.featuredVideo || event.featuredVideos || event.yearSections) && (
                         <div id='films' className='pb-20' style={{ borderTop: `1px solid ${C.line}` }}>
+                            {/* Section label */}
                             <div className='mx-auto max-w-[1480px] px-6 lg:px-10 pt-16 mb-12'>
-                                <p style={{ ...T.label, color: C.rose }}>Event Films</p>
+                                <motion.p
+                                    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }} transition={{ duration: 0.7 }}
+                                    style={{ ...T.label, color: C.rose }}>
+                                    Event Films
+                                </motion.p>
                             </div>
 
-                            {event.featuredVideos ? (
+                            {event.yearSections ? (
+                                <div className='mb-10'>
+                                    {event.yearSections.map((section) => (
+                                        <div key={section.year} className='mb-2'>
+                                            <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-4 flex items-center gap-4'>
+                                                <span style={{
+                                                    fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.22em',
+                                                    textTransform: 'uppercase', color: C.rose,
+                                                }}>Edition</span>
+                                                <span style={{
+                                                    fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800,
+                                                    letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite,
+                                                }}>{section.year}</span>
+                                                <div style={{ flex: 1, height: '1px', backgroundColor: 'rgba(163,86,113,0.2)' }} />
+                                            </div>
+                                            <FeaturedVideo src={section.video} />
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : event.featuredVideos ? (
                                 <div className='mb-10'>
                                     {event.featuredVideos.map((src) => (
                                         <FeaturedVideo key={src} src={src} />
@@ -598,41 +623,6 @@ export default function EventPageClient({ event }: { event: EventData }) {
 
                 </div>
             </ScrollExpandMedia>
-
-            {/* ── yearSections films — outside ScrollExpandMedia so never gated by showContent ── */}
-            {event.yearSections && event.yearSections.length > 0 && (
-                <section id='films' style={{ backgroundColor: C.black, padding: '60px 0', borderTop: `1px solid ${C.line}` }}>
-                    <div className='mx-auto max-w-[1480px] px-6 lg:px-10'>
-                        <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', opacity: 0.4, marginBottom: '24px', fontFamily: 'var(--font-mono)', color: C.offWhite }}>EVENT FILMS</p>
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: `repeat(${Math.min(event.yearSections.length, 3)}, 1fr)`,
-                            gap: '16px',
-                            width: '100%',
-                        }}>
-                            {event.yearSections.map((section) => (
-                                <div key={section.year}>
-                                    {section.video.includes('vimeo.com') ? (
-                                        <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px' }}>
-                                            <iframe
-                                                src={`https://player.vimeo.com/video/${section.video.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1]}?controls=1&title=0&byline=0&portrait=0&dnt=1`}
-                                                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
-                                                allowFullScreen
-                                                allow='autoplay; fullscreen; picture-in-picture'
-                                            />
-                                        </div>
-                                    ) : (
-                                        <video controls playsInline style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}>
-                                            <source src={section.video.endsWith('.mp4') ? section.video : section.video + '.mp4'} type='video/mp4' />
-                                        </video>
-                                    )}
-                                    <p style={{ fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.4, marginTop: '8px', fontFamily: 'var(--font-mono)', color: C.offWhite }}>{section.year}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
 
             {/* ── Next Project teaser ── */}
             <ProjectNav current={event} />
