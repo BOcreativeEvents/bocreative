@@ -46,6 +46,12 @@ next-env.d.ts
 /public/Website_home_video.mp4
 /public/videos/hero-poster-hq.jpg
 /public/videos/hero-hq.mp4
+/public/videos/hero.mp4
+/public/videos/hero-poster.jpg
+/public/videos/sckylers-01.mp4
+/public/videos/sckylers-01-poster.jpg
+/public/videos/wegovy-featured.mp4
+/public/videos/wegovy-featured-poster.jpg
 
 # raw camera files
 *.ARW
