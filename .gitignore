@@ -45,6 +45,7 @@ next-env.d.ts
 /public/event videos/
 /public/Website_home_video.mp4
 /public/videos/hero-poster-hq.jpg
+/public/videos/hero-hq.mp4
 
 # raw camera files
 *.ARW
