@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, IBM_Plex_Mono, Cormorant_Garamond, Syne } from "next/font/google";
+import { Manrope, IBM_Plex_Mono, Syne } from "next/font/google";
 import "./globals.css";
 import GlobalNav from "@/components/ui/global-nav";
 import CustomCursor from "@/components/ui/custom-cursor";
@@ -15,13 +15,6 @@ const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -65,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${ibmPlexMono.variable} ${cormorant.variable} ${syne.variable} h-full antialiased`}>
+    <html lang="en" className={`${manrope.variable} ${ibmPlexMono.variable} ${syne.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <CustomCursor />
         <GlobalNav />

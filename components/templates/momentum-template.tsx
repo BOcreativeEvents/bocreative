@@ -50,7 +50,7 @@ const featuredWork = [
         category: 'Project Launch',
         location: 'Cairo JW Marriott',
         year: '2025',
-        img: '/event photos/Sckylers/20250904-20250903-DSC09464.JPG',
+        img: '/work/sckylers.jpg',
     },
     {
         slug: 'wegovy',
