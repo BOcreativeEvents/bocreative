@@ -121,7 +121,7 @@ export default function ConnectPage() {
                 </div>
 
                 {/* Right — form */}
-                <div className='flex flex-col justify-center px-6 lg:px-16 py-24'>
+                <div className='flex flex-col justify-start px-6 lg:px-16 py-24' style={{ paddingTop: '340px' }}>
                     {submitted ? (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
                             className='text-center'>
