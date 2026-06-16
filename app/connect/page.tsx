@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
@@ -30,6 +30,22 @@ const inputStyle = {
 export default function ConnectPage() {
     const [submitted, setSubmitted] = useState(false)
     const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', brief: '' })
+    const contactBlockRef = useRef<HTMLDivElement>(null)
+    const leftColRef = useRef<HTMLDivElement>(null)
+    const [formOffset, setFormOffset] = useState(0)
+
+    useEffect(() => {
+        const measure = () => {
+            if (contactBlockRef.current && leftColRef.current) {
+                const colTop = leftColRef.current.getBoundingClientRect().top
+                const blockTop = contactBlockRef.current.getBoundingClientRect().top
+                setFormOffset(blockTop - colTop)
+            }
+        }
+        measure()
+        window.addEventListener('resize', measure)
+        return () => window.removeEventListener('resize', measure)
+    }, [])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -42,7 +58,7 @@ export default function ConnectPage() {
             <div className='pt-[64px] min-h-screen grid grid-cols-1 lg:grid-cols-2'>
 
                 {/* Left — headline */}
-                <div className='flex flex-col justify-center px-6 lg:px-16 py-24 lg:py-0'
+                <div ref={leftColRef} className='flex flex-col justify-center px-6 lg:px-16 py-24 lg:py-0'
                     style={{ borderRight: `1px solid ${C.line}` }}>
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}
                         style={{ ...MONO, color: C.rose, marginBottom: '20px' }}>
@@ -63,7 +79,7 @@ export default function ConnectPage() {
                         </p>
                     </motion.div>
 
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
+                    <motion.div ref={contactBlockRef} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
                         style={{ marginTop: '48px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
                         {/* Phone */}
@@ -121,7 +137,7 @@ export default function ConnectPage() {
                 </div>
 
                 {/* Right — form */}
-                <div className='flex flex-col justify-start px-6 lg:px-16 py-24' style={{ paddingTop: '535px' }}>
+                <div className='flex flex-col justify-start px-6 lg:px-16 py-24' style={{ paddingTop: formOffset > 0 ? `${formOffset}px` : '535px' }}>
                     {submitted ? (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
                             className='text-center'>
