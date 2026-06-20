@@ -39,6 +39,7 @@ const navLinks = [
     { label: 'About',        href: '/bo' },
     { label: 'Capabilities', href: '#framework' },
     { label: 'Work',         href: '#work' },
+    { label: 'Updates',      href: '/updates' },
     { label: 'Careers',      href: '/careers' },
     { label: 'Connect',      href: '/connect' },
 ]
@@ -144,8 +145,7 @@ export function MomentumTemplate() {
                         <nav className="hidden lg:flex items-center gap-9 mt-7 ml-auto">
                             {navLinks.map((l) => (
                                 <Link key={l.label} href={l.href}
-                                    style={{ ...T.label, color: C.offWhite, fontWeight: 700, opacity: 0.9, fontSize: '13px' }}
-                                    className="transition-opacity duration-300 hover:opacity-100">
+                                    className="gnav-link">
                                     {l.label}
                                 </Link>
                             ))}
@@ -173,7 +173,7 @@ export function MomentumTemplate() {
                             <div className="px-6 py-8 flex flex-col items-end gap-6">
                                 {navLinks.map((l) => (
                                     <Link key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
-                                        style={{ ...T.label, color: C.offWhite, fontWeight: 700 }}>{l.label}</Link>
+                                        className="gnav-link">{l.label}</Link>
                                 ))}
                             </div>
                         </motion.div>
