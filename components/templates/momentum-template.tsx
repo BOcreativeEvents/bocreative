@@ -386,7 +386,7 @@ const testimonials = [
         name: "H.E. Jassim bin Abdulrahman Al Thani",
         role: "Ambassador of the State of Qatar to Egypt",
         company: "State of Qatar",
-        quote: "Blue Ocean Creative Events exceeded our expectations in delivering the Qatar National Day celebration in Cairo. Their meticulous planning, flawless execution, and unwavering commitment to excellence resulted in an outstanding event that was highly appreciated by all guests. We commend their professionalism and look forward to future collaborations.",
+        quote: "BO Creative exceeded our expectations in delivering the Qatar National Day celebration in Cairo. Their meticulous planning, flawless execution, and unwavering commitment to excellence resulted in an outstanding event that was highly appreciated by all guests. We commend their professionalism and look forward to future collaborations.",
     },
     {
         name: "Sinead Stewart",

@@ -123,7 +123,7 @@ export default function SiteFooter() {
                 <div className='mt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-4'
                     style={{ borderTop: `1px solid ${C.line}`, paddingTop: '28px' }}>
                     <p style={{ ...MONO, fontSize: '10px', color: C.muted }}>
-                        © BlueOcean® · 2009–2026 · All Rights Reserved
+                        © BO Creative® · 2009–2026 · All Rights Reserved
                     </p>
                     <ul className='flex items-center gap-6'>
                         {legalLinks.map((link) => (
