@@ -23,11 +23,19 @@ const POSTS = [
     cover:  'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,q_auto,f_auto/header_photo_bmzvin.png',
   },
   {
-    slug:  'yearly-kickoff',
+    slug:  'kickoff-2026',
     tag:   'Company · Culture',
-    date:  'January 2025 & 2026',
-    title:  'BO Creative Annual Kickoff Celebrating Milestones, Setting the Vision',
-    excerpt: 'Each January, the BO Creative team gathers to reflect on the year\'s achievements and lay the groundwork for what comes next hosted at Four Seasons (2025) and Marriott Zamalek (2026).',
+    date:  'January 2026',
+    title:  'BO Creative Annual Kickoff 2026',
+    excerpt: 'The team gathered at Marriott Zamalek to celebrate a strong year and set the vision for what comes next. New capabilities, new markets, and a sharper articulation of Experience Architecture in Motion.',
+    cover:  null,
+  },
+  {
+    slug:  'kickoff-2025',
+    tag:   'Company · Culture',
+    date:  'January 2025',
+    title:  'BO Creative Annual Kickoff 2025',
+    excerpt: 'The team gathered at Four Seasons Cairo to celebrate the milestones of 2024 and lay the groundwork for the year ahead. A night of reflection, recognition, and recommitment.',
     cover:  'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,e_grayscale,q_auto,f_auto/474888905_18454507504067056_5980307467164775721_n_xpmjhb.jpg',
   },
 ]
