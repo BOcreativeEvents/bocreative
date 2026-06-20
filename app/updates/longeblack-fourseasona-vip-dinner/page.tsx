@@ -23,7 +23,7 @@ const META = [
     { label: 'Date',      value: 'Apr 28, 2026' },
 ]
 
-const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,h_680,c_fill,g_auto,q_auto,f_auto/LxiasDinner21_sqie4u.jpg'
+const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,h_680,c_fill,g_auto,q_auto,f_auto/header_photo_bmzvin.png'
 
 export default function LongeBlackFourSeasonsPage() {
     return (
@@ -50,7 +50,9 @@ export default function LongeBlackFourSeasonsPage() {
                     </div>
                     <h1 className="font-extrabold mb-10"
                         style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.05, color: C.offWhite }}>
-                        The Rare Company — A Private Dinner by LXIAS × BO Creative
+                        The Rare Company<br />
+                        A Private Dinner<br />
+                        <span style={{ color: C.rose }}>by LXIAS × BO Creative</span>
                     </h1>
 
                     {/* Meta grid */}
