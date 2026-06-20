@@ -18,8 +18,8 @@ const POSTS = [
         slug:     'longeblack-fourseasona-vip-dinner',
         tag:      'Sponsorship · Branding',
         date:     'April 2026',
-        title:    'LongeBlack × Four Seasons — A VIP Brand Launch on the Nile',
-        excerpt:  'BO Creative served as event management and branding sponsor for an exclusive VIP dinner and brand launch announcement held aboard the iconic Four Seasons Boat.',
+        title:    'The Rare Company — Inside the LXIAS Launch at Four Seasons Cairo',
+        excerpt:  'BO Creative served as Event Management lead and Branding Sponsor for The Rare Company — an invitation-only private business dinner marking the formal launch of LXIAS at Four Seasons Cairo, First Residence.',
     },
     {
         slug:     'yearly-kickoff',

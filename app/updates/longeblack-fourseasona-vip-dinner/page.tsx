@@ -12,6 +12,14 @@ const C = {
 }
 const MONO = { fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const }
 
+const META = [
+    { label: 'Category',  value: 'Event' },
+    { label: 'Role',      value: 'Event Management & Branding Sponsor' },
+    { label: 'Read',      value: '5 min' },
+    { label: 'Location',  value: 'Giza, Egypt' },
+    { label: 'Date',      value: 'Apr 28, 2026' },
+]
+
 const PHOTOS = [
     'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/LxiasDinner21_sqie4u.jpg',
     'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner204_damugf.jpg',
@@ -47,23 +55,34 @@ export default function LongeBlackFourSeasonsPage() {
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                     className="max-w-[860px]">
                     <div className="flex items-center gap-4 mb-6">
-                        <span style={{ ...MONO, color: C.rose }}>Sponsorship · Branding</span>
-                        <span style={{ ...MONO, color: C.muted }}>April 2026</span>
+                        <span style={{ ...MONO, color: C.rose }}>Sponsorship · Event</span>
+                        <span style={{ ...MONO, color: C.muted }}>Apr 28, 2026</span>
                     </div>
-                    <h1 className="font-extrabold mb-8"
-                        style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1, color: C.offWhite }}>
-                        LongeBlack × Four Seasons — A VIP Brand Launch on the Nile
+                    <h1 className="font-extrabold mb-10"
+                        style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.05, color: C.offWhite }}>
+                        The Rare Company — Inside the LXIAS Launch at Four Seasons Cairo
                     </h1>
+
+                    {/* Meta grid */}
+                    <div className="flex flex-wrap gap-x-10 gap-y-4 mb-12">
+                        {META.map(m => (
+                            <div key={m.label}>
+                                <p style={{ ...MONO, color: C.rose, marginBottom: '4px' }}>{m.label}</p>
+                                <p style={{ ...MONO, color: C.offWhite, opacity: 0.7, fontSize: '9px' }}>{m.value}</p>
+                            </div>
+                        ))}
+                    </div>
+
                     <div style={{ height: '2px', backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: '56px' }} />
                 </motion.div>
 
                 {/* Hero image */}
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.2 }}
-                    className="mb-16 w-full overflow-hidden"
+                    className="mb-20 w-full overflow-hidden"
                     style={{ borderRadius: '2px' }}>
                     <img
                         src={PHOTOS[0]}
-                        alt="LongeBlack Four Seasons VIP Dinner"
+                        alt="The Rare Company — LXIAS Launch at Four Seasons Cairo"
                         style={{ width: '100%', height: 'clamp(300px, 55vw, 680px)', objectFit: 'cover', display: 'block' }}
                     />
                 </motion.div>
@@ -75,28 +94,44 @@ export default function LongeBlackFourSeasonsPage() {
                         style={{ fontSize: 'clamp(1rem, 1.6vw, 1.15rem)', lineHeight: 1.85, color: C.muted, fontWeight: 300 }}>
 
                         <p>
-                            In April 2026, BO Creative partnered with LongeBlack to produce one of the season's most talked-about brand moments — an exclusive VIP dinner and brand launch announcement held aboard the iconic Four Seasons Boat on the Nile.
+                            On April 28, 2026, BO Creative joined forces with Longeblack and LXIAS to bring one of the year's most intentional brand experiences to life — The Rare Company, an invitation-only private business dinner held at Four Seasons Cairo at The First Residence.
                         </p>
 
                         <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
-                            The Event
+                            What is LXIAS?
                         </h2>
                         <p>
-                            Set against the backdrop of Cairo's skyline reflected on the Nile, the evening brought together an intimate group of tastemakers, brand partners, and industry figures for a curated experience that balanced elegance with purpose. The dinner served as the stage for LongeBlack's formal brand launch — a moment designed to make an impression that would endure beyond the night itself.
+                            LXIAS — the League of Extraordinary Innovators and Strategists — is a strategic alliance built on the belief that the future of brand building belongs to collaboration at the highest level. It brings together a curated group of specialized companies operating across branding, architecture, production, media, communication, advertising, packaging, and experiential design. The alliance includes Longeblack, Memakaia, Tiny Green Rhino, Epic Big Box, Blackeels, Boegow, and Subformers — each contributing a distinct expertise under a shared standard of excellence.
                         </p>
                         <p>
-                            Every detail of the environment — from the spatial layout and ambient lighting to the presentation of brand materials — was conceived to reinforce LongeBlack's identity and signal its positioning in the market.
+                            LXIAS was created to address one of the most persistent challenges in brand building: fragmentation. Strategy speaks one language, production another, and communication often moves in an entirely different direction. The alliance was designed to eliminate that disconnect — creating seamless, end-to-end brand experiences where every touchpoint moves with consistency, clarity, and purpose.
+                        </p>
+
+                        <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
+                            The Rare Company Concept
+                        </h2>
+                        <p>
+                            The Rare Company is LXIAS' signature private business dinner concept — and the setting for the alliance's formal launch. Designed as an invitation-only gathering at Four Seasons Cairo at The First Residence, the experience was never intended to function as a conventional networking event. There were no stages, no panels, and no performative visibility.
+                        </p>
+                        <p>
+                            Instead, the concept focused on creating an environment where accomplished individuals could connect organically — through shared standards, meaningful conversation, and intentional proximity. Every guest was selected with purpose. Every interaction was designed to feel personal rather than transactional. The event demonstrated how luxury today is shifting away from excess and toward access, curation, and relevance.
                         </p>
 
                         <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
                             BO Creative's Role
                         </h2>
                         <p>
-                            BO Creative served as both event management lead and branding sponsor for the evening. Our team handled the end-to-end production: concept development, venue coordination with Four Seasons, guest experience design, and on-site execution. As a branding sponsor, we were invested not just as operators but as creative partners in how LongeBlack introduced itself to the world.
+                            BO Creative served as Event Management lead and Branding Sponsor for the evening — alongside partners Longeblack, Four Seasons First Residence, and Mansory. Our team handled the full production: spatial design, venue coordination, guest experience flow, and on-site execution. As a branding sponsor, our investment went beyond logistics — we were creative partners in how LXIAS and Longeblack introduced themselves to the room.
                         </p>
                         <p>
-                            The result was an evening that felt effortless — which is precisely the hallmark of meticulous preparation and experienced hands behind the scenes.
+                            The result was an evening that felt effortless. Which is, of course, the clearest sign of everything that happened behind the scenes.
                         </p>
+
+                        <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '32px' }}>
+                            <p style={{ fontSize: '13px', letterSpacing: '0.04em' }}>
+                                Powered by <span style={{ color: C.offWhite }}>LXIAS · Longeblack · Four Seasons First Residence · BO Creative · Mansory</span>
+                            </p>
+                        </div>
                     </motion.div>
                 </div>
 
@@ -112,7 +147,7 @@ export default function LongeBlackFourSeasonsPage() {
                                 style={{ overflow: 'hidden', aspectRatio: '4/3' }}>
                                 <img
                                     src={src}
-                                    alt={`LongeBlack Four Seasons event photo ${i + 2}`}
+                                    alt={`The Rare Company event photo ${i + 2}`}
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease', cursor: 'pointer' }}
                                     onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)' }}
                                     onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1)' }}
@@ -125,7 +160,7 @@ export default function LongeBlackFourSeasonsPage() {
                 {/* Footer meta */}
                 <div className="max-w-[860px] mx-auto mt-20" style={{ borderTop: `1px solid ${C.line}`, paddingTop: '40px' }}>
                     <p style={{ ...MONO, color: C.muted }}>
-                        Role: Event Management &amp; Branding Sponsor &nbsp;·&nbsp; Venue: Four Seasons Boat, Cairo &nbsp;·&nbsp; April 2026
+                        Role: Event Management &amp; Branding Sponsor &nbsp;·&nbsp; Venue: Four Seasons Cairo, First Residence &nbsp;·&nbsp; Apr 28, 2026 &nbsp;·&nbsp; Giza, Egypt
                     </p>
                 </div>
 
