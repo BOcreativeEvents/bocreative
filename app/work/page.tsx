@@ -199,14 +199,14 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                 <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700'
                     style={{ background: 'linear-gradient(to top, rgba(163,86,113,0.45) 0%, transparent 55%)', zIndex: 4 }} />
 
-                {/* Index number — top left */}
+                {/* Index number  top left */}
                 <div className='absolute top-5 left-6' style={{ zIndex: 5 }}>
                     <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.3)' }}>
                         {String(index + 1).padStart(2, '0')}
                     </span>
                 </div>
 
-                {/* Category pill — top right */}
+                {/* Category pill  top right */}
                 <div className='absolute top-5 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500' style={{ zIndex: 5 }}>
                     <span style={{
                         fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.16em',
@@ -218,7 +218,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                     </span>
                 </div>
 
-                {/* Bottom info — slides up on hover */}
+                {/* Bottom info  slides up on hover */}
                 <div className='relative z-10 p-6 lg:p-7'>
                     {/* Partnership badge */}
                     {event.partnershipBadge && (
@@ -234,7 +234,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                         </div>
                     )}
 
-                    {/* Location — always visible */}
+                    {/* Location  always visible */}
                     <div className={`flex items-center gap-2 mb-3 ${isMobile ? '' : 'translate-y-0 group-hover:-translate-y-1 transition-transform duration-500'}`}>
                         <MapPin size={10} style={{ color: 'rgba(255,255,255,0.35)' }} />
                         <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>
@@ -242,7 +242,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                         </span>
                     </div>
 
-                    {/* Title — static on mobile, slides up on hover on desktop */}
+                    {/* Title  static on mobile, slides up on hover on desktop */}
                     <div style={{ overflow: isMobile ? 'visible' : 'hidden' }}>
                         <h3 className={`font-extrabold text-white ${isMobile ? '' : 'translate-y-2 group-hover:translate-y-0 transition-transform duration-500'}`}
                             style={{
@@ -254,7 +254,7 @@ function WorkCard({ event, index, featured, isMobile }: { event: EventData; inde
                         </h3>
                     </div>
 
-                    {/* Arrow — appears on hover (desktop only) */}
+                    {/* Arrow  appears on hover (desktop only) */}
                     {!isMobile && <div className='mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-75'>
                         <div style={{ height: '1px', width: '24px', backgroundColor: 'rgba(163,86,113,0.6)' }} />
                         <ArrowUpRight size={13} style={{ color: C.rose }} />

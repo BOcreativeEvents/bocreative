@@ -36,7 +36,7 @@ export default function JobPageClient({ job }: { job: Job }) {
         e.preventDefault()
         const subject = encodeURIComponent(`Application: ${job.title}`)
         const body = encodeURIComponent(
-            `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || '—'}\nPortfolio: ${form.portfolio || '—'}\nCV/Resume: ${cvFile ? cvFile.name : '—'}\n\n${form.message}`
+            `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || ''}\nPortfolio: ${form.portfolio || ''}\nCV/Resume: ${cvFile ? cvFile.name : ''}\n\n${form.message}`
         )
         window.location.href = `mailto:info@bocreative.me?subject=${subject}&body=${body}`
         setSubmitted(true)
@@ -47,7 +47,7 @@ export default function JobPageClient({ job }: { job: Job }) {
 
             <div className='pt-[64px] min-h-screen grid grid-cols-1 lg:grid-cols-2'>
 
-                {/* Left — job info */}
+                {/* Left  job info */}
                 <div className='flex flex-col justify-center px-6 lg:px-16 py-24 lg:py-0'
                     style={{ borderRight: `1px solid ${C.line}` }}>
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}
@@ -86,7 +86,7 @@ export default function JobPageClient({ job }: { job: Job }) {
                     </motion.div>
                 </div>
 
-                {/* Right — application form */}
+                {/* Right  application form */}
                 <div className='flex flex-col justify-center px-6 lg:px-16 py-24'>
                     {submitted ? (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}

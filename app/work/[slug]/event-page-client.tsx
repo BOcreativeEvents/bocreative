@@ -42,7 +42,7 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
             viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             style={{ width: '100%', minWidth: 0 }}>
             {isVimeo(src) ? (
-                // Vimeo iframes have no natural dimensions — use 16:9 container
+                // Vimeo iframes have no natural dimensions  use 16:9 container
                 <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
                     <iframe
                         src={vimeoSrc(src)}
@@ -205,7 +205,7 @@ function PhotoItem({ src, alt, objectPosition = 'center', onClick, fillHeight = 
                         src={src} alt={alt}
                         className='transition-transform duration-700 group-hover:scale-105'
                         style={fillHeight ? {
-                            // absolute fill — guaranteed no gaps regardless of grid/flex context
+                            // absolute fill  guaranteed no gaps regardless of grid/flex context
                             position: 'absolute', inset: 0,
                             width: '100%', height: '100%',
                             objectFit: 'cover', objectPosition,
@@ -232,7 +232,7 @@ function PhotoItem({ src, alt, objectPosition = 'center', onClick, fillHeight = 
     )
 }
 
-/* ── Smart crop image — detects faces, crops to show them ─────────────────── */
+/* ── Smart crop image  detects faces, crops to show them ─────────────────── */
 function SmartCropImg({ src, alt, className = '', style = {}, fallbackPosition = 'center 25%' }: {
     src: string; alt: string; className?: string; style?: React.CSSProperties; fallbackPosition?: string
 }) {
@@ -316,7 +316,7 @@ function Lightbox({ photos, startIdx, onClose, title }: {
                 <X size={16} />
             </button>
 
-            {/* Project name — top left */}
+            {/* Project name  top left */}
             {title && (
                 <div className='absolute top-5 left-6'
                     style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: C.rose }}>
@@ -324,7 +324,7 @@ function Lightbox({ photos, startIdx, onClose, title }: {
                 </div>
             )}
 
-            {/* Counter — top center */}
+            {/* Counter  top center */}
             <div className='absolute top-5 left-1/2 -translate-x-1/2'
                 style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase' }}>
                 {String(idx + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
@@ -424,7 +424,7 @@ function EditorialGallery({ photos, title }: { photos: (string | null)[]; title:
                         {chunk.type === 'trio' && (() => {
                             const [large, s1, s2] = chunk.items
                             const leftCol = (
-                                /* Large photo — aspect ratio defines row height */
+                                /* Large photo  aspect ratio defines row height */
                                 <div className='relative overflow-hidden group'
                                     style={{ aspectRatio: '4/3', width: '100%', cursor: large ? 'pointer' : 'default' }}
                                     onClick={large ? () => setLightboxIdx(getRealIdx(large)) : undefined}>
@@ -469,7 +469,7 @@ function EditorialGallery({ photos, title }: { photos: (string | null)[]; title:
                         {chunk.type === 'pair' && (
                             <div className='grid' style={{ gridTemplateColumns: '1fr 1fr' }}>
                                 {chunk.items.map((src, si) => (
-                                    <PhotoItem key={si} src={src} alt={`${title} — ${si + 1}`}
+                                    <PhotoItem key={si} src={src} alt={`${title}  ${si + 1}`}
                                         onClick={src ? () => setLightboxIdx(getRealIdx(src)) : undefined} />
                                 ))}
                             </div>
@@ -679,14 +679,14 @@ function ProjectCard({ event, direction }: { event: EventData; direction: string
             <div className='absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500'
                 style={{ background: 'linear-gradient(to top, rgba(163,86,113,0.35) 0%, transparent 60%)' }} />
 
-            {/* Direction label — top left */}
+            {/* Direction label  top left */}
             <div className='absolute top-5 left-6 z-10'>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
                     {direction}
                 </p>
             </div>
 
-            {/* Card info — bottom */}
+            {/* Card info  bottom */}
             <div className='relative z-10 p-6'>
                 <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '8px' }}>
                     {event.category}

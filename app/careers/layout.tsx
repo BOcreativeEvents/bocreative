@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Careers — BO Creative",
+  title: "Careers  BO Creative",
   description: "Join the BO Creative team. We are looking for talented people who are passionate about brand experiences, events, and creative production.",
 }
 

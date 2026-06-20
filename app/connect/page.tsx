@@ -57,7 +57,7 @@ export default function ConnectPage() {
 
             <div className='pt-[64px] min-h-screen grid grid-cols-1 lg:grid-cols-2'>
 
-                {/* Left — headline */}
+                {/* Left  headline */}
                 <div ref={leftColRef} className='flex flex-col justify-center px-6 lg:px-16 py-24 lg:py-0'
                     style={{ borderRight: `1px solid ${C.line}` }}>
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}
@@ -121,7 +121,7 @@ export default function ConnectPage() {
                         {/* Address */}
                         <div>
                             <p style={{ ...MONO, color: C.rose, marginBottom: '6px' }}>Address</p>
-                            <p style={{ fontSize: '15px', color: C.offWhite }}>Cairo, Maadi — Egypt</p>
+                            <p style={{ fontSize: '15px', color: C.offWhite }}>Cairo, Maadi  Egypt</p>
                         </div>
 
                         {/* Working Hours */}
@@ -136,7 +136,7 @@ export default function ConnectPage() {
                     </motion.div>
                 </div>
 
-                {/* Right — form */}
+                {/* Right  form */}
                 <div className='flex flex-col justify-start px-6 lg:px-16 py-24' style={{ paddingTop: formOffset > 0 ? `${formOffset}px` : '535px' }}>
                     {submitted ? (
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
