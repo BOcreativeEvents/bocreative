@@ -53,7 +53,7 @@ const sections = [
 ]
 
 const socialLinks = [
-    { icon: <IgIcon />, href: 'https://www.instagram.com/bocreativeevents?igsh=cmpmbDZma2JqZzFt', label: 'Instagram' },
+    { icon: <IgIcon />, href: 'https://www.instagram.com/bocreative.me
     { icon: <LiIcon />, href: 'https://www.linkedin.com/company/bo-creative/', label: 'LinkedIn' },
     { icon: <FbIcon />, href: 'https://www.facebook.com/share/1NsE5vgVNy/?mibextid=wwXIfr', label: 'Facebook' },
 ]
