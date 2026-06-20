@@ -15,18 +15,20 @@ const MONO = { fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: 
 
 const POSTS = [
     {
-        slug:     'longeblack-fourseasona-vip-dinner',
-        tag:      'Sponsorship · Branding',
-        date:     'April 2026',
-        title:    'The Rare Company — A Private Dinner by LXIAS × BO Creative',
-        excerpt:  'BO Creative served as Event Management lead and Branding Sponsor for The Rare Company — an invitation-only private business dinner marking the formal launch of LXIAS at Four Seasons Cairo, First Residence.',
+        slug:    'longeblack-fourseasona-vip-dinner',
+        tag:     'Sponsorship · Branding',
+        date:    'April 2026',
+        title:   'The Rare Company — A Private Dinner by LXIAS × BO Creative',
+        excerpt: 'BO Creative served as Event Management lead and Branding Sponsor for The Rare Company — an invitation-only private business dinner marking the formal launch of LXIAS at Four Seasons Cairo, First Residence.',
+        cover:   'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_520,c_fill,g_auto,q_auto,f_auto/header_photo_bmzvin.png',
     },
     {
-        slug:     'yearly-kickoff',
-        tag:      'Company · Culture',
-        date:     'January 2025 & 2026',
-        title:    'BO Creative Annual Kickoff — Celebrating Milestones, Setting the Vision',
-        excerpt:  'Each January, the BO Creative team gathers to reflect on the year\'s achievements and lay the groundwork for what comes next — hosted at Four Seasons (2025) and Marriott Zamalek (2026).',
+        slug:    'yearly-kickoff',
+        tag:     'Company · Culture',
+        date:    'January 2025 & 2026',
+        title:   'BO Creative Annual Kickoff — Celebrating Milestones, Setting the Vision',
+        excerpt: 'Each January, the BO Creative team gathers to reflect on the year\'s achievements and lay the groundwork for what comes next — hosted at Four Seasons (2025) and Marriott Zamalek (2026).',
+        cover:   null,
     },
 ]
 
@@ -60,25 +62,42 @@ export default function UpdatesPage() {
                     <motion.div key={post.slug}
                         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ borderBottom: `1px solid ${C.line}`, paddingBottom: '48px', marginBottom: '48px' }}>
+                        style={{ borderBottom: `1px solid ${C.line}`, paddingBottom: '56px', marginBottom: '56px' }}>
                         <Link href={`/updates/${post.slug}`} className="group block">
-                            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-                                <div style={{ flex: 1 }}>
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <span style={{ ...MONO, color: C.rose }}>{post.tag}</span>
-                                        <span style={{ ...MONO, color: C.muted }}>{post.date}</span>
+                            <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12">
+
+                                {/* Cover image */}
+                                {post.cover && (
+                                    <div className="flex-shrink-0 overflow-hidden"
+                                        style={{ width: '100%', maxWidth: '420px', aspectRatio: '16/10', borderRadius: '2px' }}>
+                                        <img
+                                            src={post.cover}
+                                            alt={post.title}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
+                                            className="group-hover:scale-105 transition-transform duration-700"
+                                        />
                                     </div>
-                                    <h2 className="font-bold group-hover:text-[#A35671] transition-colors duration-300"
-                                        style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.4rem)', letterSpacing: '-0.03em', lineHeight: 1.15, color: C.offWhite, marginBottom: '16px' }}>
-                                        {post.title}
-                                    </h2>
-                                    <p style={{ fontSize: '15px', lineHeight: 1.75, color: C.muted, maxWidth: '640px' }}>
-                                        {post.excerpt}
-                                    </p>
-                                </div>
-                                <div className="flex-shrink-0 flex items-center gap-2 group-hover:gap-3 transition-all duration-300"
-                                    style={{ ...MONO, color: C.rose, paddingTop: '4px' }}>
-                                    Read <ArrowUpRight size={12} />
+                                )}
+
+                                {/* Text */}
+                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <div className="flex items-center gap-4 mb-5">
+                                            <span style={{ ...MONO, color: C.rose }}>{post.tag}</span>
+                                            <span style={{ ...MONO, color: C.muted }}>{post.date}</span>
+                                        </div>
+                                        <h2 className="font-bold group-hover:text-[#A35671] transition-colors duration-300"
+                                            style={{ fontSize: 'clamp(1.4rem, 2.8vw, 2.4rem)', letterSpacing: '-0.03em', lineHeight: 1.15, color: C.offWhite, marginBottom: '16px' }}>
+                                            {post.title}
+                                        </h2>
+                                        <p style={{ fontSize: '15px', lineHeight: 1.75, color: C.muted, maxWidth: '600px' }}>
+                                            {post.excerpt}
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300 mt-6"
+                                        style={{ ...MONO, color: C.rose }}>
+                                        Read <ArrowUpRight size={12} />
+                                    </div>
                                 </div>
                             </div>
                         </Link>

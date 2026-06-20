@@ -1,4 +1,5 @@
 export const FOURSEASONA_PHOTOS: string[] = [
+  'LONGBLACK--270_ypzswd',
   'lxiasDinner145_oeeu2p',
   'lxiasDinner007_a3pbb0',
   'lxiasDinner001_xpsu1u',
