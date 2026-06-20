@@ -45,6 +45,9 @@ const CLIENTS = [
     { name: 'Client',          file: 'logo-web-10.png'    },
     { name: 'Client',          file: 'logo-web-11.png'    },
     { name: 'Client',          file: 'logo-web-12.png'    },
+    { name: 'LongeBlack',      file: 'longeblack.png'     },
+    { name: 'The Rare Company',file: 'the-rare-company.png'},
+    { name: 'LT',              file: 'lt-monogram.png'    },
 ]
 
 const C = {
