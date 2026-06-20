@@ -168,9 +168,9 @@ export default function BOPage() {
                                 src={`/clients/${c.file}`}
                                 alt={c.name}
                                 style={{
-                                    height: '68px',
+                                    height: '88px',
                                     width: '100%',
-                                    maxWidth: '195px',
+                                    maxWidth: '254px',
                                     objectFit: 'contain',
                                     filter: 'brightness(0) invert(1)',
                                     opacity: 0.28,
