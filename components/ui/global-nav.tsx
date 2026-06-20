@@ -14,6 +14,7 @@ const LINKS = [
     { label: 'About',        href: '/bo' },
     { label: 'Capabilities', href: '/#framework' },
     { label: 'Work',         href: '/work' },
+    { label: 'Updates',      href: '/updates' },
     { label: 'Careers',      href: '/careers' },
     { label: 'Connect',      href: '/connect' },
 ]
@@ -26,7 +27,8 @@ export default function GlobalNav() {
     const isInnerPage = pathname?.startsWith('/work') ||
                         pathname?.startsWith('/careers') ||
                         pathname?.startsWith('/connect') ||
-                        pathname?.startsWith('/bo')
+                        pathname?.startsWith('/bo') ||
+                        pathname?.startsWith('/updates')
 
     if (!isInnerPage) return null
 
