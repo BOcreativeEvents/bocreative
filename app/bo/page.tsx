@@ -73,9 +73,6 @@ const CLIENTS = [
     { name: 'Client',          file: 'client-2023-26.png' },
     { name: 'Client',          file: 'client-2023-27.png' },
     { name: 'Client',          file: 'client-2023-28.png' },
-    { name: 'Client',          file: 'artboard-1.jpg'     },
-    { name: 'Client',          file: 'artboard-2.jpg'     },
-    { name: 'Client',          file: 'artboard-3.jpg'     },
 ]
 
 const C = {
