@@ -86,37 +86,28 @@ export default function LongeBlackFourSeasonsPage() {
                         style={{ fontSize: 'clamp(1rem, 1.6vw, 1.15rem)', lineHeight: 1.85, color: C.muted, fontWeight: 300 }}>
 
                         <p>
-                            On April 28, 2026, BO Creative joined forces with Longeblack and LXIAS to bring one of the year's most intentional brand experiences to life — The Rare Company, an invitation-only private business dinner held at Four Seasons Cairo at The First Residence.
+                            April 28, 2026. Four Seasons Cairo, First Residence. An invitation-only private dinner marking the formal launch of LXIAS — one of the year's most intentional brand experiences.
                         </p>
 
                         <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
                             What is LXIAS?
                         </h2>
                         <p>
-                            LXIAS — the League of Extraordinary Innovators and Strategists — is a strategic alliance built on the belief that the future of brand building belongs to collaboration at the highest level. It brings together a curated group of specialized companies operating across branding, architecture, production, media, communication, advertising, packaging, and experiential design. The alliance includes Longeblack, Memakaia, Tiny Green Rhino, Epic Big Box, Blackeels, Boegow, and Subformers — each contributing a distinct expertise under a shared standard of excellence.
-                        </p>
-                        <p>
-                            LXIAS was created to address one of the most persistent challenges in brand building: fragmentation. Strategy speaks one language, production another, and communication often moves in an entirely different direction. The alliance was designed to eliminate that disconnect — creating seamless, end-to-end brand experiences where every touchpoint moves with consistency, clarity, and purpose.
+                            LXIAS — League of Extraordinary Innovators and Strategists — is a strategic alliance of specialized companies across branding, production, media, architecture, and experiential design. Members: Longeblack, Memakaia, Tiny Green Rhino, Epic Big Box, Blackeels, Boegow, and Subformers. One shared standard. Zero fragmentation.
                         </p>
 
                         <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
-                            The Rare Company Concept
+                            The Rare Company
                         </h2>
                         <p>
-                            The Rare Company is LXIAS' signature private business dinner concept — and the setting for the alliance's formal launch. Designed as an invitation-only gathering at Four Seasons Cairo at The First Residence, the experience was never intended to function as a conventional networking event. There were no stages, no panels, and no performative visibility.
-                        </p>
-                        <p>
-                            Instead, the concept focused on creating an environment where accomplished individuals could connect organically — through shared standards, meaningful conversation, and intentional proximity. Every guest was selected with purpose. Every interaction was designed to feel personal rather than transactional. The event demonstrated how luxury today is shifting away from excess and toward access, curation, and relevance.
+                            No stages. No panels. No performative networking. An invitation-only gathering where accomplished individuals connect through shared standards and intentional proximity. Luxury as access, not excess.
                         </p>
 
                         <h2 className="font-semibold" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: C.offWhite, letterSpacing: '-0.02em' }}>
                             BO Creative's Role
                         </h2>
                         <p>
-                            BO Creative served as Event Management lead and Branding Sponsor for the evening — alongside partners Longeblack, Four Seasons First Residence, and Mansory. Our team handled the full production: spatial design, venue coordination, guest experience flow, and on-site execution. As a branding sponsor, our investment went beyond logistics — we were creative partners in how LXIAS and Longeblack introduced themselves to the room.
-                        </p>
-                        <p>
-                            The result was an evening that felt effortless. Which is, of course, the clearest sign of everything that happened behind the scenes.
+                            Event Management lead and Branding Sponsor. Spatial design, venue coordination, guest experience, and full on-site execution — alongside Longeblack, Four Seasons, and Mansory. The evening felt effortless. That's the point.
                         </p>
 
                         <div style={{ borderTop: `1px solid ${C.line}`, paddingTop: '32px' }}>
