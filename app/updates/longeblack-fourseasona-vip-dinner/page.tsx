@@ -20,19 +20,20 @@ const META = [
     { label: 'Date',      value: 'Apr 28, 2026' },
 ]
 
+const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,h_680,c_fill,g_auto,q_auto,f_auto/LxiasDinner21_sqie4u.jpg'
+
 const PHOTOS = [
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/LxiasDinner21_sqie4u.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner204_damugf.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner185_wsmg7l.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/LxiasDinner35_akrcdw.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner148_iqyvgr.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner245_memvdw.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/LxiasDinner66_lmq5u4.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner076_pgumrb.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner219_ljmjjh.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner240_kbpty9.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner173_gjqenv.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/lxiasDinner261_oupndy.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner204_damugf.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner185_wsmg7l.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/LxiasDinner35_akrcdw.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner148_iqyvgr.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner245_memvdw.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/LxiasDinner66_lmq5u4.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner076_pgumrb.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner219_ljmjjh.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner240_kbpty9.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner173_gjqenv.jpg',
+    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner261_oupndy.jpg',
 ]
 
 export default function LongeBlackFourSeasonsPage() {
@@ -81,7 +82,7 @@ export default function LongeBlackFourSeasonsPage() {
                     className="mb-20 w-full overflow-hidden"
                     style={{ borderRadius: '2px' }}>
                     <img
-                        src={PHOTOS[0]}
+                        src={HERO}
                         alt="The Rare Company — LXIAS Launch at Four Seasons Cairo"
                         style={{ width: '100%', height: 'clamp(300px, 55vw, 680px)', objectFit: 'cover', display: 'block' }}
                     />
