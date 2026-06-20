@@ -2,6 +2,9 @@
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { ArrowLeft } from 'lucide-react'
+import { FOURSEASONA_PHOTOS } from '@/lib/gallery-fourseasona'
+
+const CLD = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto'
 
 const C = {
     black:    '#010101',
@@ -21,20 +24,6 @@ const META = [
 ]
 
 const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,h_680,c_fill,g_auto,q_auto,f_auto/LxiasDinner21_sqie4u.jpg'
-
-const PHOTOS = [
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner204_damugf.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner185_wsmg7l.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/LxiasDinner35_akrcdw.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner148_iqyvgr.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner245_memvdw.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/LxiasDinner66_lmq5u4.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner076_pgumrb.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner219_ljmjjh.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner240_kbpty9.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner173_gjqenv.jpg',
-    'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto/lxiasDinner261_oupndy.jpg',
-]
 
 export default function LongeBlackFourSeasonsPage() {
     return (
@@ -141,14 +130,14 @@ export default function LongeBlackFourSeasonsPage() {
                     transition={{ duration: 0.8 }}>
                     <p style={{ ...MONO, color: C.rose, marginBottom: '32px' }}>Event Gallery</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: '8px' }}>
-                        {PHOTOS.slice(1).map((src, i) => (
-                            <motion.div key={i}
+                        {FOURSEASONA_PHOTOS.map((id, i) => (
+                            <motion.div key={id}
                                 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.06 }}
+                                viewport={{ once: true }} transition={{ duration: 0.6, delay: Math.min(i * 0.03, 0.4) }}
                                 style={{ overflow: 'hidden', aspectRatio: '4/3' }}>
                                 <img
-                                    src={src}
-                                    alt={`The Rare Company event photo ${i + 2}`}
+                                    src={`${CLD}/${id}.jpg`}
+                                    alt={`The Rare Company event photo ${i + 1}`}
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease', cursor: 'pointer' }}
                                     onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1.04)' }}
                                     onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1)' }}
