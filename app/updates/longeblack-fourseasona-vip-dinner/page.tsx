@@ -23,7 +23,7 @@ const META = [
     { label: 'Date',      value: 'Apr 28, 2026' },
 ]
 
-const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,h_680,c_fill,g_auto,q_auto,f_auto/header_photo_bmzvin.png'
+const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/header_photo_bmzvin.png'
 
 export default function LongeBlackFourSeasonsPage() {
     return (
@@ -75,7 +75,7 @@ export default function LongeBlackFourSeasonsPage() {
                     <img
                         src={HERO}
                         alt="The Rare Company — LXIAS Launch at Four Seasons Cairo"
-                        style={{ width: '100%', height: 'clamp(300px, 55vw, 680px)', objectFit: 'cover', display: 'block' }}
+                        style={{ width: '100%', height: 'auto', display: 'block' }}
                     />
                 </motion.div>
 

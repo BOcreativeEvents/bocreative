@@ -18,9 +18,9 @@ const POSTS = [
         slug:    'longeblack-fourseasona-vip-dinner',
         tag:     'Sponsorship · Branding',
         date:    'April 2026',
-        title:   'The Rare Company — A Private Dinner by LXIAS × BO Creative',
+        title:   'The Rare Company. A Private Dinner by LXIAS × BO Creative',
         excerpt: 'BO Creative served as Event Management lead and Branding Sponsor for The Rare Company — an invitation-only private business dinner marking the formal launch of LXIAS at Four Seasons Cairo, First Residence.',
-        cover:   'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_520,c_fill,g_auto,q_auto,f_auto/header_photo_bmzvin.png',
+        cover:   'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,q_auto,f_auto/header_photo_bmzvin.png',
     },
     {
         slug:    'yearly-kickoff',
@@ -68,13 +68,12 @@ export default function UpdatesPage() {
 
                                 {/* Cover image */}
                                 {post.cover && (
-                                    <div className="flex-shrink-0 overflow-hidden"
-                                        style={{ width: '100%', maxWidth: '420px', aspectRatio: '16/10', borderRadius: '2px' }}>
+                                    <div className="flex-shrink-0"
+                                        style={{ width: '100%', maxWidth: '420px', borderRadius: '2px' }}>
                                         <img
                                             src={post.cover}
                                             alt={post.title}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.6s ease' }}
-                                            className="group-hover:scale-105 transition-transform duration-700"
+                                            style={{ width: '100%', height: 'auto', display: 'block' }}
                                         />
                                     </div>
                                 )}
