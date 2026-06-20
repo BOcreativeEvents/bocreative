@@ -28,7 +28,7 @@ const POSTS = [
     date:  'January 2025 & 2026',
     title:  'BO Creative Annual Kickoff Celebrating Milestones, Setting the Vision',
     excerpt: 'Each January, the BO Creative team gathers to reflect on the year\'s achievements and lay the groundwork for what comes next hosted at Four Seasons (2025) and Marriott Zamalek (2026).',
-    cover:  'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,q_auto,f_auto/474888905_18454507504067056_5980307467164775721_n_xpmjhb.jpg',
+    cover:  'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,e_grayscale,q_auto,f_auto/474888905_18454507504067056_5980307467164775721_n_xpmjhb.jpg',
   },
 ]
 
