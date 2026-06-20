@@ -18,7 +18,7 @@ const POSTS = [
         slug:     'longeblack-fourseasona-vip-dinner',
         tag:      'Sponsorship · Branding',
         date:     'April 2026',
-        title:    'The Rare Company — Inside the LXIAS Launch at Four Seasons Cairo',
+        title:    'The Rare Company — A Private Dinner by LXIAS × BO Creative',
         excerpt:  'BO Creative served as Event Management lead and Branding Sponsor for The Rare Company — an invitation-only private business dinner marking the formal launch of LXIAS at Four Seasons Cairo, First Residence.',
     },
     {

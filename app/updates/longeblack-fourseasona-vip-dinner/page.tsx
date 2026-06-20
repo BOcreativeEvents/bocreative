@@ -60,7 +60,7 @@ export default function LongeBlackFourSeasonsPage() {
                     </div>
                     <h1 className="font-extrabold mb-10"
                         style={{ fontSize: 'clamp(2.2rem, 5vw, 4.5rem)', letterSpacing: '-0.04em', lineHeight: 1.05, color: C.offWhite }}>
-                        The Rare Company — Inside the LXIAS Launch at Four Seasons Cairo
+                        The Rare Company — A Private Dinner by LXIAS × BO Creative
                     </h1>
 
                     {/* Meta grid */}
