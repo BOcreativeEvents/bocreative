@@ -12,8 +12,8 @@ const C = {
 }
 const MONO = { fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase' as const }
 
-const CLD = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,q_auto,f_auto'
-const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,q_auto,f_auto/476582674_18454507588067056_1120095820665621486_n_bvzfqx.jpg'
+const CLD = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_800,h_600,c_fill,g_auto,e_grayscale,q_auto,f_auto'
+const HERO = 'https://res.cloudinary.com/dwlznbqoi/image/upload/w_1400,e_grayscale,q_auto,f_auto/476582674_18454507588067056_1120095820665621486_n_bvzfqx.jpg'
 
 const PHOTOS = [
     '475983460_18454507510067056_2171036095536817261_n_ejm6bh',
