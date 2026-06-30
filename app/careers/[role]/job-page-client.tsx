@@ -32,13 +32,11 @@ export default function JobPageClient({ job }: { job: Job }) {
     const [cvFile, setCvFile] = useState<File | null>(null)
     const fileRef = useRef<HTMLInputElement>(null)
 
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSevlKi-T0vs6ubLfKnhSGWY2NEp3NUcVfQ9fNSM-ETz2mxGsQ/viewform'
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        const subject = encodeURIComponent(`Application: ${job.title}`)
-        const body = encodeURIComponent(
-            `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || ''}\nPortfolio: ${form.portfolio || ''}\nCV/Resume: ${cvFile ? cvFile.name : ''}\n\n${form.message}`
-        )
-        window.location.href = `mailto:hr@bocreative.me?subject=${subject}&body=${body}`
+        window.open(GOOGLE_FORM_URL, '_blank')
         setSubmitted(true)
     }
 
