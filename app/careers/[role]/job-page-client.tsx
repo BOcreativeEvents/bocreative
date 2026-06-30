@@ -38,7 +38,7 @@ export default function JobPageClient({ job }: { job: Job }) {
         const body = encodeURIComponent(
             `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || ''}\nPortfolio: ${form.portfolio || ''}\nCV/Resume: ${cvFile ? cvFile.name : ''}\n\n${form.message}`
         )
-        window.location.href = `mailto:info@bocreative.me?subject=${subject}&body=${body}`
+        window.location.href = `mailto:hr@bocreative.me?subject=${subject}&body=${body}`
         setSubmitted(true)
     }
 
