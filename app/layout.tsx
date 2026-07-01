@@ -4,6 +4,7 @@ import "./globals.css";
 import GlobalNav from "@/components/ui/global-nav";
 import CustomCursor from "@/components/ui/custom-cursor";
 import SiteFooter from "@/components/ui/site-footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -76,6 +77,7 @@ export default function RootLayout({
         <GlobalNav />
         {children}
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
