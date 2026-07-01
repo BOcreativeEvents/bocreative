@@ -27,7 +27,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bocreative.me"),
   verification: {
-    google: "fdMKR6HMiBuI9by1peCr16m65YFULQ1Kz-gEgTlw3H4",
+    google: ["fdMKR6HMiBuI9by1peCr16m65YFULQ1Kz-gEgTlw3H4", "886c03b11ecb10bf"],
   },
   title: "BO Creative  Experience Architecture in Motion™",
   description: "BO Creative  Strategy · Experience Design · Orchestration. A brand experience partner since 2009.",
