@@ -73,6 +73,33 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${manrope.variable} ${ibmPlexMono.variable} ${syne.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "BO Creative",
+              "url": "https://bocreative.me",
+              "logo": "https://bocreative.me/icon.png",
+              "description": "Brand experience agency in Cairo, Egypt. Strategy, creative direction, and experience orchestration since 2009.",
+              "foundingDate": "2009",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Cairo",
+                "addressRegion": "Maadi",
+                "addressCountry": "EG"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+20-111-500-0320",
+                "contactType": "customer service",
+                "availableLanguage": ["English", "Arabic"]
+              },
+              "sameAs": []
+            })
+          }}
+        />
         <CustomCursor />
         <GlobalNav />
         {children}
