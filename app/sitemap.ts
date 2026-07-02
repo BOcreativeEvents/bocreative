@@ -22,6 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/updates/longeblack-fourseasona-vip-dinner`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/updates/kickoff-2026`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/updates/kickoff-2025`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${base}/updates/how-to-plan-corporate-event-cairo`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/updates/what-is-brand-experience`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${base}/updates/event-production-egypt`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     ...workPages,
   ]
 }

@@ -15,6 +15,30 @@ const MONO = { fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: 
 
 const POSTS = [
   {
+    slug:  'how-to-plan-corporate-event-cairo',
+    tag:   'Guide · Event Planning',
+    date:  'July 2026',
+    title:  'How to Plan a Corporate Event in Cairo: A Complete Guide',
+    excerpt: 'Venue selection, production timelines, vendor management, and day-of execution. What 15+ years and 500+ events across Cairo taught us about making corporate events work.',
+    cover:  null,
+  },
+  {
+    slug:  'what-is-brand-experience',
+    tag:   'Insight · Brand Experience',
+    date:  'July 2026',
+    title:  'What Is Brand Experience and Why Leading Companies Invest in It',
+    excerpt: 'Brand experience is one of the most used and most misunderstood terms in modern marketing. Here is what it actually means, and why the brands that invest in it pull ahead.',
+    cover:  null,
+  },
+  {
+    slug:  'event-production-egypt',
+    tag:   'Behind the Scenes · Production',
+    date:  'July 2026',
+    title:  'Event Production in Egypt: What Actually Happens Before the Doors Open',
+    excerpt: 'Guests arrive to a transformed space and moments that feel effortless. What they do not see is the 8 to 16 weeks of work behind it. A behind-the-scenes look at professional event production in Egypt.',
+    cover:  null,
+  },
+  {
     slug:  'longeblack-fourseasona-vip-dinner',
     tag:   'Sponsorship · Branding',
     date:  'April 2026',
