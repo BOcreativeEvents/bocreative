@@ -23,9 +23,9 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to:   ['hr@bocreative.me', 'aymandomiaty@gmail.com'],
+      to:   ['aymandomiaty@gmail.com'],
       replyTo: email,
-      subject: `New Application: ${role}`,
+      subject: `[BO Creative — Forward to HR] New Application: ${role}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
           <h2 style="color:#A35671;">New Job Application — ${role}</h2>
