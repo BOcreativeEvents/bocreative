@@ -32,12 +32,31 @@ export default function JobPageClient({ job }: { job: Job }) {
     const [cvFile, setCvFile] = useState<File | null>(null)
     const fileRef = useRef<HTMLInputElement>(null)
 
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSevlKi-T0vs6ubLfKnhSGWY2NEp3NUcVfQ9fNSM-ETz2mxGsQ/viewform'
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        window.open(GOOGLE_FORM_URL, '_blank')
-        setSubmitted(true)
+        setLoading(true)
+        setError('')
+        try {
+            const data = new FormData()
+            data.append('name', form.name)
+            data.append('email', form.email)
+            data.append('phone', form.phone)
+            data.append('portfolio', form.portfolio)
+            data.append('message', form.message)
+            data.append('role', job.title)
+            if (cvFile) data.append('cv', cvFile)
+
+            const res = await fetch('/api/apply', { method: 'POST', body: data })
+            if (!res.ok) throw new Error('failed')
+            setSubmitted(true)
+        } catch {
+            setError('Something went wrong. Please try again.')
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -149,13 +168,14 @@ export default function JobPageClient({ job }: { job: Job }) {
                                 value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                                 rows={4} style={{ ...inputStyle, resize: 'none' }} className='placeholder-[#666666]' />
 
-                            <button type='submit'
+                            {error && <p style={{ fontSize: '13px', color: '#e57373' }}>{error}</p>}
+                            <button type='submit' disabled={loading}
                                 className='inline-flex items-center gap-2 transition-all duration-300 group w-fit'
-                                style={{ ...MONO, color: C.rose, border: `1px solid ${C.rose}`, padding: '14px 28px', backgroundColor: 'transparent', cursor: 'pointer' }}
-                                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = C.rose; (e.currentTarget as HTMLButtonElement).style.color = '#fff' }}
+                                style={{ ...MONO, color: C.rose, border: `1px solid ${C.rose}`, padding: '14px 28px', backgroundColor: 'transparent', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.6 : 1 }}
+                                onMouseEnter={(e) => { if (!loading) { (e.currentTarget as HTMLButtonElement).style.backgroundColor = C.rose; (e.currentTarget as HTMLButtonElement).style.color = '#fff' }}}
                                 onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = C.rose }}>
-                                Submit Application
-                                <ArrowUpRight size={12} className='transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5' />
+                                {loading ? 'Sending...' : 'Submit Application'}
+                                {!loading && <ArrowUpRight size={12} className='transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5' />}
                             </button>
                         </motion.form>
                     )}
