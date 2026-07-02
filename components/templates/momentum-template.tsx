@@ -243,33 +243,6 @@ export function MomentumTemplate() {
                     <div style={{ width: '1px', height: '48px', backgroundColor: C.line }} />
                 </div>
 
-                {/* Sound toggle — bottom-left, visible on all screen sizes */}
-                <button
-                    onClick={toggleSound}
-                    aria-label={soundOn ? 'Mute video' : 'Unmute video'}
-                    className="absolute bottom-8 left-6 lg:left-10 flex items-center gap-2 group"
-                    style={{ zIndex: 10, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
-                    <div
-                        className="flex items-center justify-center transition-all duration-300"
-                        style={{
-                            width: '36px',
-                            height: '36px',
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(255,255,255,0.08)',
-                            border: '1px solid rgba(255,255,255,0.15)',
-                            backdropFilter: 'blur(12px)',
-                        }}
-                        onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.16)' }}
-                        onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = 'rgba(255,255,255,0.08)' }}>
-                        {soundOn
-                            ? <Volume2 size={14} color="rgba(255,255,255,0.85)" />
-                            : <VolumeX size={14} color="rgba(255,255,255,0.5)" />
-                        }
-                    </div>
-                    <span style={{ ...T.label, fontSize: '9px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.14em' }}>
-                        {soundOn ? 'SOUND ON' : 'SOUND OFF'}
-                    </span>
-                </button>
             </section>
 
             {/* ── THIN DIVIDER ────────────────────────────────────────────── */}
