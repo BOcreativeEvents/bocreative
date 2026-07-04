@@ -29,6 +29,7 @@ const inputStyle = {
 
 export default function ConnectClient() {
     const [submitted, setSubmitted] = useState(false)
+    const [sending, setSending] = useState(false)
     const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', brief: '' })
     const contactBlockRef = useRef<HTMLDivElement>(null)
     const leftColRef = useRef<HTMLDivElement>(null)
@@ -47,8 +48,17 @@ export default function ConnectClient() {
         return () => window.removeEventListener('resize', measure)
     }, [])
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setSending(true)
+        try {
+            await fetch('/api/connect', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            })
+        } catch {}
+        setSending(false)
         setSubmitted(true)
     }
 
@@ -220,8 +230,8 @@ export default function ConnectClient() {
                                     style={{ ...MONO, color: C.rose, border: `1px solid ${C.rose}`, padding: '14px 28px', backgroundColor: 'transparent', cursor: 'pointer' }}
                                     onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = C.rose; (e.currentTarget as HTMLButtonElement).style.color = '#fff' }}
                                     onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = C.rose }}>
-                                    Start the Conversation
-                                    <ArrowUpRight size={12} className='transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5' />
+                                    {sending ? 'Sending…' : 'Start the Conversation'}
+                                    {!sending && <ArrowUpRight size={12} className='transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5' />}
                                 </button>
                             </div>
                         </motion.form>
