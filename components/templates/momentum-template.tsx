@@ -38,7 +38,7 @@ const T = {
 const navLinks = [
     { label: 'About',        href: '/bo' },
     { label: 'Capabilities', href: '#framework' },
-    { label: 'Work',         href: '#work' },
+    { label: 'Work',         href: '/work' },
     { label: 'Updates',      href: '/updates' },
     { label: 'Careers',      href: '/careers' },
     { label: 'Connect',      href: '/connect' },
