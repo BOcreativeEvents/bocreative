@@ -11,10 +11,12 @@ const CLIENTS = [
   { name: 'British Embassy', file: 'british-embassy.png'},
   { name: 'Shell',      file: 'shell.png'     },
   { name: 'WHO',       file: 'who.png'      },
-  { name: 'Hero',      file: 'hero.png'      },
   { name: 'Knorr',      file: 'knorr.png'     },
   { name: 'Sunsilk',     file: 'sunsilk.png'    },
   { name: 'Marriott',    file: 'marriott.png'    },
+  { name: 'LongeBlack',   file: 'longeblack.png'   },
+  { name: 'The Rare Company',file: 'the-rare-company.png', scale: 1.5 },
+  { name: 'LT',       file: 'lt-monogram.png',  scale: 1.5 },
   { name: 'Lipton',     file: 'lipton.png'     },
   { name: 'Main Marks',   file: 'main-marks.png'   },
   { name: 'Kuehne+Nagel',  file: 'kuehne-nagel.png'  },
@@ -33,21 +35,6 @@ const CLIENTS = [
   { name: 'Signal',     file: 'signal.png'     },
   { name: 'Medfest Egypt',  file: 'medfest.png'    },
   { name: 'Amreyah Cement', file: 'amreyah-cement.png' },
-  { name: 'Client',     file: 'logo-web-01.png'  },
-  { name: 'Client',     file: 'logo-web-02.png'  },
-  { name: 'Client',     file: 'logo-web-03.png'  },
-  { name: 'Client',     file: 'logo-web-04.png'  },
-  { name: 'Client',     file: 'logo-web-05.png'  },
-  { name: 'Client',     file: 'logo-web-06.png'  },
-  { name: 'Client',     file: 'logo-web-07.png'  },
-  { name: 'Client',     file: 'logo-web-08.png'  },
-  { name: 'Client',     file: 'logo-web-09.png'  },
-  { name: 'Client',     file: 'logo-web-10.png'  },
-  { name: 'Client',     file: 'logo-web-11.png'  },
-  { name: 'Client',     file: 'logo-web-12.png'  },
-  { name: 'LongeBlack',   file: 'longeblack.png'   },
-  { name: 'The Rare Company',file: 'the-rare-company.png'},
-  { name: 'LT',       file: 'lt-monogram.png'  },
 ]
 
 const C = {
@@ -88,7 +75,7 @@ export default function BOClient() {
           <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className='font-extrabold mb-10'
-            style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', letterSpacing: '-0.04em', lineHeight: 0.9, color: C.offWhite }}>
+            style={{ fontSize: 'clamp(1.8rem, 10vw, 10rem)', letterSpacing: '-0.04em', lineHeight: 0.9, color: C.offWhite }}>
             THE BO<br />
             <span style={{ color: C.rose }}>EXPERIENCE</span>
           </motion.h1>
@@ -138,13 +125,74 @@ export default function BOClient() {
             <motion.div key={p.num}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className='grid gap-x-12 py-10'
-              style={{ gridTemplateColumns: '60px 1fr 1fr', borderBottom: `1px solid rgba(255,255,255,0.2)`, alignItems: 'start' }}>
+              className='grid gap-x-12 py-10 grid-cols-[40px_1fr] lg:grid-cols-[60px_1fr_1fr]'
+              style={{ borderBottom: `1px solid rgba(255,255,255,0.2)`, alignItems: 'start' }}>
               <span style={{ ...MONO, color: C.rose, opacity: 0.6, paddingTop: '4px' }}>{p.num}</span>
               <h3 className='font-semibold' style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', letterSpacing: '-0.02em', color: C.offWhite, lineHeight: 1.2 }}>{p.title}</h3>
-              <p style={{ fontSize: '14px', lineHeight: 1.75, color: C.muted }}>{p.desc}</p>
+              <p className='col-start-2 mt-3 lg:col-auto lg:mt-0' style={{ fontSize: '14px', lineHeight: 1.75, color: C.muted }}>{p.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </div>
+
+      {/* Founder */}
+      <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-24 lg:py-32' style={{ borderTop: `1px solid rgba(255,255,255,0.1)` }}>
+
+        {/* Label row */}
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          style={{ ...MONO, color: C.offWhite, marginBottom: '48px', fontSize: '15px' }}>
+          Leadership
+        </motion.p>
+
+        {/* Main editorial grid: text left, photo right */}
+        <div className='grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16 lg:gap-24 items-stretch'>
+
+          {/* Left — three sections spread top to bottom matching photo height */}
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className='flex flex-col justify-between order-2 lg:order-1'>
+
+            {/* Top — bio */}
+            <p style={{ fontSize: 'clamp(0.8rem, 1.5vw, 1.3rem)', lineHeight: 1.25, fontWeight: 300, color: C.offWhite, fontFamily: 'var(--font-syne)' }}>
+              Ayman Domiaty is a Creative Director and Founder with over 15 years leading BO Creative, one of the region&rsquo;s foremost experience agencies. His practice spans brand strategy, spatial design, and live experience for some of the world&rsquo;s most recognised organisations. From Cairo to global stages, he transforms strategic intent into sensory environments and signature moments that define how audiences remember a brand.
+            </p>
+
+            {/* Middle — expertise */}
+            <div className='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4' style={{ borderTop: `1px solid rgba(255,255,255,0.1)`, paddingTop: '32px' }}>
+              <span style={{ ...MONO, color: C.muted, paddingTop: '2px' }}>Expertise</span>
+              <div className='flex flex-col gap-1'>
+                {['Experience Architecture', 'Creative Leadership', 'Spatial & Sensory Curation', 'Brand Experience Design', 'Live Production & Orchestration'].map(item => (
+                  <p key={item} style={{ fontSize: '15px', color: C.offWhite, lineHeight: 1.9 }}>{item}</p>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom — vision */}
+            <div className='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4' style={{ borderTop: `1px solid rgba(255,255,255,0.1)`, paddingTop: '32px' }}>
+              <span style={{ ...MONO, color: C.muted, paddingTop: '2px' }}>Vision</span>
+              <p style={{ fontSize: '15px', lineHeight: 1.85, color: C.muted, fontStyle: 'italic' }}>
+                &ldquo;The brief is never to impress. It is to engineer experiences so precisely crafted, so deeply felt, that they outlast the evening and live in people long after the last guest leaves.&rdquo;
+              </p>
+            </div>
+
+          </motion.div>
+
+          {/* Right — contained photo, crisp, no fade */}
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+            viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }}
+            className='flex flex-col order-1 lg:order-2'>
+            <div style={{ position: 'relative', width: '100%', flex: 1, minHeight: '400px', overflow: 'hidden' }}>
+              <Image
+                src='/ayman.jpg'
+                alt='Ayman Domiaty, Founder and Creative Director'
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'grayscale(100%) contrast(1.08)' }}
+              />
+            </div>
+            <p className='mt-12' style={{ ...MONO, color: C.muted }}>Ayman Domiaty</p>
+            <p style={{ ...MONO, color: C.rose, marginTop: '4px' }}>Founder & Creative Director</p>
+            <Image src='/signature.png' alt='Signature' width={154} height={70} style={{ marginTop: '16px', filter: 'invert(1)', opacity: 0.8, objectFit: 'contain', display: 'block' }} />
+          </motion.div>
         </div>
       </div>
 
@@ -152,29 +200,30 @@ export default function BOClient() {
       <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-20 sm:py-28'>
         <div className='flex items-center justify-between mb-12'
           style={{ borderTop: `1px solid ${C.line}`, paddingTop: '48px' }}>
-          <p style={{ ...MONO, color: C.rose }}>Trusted By</p>
+          <p style={{ ...MONO, color: C.offWhite, fontSize: '15px' }}>Trusted By</p>
           <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
         </div>
 
-        <div className='grid grid-cols-4 lg:grid-cols-5' style={{ gap: '36px 0' }}>
+        <div className='grid grid-cols-3 lg:grid-cols-5' style={{ gap: '0' }}>
           {CLIENTS.map((c, i) => (
             <motion.div
-              key={c.name}
+              key={`${c.name}-${i}`}
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.04 }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px 8px' }}>
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 16px' }}>
               <img
                 src={`/clients/${c.file}`}
                 alt={c.name}
                 style={{
-                  height: '101px',
-                  width: '100%',
-                  maxWidth: '292px',
+                  width: '85%',
+                  maxWidth: '180px',
+                  height: '65px',
                   objectFit: 'contain',
                   filter: 'brightness(0) invert(1)',
                   opacity: 0.28,
                   transition: 'opacity 0.3s',
+                  transform: c.scale ? `scale(${c.scale})` : undefined,
                 }}
                 onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.7' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.28' }}
