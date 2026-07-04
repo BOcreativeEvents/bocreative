@@ -181,7 +181,7 @@ export default function BOClient() {
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }}
             className='flex flex-col order-1 lg:order-2'>
-            <div style={{ position: 'relative', width: '100%', flex: 1, minHeight: '400px', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', flex: 1, aspectRatio: '3/4', minHeight: '400px', overflow: 'hidden' }}>
               <Image
                 src='/ayman.jpg'
                 alt='Ayman Domiaty, Founder and Creative Director'
