@@ -5,36 +5,48 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'
 
 const CLIENTS = [
-  { name: 'Novo Nordisk',  file: 'novo-nordisk.png'  },
-  { name: 'Unilever',    file: 'unilever.png'    },
-  { name: 'Coca-Cola',    file: 'coca-cola.png'   },
-  { name: 'British Embassy', file: 'british-embassy.png'},
-  { name: 'Shell',      file: 'shell.png'     },
-  { name: 'WHO',       file: 'who.png'      },
-  { name: 'Knorr',      file: 'knorr.png'     },
-  { name: 'Sunsilk',     file: 'sunsilk.png'    },
-  { name: 'Marriott',    file: 'marriott.png'    },
-  { name: 'LongeBlack',   file: 'longeblack.png'   },
-  { name: 'The Rare Company',file: 'the-rare-company.png', scale: 1.5 },
-  { name: 'LT',       file: 'lt-monogram.png',  scale: 1.5 },
-  { name: 'Lipton',     file: 'lipton.png'     },
-  { name: 'Main Marks',   file: 'main-marks.png'   },
-  { name: 'Kuehne+Nagel',  file: 'kuehne-nagel.png'  },
-  { name: 'Pirelli',     file: 'pirelli.png'    },
-  { name: 'Dreem',      file: 'dreem.png'     },
-  { name: 'Direction White', file: 'direction-white.png'},
-  { name: 'MSC',       file: 'msc.png'      },
-  { name: 'Town Writers',  file: 'town-writers.png'  },
-  { name: 'Bayer',      file: 'bayer.png'     },
-  { name: 'Egyptian LNG',  file: 'egyptian-lng.png'  },
-  { name: 'GIECO',      file: 'gieco.png'     },
-  { name: 'Dove',      file: 'dove.png'      },
-  { name: 'Clear',      file: 'clear.png'     },
-  { name: 'Groupe Savencia', file: 'savencia.png'    },
-  { name: 'Mondelēz',    file: 'mondelez.png'    },
-  { name: 'Signal',     file: 'signal.png'     },
-  { name: 'Medfest Egypt',  file: 'medfest.png'    },
-  { name: 'Amreyah Cement', file: 'amreyah-cement.png' },
+  { name: 'Novo Nordisk',       file: 'novo-nordisk.png'                    },
+  { name: 'Unilever',           file: 'unilever.png'                        },
+  { name: 'Coca-Cola',          file: 'coca-cola.png'                       },
+  { name: 'British Embassy',    file: 'british-embassy.png', scale: 1.3      },
+  { name: 'Shell',              file: 'shell.png',       scale: 1.2         },
+  { name: 'WHO',                file: 'who.png',         scale: 1.3         },
+  { name: 'Knorr',              file: 'knorr.png',       scale: 1.3         },
+  { name: 'Sunsilk',            file: 'sunsilk.png',     scale: 1.3         },
+  { name: 'Marriott',           file: 'marriott.png',    scale: 1.2         },
+  { name: 'LongeBlack',         file: 'longeblack.png'                      },
+  { name: 'The Rare Company',   file: 'the-rare-company.png', scale: 1.6    },
+  { name: 'LT',                 file: 'lt-monogram.png', scale: 1.4         },
+  { name: 'Lipton',             file: 'lipton.png',      scale: 1.2         },
+  { name: 'Main Marks',         file: 'main-marks.png',  scale: 1.3         },
+  { name: 'Kuehne+Nagel',       file: 'kuehne-nagel.png'                    },
+  { name: 'Pirelli',            file: 'pirelli.png',     scale: 1.3         },
+  { name: 'Dreem',              file: 'dreem.png',       scale: 1.3         },
+  { name: 'Direction White',    file: 'direction-white.png', scale: 1.3     },
+  { name: 'MSC',                file: 'msc.png',         scale: 1.2         },
+  { name: 'Town Writers',       file: 'town-writers.png', scale: 1.1        },
+  { name: 'Bayer',              file: 'bayer.png',       scale: 1.2         },
+  { name: 'Egyptian LNG',       file: 'egyptian-lng.png', scale: 1.3        },
+  { name: 'GIECO',              file: 'gieco.png',        scale: 1.3        },
+  { name: 'Dove',               file: 'dove.png',        scale: 1.5         },
+  { name: 'Clear',              file: 'clear.png',       scale: 1.3         },
+  { name: 'Groupe Savencia',    file: 'savencia.png',    scale: 1.5         },
+  { name: 'Mondelez',           file: 'mondelez.png',    scale: 1.3         },
+  { name: 'Signal',             file: 'signal.png',      scale: 1.5         },
+  { name: 'Medfest Egypt',      file: 'medfest.png',     scale: 1.2         },
+  { name: 'Amreyah Cement',     file: 'amreyah-cement.png'                  },
+  { name: 'Rich Bake',          file: 'rich-bake.png',          scale: 1.1  },
+  { name: 'Orascom Development',file: 'orascom.png',            scale: 0.8  },
+  { name: 'Arabtec',            file: 'arabtec.png',            scale: 0.75 },
+  { name: 'Sckylers',           file: 'sckylers.png',           scale: 0.8  },
+  { name: 'The Blissful Key',   file: 'the-blissful-key.png',   scale: 0.75 },
+  { name: 'Wealth Developments',file: 'wealth-developments.png',scale: 0.8  },
+  { name: 'Coventry University',file: 'coventry-university.png',scale: 0.7  },
+  { name: 'Hometown',           file: 'hometown.png',           scale: 0.75 },
+  { name: 'Egyptian Food Bank', file: 'egyptian-food-bank.png', scale: 0.7  },
+  { name: 'DARE',               file: 'dare.png',               scale: 0.62 },
+  { name: 'MANAJ',              file: 'manaj.png',              scale: 0.6  },
+  { name: 'Knauf',              file: 'knauf.png',              scale: 0.62 },
 ]
 
 const C = {
@@ -66,24 +78,15 @@ export default function BOClient() {
 
       {/* Hero — full-bleed event photo background */}
       <div className='relative pt-[64px] overflow-hidden' style={{ minHeight: '100vh' }}>
-        {/* Background photo */}
         <div className='absolute inset-0' style={{ zIndex: 0 }}>
-          <img
-            src='/bo-hero-bg.jpg'
-            alt=''
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
-          />
-          {/* Dark gradient overlay — heavier at bottom so text below stays readable */}
+          <img src='/bo-hero-bg.jpg' alt='' style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
           <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(1,1,1,0.75) 0%, rgba(1,1,1,0.60) 40%, rgba(1,1,1,0.90) 75%, rgba(1,1,1,1) 100%)' }} />
         </div>
-
-        {/* Content */}
         <div className='relative mx-auto max-w-[1480px] px-6 lg:px-10 py-24 sm:py-32 lg:py-40 flex flex-col justify-end' style={{ minHeight: '100vh', zIndex: 1 }}>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}
             style={{ ...MONO, color: C.offWhite, marginBottom: '20px', fontSize: '19px' }}>
             Who We Are
           </motion.p>
-
           <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className='font-extrabold mb-10'
@@ -91,31 +94,25 @@ export default function BOClient() {
             THE BO<br />
             <span style={{ color: C.rose }}>EXPERIENCE</span>
           </motion.h1>
-
-          {/* Thin divider line */}
           <motion.div initial={{ scaleX: 0, originX: 0 }} animate={{ scaleX: 1 }}
             transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className='mb-10'
             style={{ height: '3px', backgroundColor: 'rgba(255,255,255,0.2)' }} />
-
           <div className='lg:ml-[50%]'>
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
               className='mb-6'
               style={{ fontSize: 'clamp(1.24rem, 2.53vw, 2.81rem)', lineHeight: 1.2, fontWeight: 300, color: C.offWhite, fontFamily: 'var(--font-syne)' }}>
               Experience Architecture in Motion™
             </motion.p>
-
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.3 }}
               className='mb-6'
               style={{ fontSize: 'clamp(1.24rem, 2.53vw, 2.81rem)', lineHeight: 1.2, fontWeight: 300, color: C.offWhite, fontFamily: 'var(--font-syne)' }}>
               Since 2009, BO Creative has partnered with leading brands, institutions, and organizations to transform business objectives into meaningful audience experiences.
             </motion.p>
-
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }}
               style={{ fontSize: 'clamp(1.24rem, 2.53vw, 2.81rem)', lineHeight: 1.2, fontWeight: 300, color: C.offWhite, fontFamily: 'var(--font-syne)' }}>
               Through Experience Strategy, Creative Direction, Signature Moments, and Experience Orchestration, we create experiences that engage audiences, strengthen brands, and inspire action.
             </motion.p>
-
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}
               className='mt-4 sm:mt-8 font-extrabold'
               style={{ fontSize: 'clamp(1.7rem, 6vw, 46px)', lineHeight: 1.2, color: C.offWhite }}>
@@ -149,27 +146,17 @@ export default function BOClient() {
 
       {/* Founder */}
       <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-24 lg:py-32' style={{ borderTop: `1px solid rgba(255,255,255,0.1)` }}>
-
-        {/* Label row */}
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           style={{ ...MONO, color: C.offWhite, marginBottom: '48px', fontSize: '15px' }}>
           Leadership
         </motion.p>
-
-        {/* Main editorial grid: text left, photo right */}
         <div className='grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-16 lg:gap-24 items-stretch'>
-
-          {/* Left — three sections spread top to bottom matching photo height */}
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className='flex flex-col justify-between order-2 lg:order-1'>
-
-            {/* Top — bio */}
             <p style={{ fontSize: 'clamp(0.8rem, 1.5vw, 1.3rem)', lineHeight: 1.25, fontWeight: 300, color: C.offWhite, fontFamily: 'var(--font-syne)' }}>
               Ayman Domiaty is a Creative Director and Founder with over 15 years leading BO Creative, one of the region&rsquo;s foremost experience agencies. His practice spans brand strategy, spatial design, and live experience for some of the world&rsquo;s most recognised organisations. From Cairo to global stages, he transforms strategic intent into sensory environments and signature moments that define how audiences remember a brand.
             </p>
-
-            {/* Middle — expertise */}
             <div className='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4' style={{ borderTop: `1px solid rgba(255,255,255,0.1)`, paddingTop: '32px' }}>
               <span style={{ ...MONO, color: C.muted, paddingTop: '2px' }}>Expertise</span>
               <div className='flex flex-col gap-1'>
@@ -178,28 +165,19 @@ export default function BOClient() {
                 ))}
               </div>
             </div>
-
-            {/* Bottom — vision */}
             <div className='grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-y-4' style={{ borderTop: `1px solid rgba(255,255,255,0.1)`, paddingTop: '32px' }}>
               <span style={{ ...MONO, color: C.muted, paddingTop: '2px' }}>Vision</span>
               <p style={{ fontSize: '15px', lineHeight: 1.85, color: C.muted, fontStyle: 'italic' }}>
                 &ldquo;The brief is never to impress. It is to engineer experiences so precisely crafted, so deeply felt, that they outlast the evening and live in people long after the last guest leaves.&rdquo;
               </p>
             </div>
-
           </motion.div>
-
-          {/* Right — contained photo, crisp, no fade */}
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }}
             className='flex flex-col order-1 lg:order-2'>
             <div style={{ position: 'relative', width: '100%', flex: 1, aspectRatio: '3/4', minHeight: '400px', overflow: 'hidden' }}>
-              <Image
-                src='/ayman.jpg'
-                alt='Ayman Domiaty, Founder and Creative Director'
-                fill
-                style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'grayscale(100%) contrast(1.08)' }}
-              />
+              <Image src='/ayman.jpg' alt='Ayman Domiaty, Founder and Creative Director' fill
+                style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'grayscale(100%) contrast(1.08)' }} />
             </div>
             <p className='mt-12' style={{ ...MONO, color: C.muted }}>Ayman Domiaty</p>
             <p style={{ ...MONO, color: C.rose, marginTop: '4px' }}>Founder & Creative Director</p>
@@ -208,15 +186,14 @@ export default function BOClient() {
         </div>
       </div>
 
-      {/* Client logo grid Trusted By */}
+      {/* Client logo grid */}
       <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-20 sm:py-28'>
         <div className='flex items-center justify-between mb-12'
           style={{ borderTop: `1px solid ${C.line}`, paddingTop: '48px' }}>
           <p style={{ ...MONO, color: C.offWhite, fontSize: '15px' }}>Trusted By</p>
           <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
         </div>
-
-        <div className='grid grid-cols-3 lg:grid-cols-7' style={{ gap: '0' }}>
+        <div className='grid grid-cols-3 lg:grid-cols-6' style={{ gap: '0' }}>
           {CLIENTS.map((c, i) => (
             <motion.div
               key={`${c.name}-${i}`}
@@ -224,24 +201,26 @@ export default function BOClient() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.04 }}
               className='flex items-center justify-center'
-              style={{ padding: '20px 16px' }}>
-              <img
-                src={`/clients/${c.file}`}
-                alt={c.name}
-                className='lg:h-[52px] lg:max-w-[160px]'
-                style={{
-                  width: '85%',
-                  maxWidth: '180px',
-                  height: '65px',
-                  objectFit: 'contain',
-                  filter: 'brightness(0) invert(1)',
-                  opacity: 0.45,
-                  transition: 'opacity 0.3s',
-                  transform: c.scale ? `scale(${c.scale})` : undefined,
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.85' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.45' }}
-              />
+              style={{ padding: '48px 24px' }}>
+              <div style={{ width: '150px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img
+                  src={`/clients/${c.file}`}
+                  alt={c.name}
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: 'auto',
+                    height: 'auto',
+                    objectFit: 'contain',
+                    filter: 'brightness(0) invert(1)',
+                    opacity: 0.45,
+                    transition: 'opacity 0.3s',
+                    transform: c.scale ? `scale(${c.scale})` : undefined,
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.85' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.45' }}
+                />
+              </div>
             </motion.div>
           ))}
         </div>
