@@ -64,9 +64,21 @@ export default function BOClient() {
   return (
     <div style={{ backgroundColor: C.black, color: C.offWhite, fontFamily: 'var(--font-manrope, Manrope, sans-serif)', minHeight: '100vh' }}>
 
-      {/* Hero */}
-      <div className='pt-[64px]'>
-        <div className='mx-auto max-w-[1480px] px-6 lg:px-10 py-24 sm:py-32 lg:py-40'>
+      {/* Hero — full-bleed event photo background */}
+      <div className='relative pt-[64px] overflow-hidden' style={{ minHeight: '100vh' }}>
+        {/* Background photo */}
+        <div className='absolute inset-0' style={{ zIndex: 0 }}>
+          <img
+            src='/bo-hero-bg.jpg'
+            alt=''
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }}
+          />
+          {/* Dark gradient overlay — heavier at bottom so text below stays readable */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(1,1,1,0.75) 0%, rgba(1,1,1,0.60) 40%, rgba(1,1,1,0.90) 75%, rgba(1,1,1,1) 100%)' }} />
+        </div>
+
+        {/* Content */}
+        <div className='relative mx-auto max-w-[1480px] px-6 lg:px-10 py-24 sm:py-32 lg:py-40 flex flex-col justify-end' style={{ minHeight: '100vh', zIndex: 1 }}>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7 }}
             style={{ ...MONO, color: C.offWhite, marginBottom: '20px', fontSize: '19px' }}>
             Who We Are
