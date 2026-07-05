@@ -204,29 +204,31 @@ export default function BOClient() {
           <p style={{ ...MONO, color: 'rgba(245,230,234,0.3)' }}>Global Brands · 15+ Years</p>
         </div>
 
-        <div className='grid grid-cols-3 lg:grid-cols-5' style={{ gap: '0' }}>
+        <div className='grid grid-cols-3 lg:grid-cols-7' style={{ gap: '0' }}>
           {CLIENTS.map((c, i) => (
             <motion.div
               key={`${c.name}-${i}`}
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.04 }}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px 16px' }}>
+              className='flex items-center justify-center'
+              style={{ padding: '20px 16px' }}>
               <img
                 src={`/clients/${c.file}`}
                 alt={c.name}
+                className='lg:h-[52px] lg:max-w-[160px]'
                 style={{
                   width: '85%',
                   maxWidth: '180px',
                   height: '65px',
                   objectFit: 'contain',
                   filter: 'brightness(0) invert(1)',
-                  opacity: 0.28,
+                  opacity: 0.45,
                   transition: 'opacity 0.3s',
                   transform: c.scale ? `scale(${c.scale})` : undefined,
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.7' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.28' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.85' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.45' }}
               />
             </motion.div>
           ))}
