@@ -40,7 +40,7 @@ export default function GlobalNav() {
                 <Link href="/" className="flex-shrink-0" style={{ opacity: 0.85, transition: 'opacity 0.3s' }}
                     onMouseEnter={(e) => { e.currentTarget.style.opacity = '1' }}
                     onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.85' }}>
-                    <Image src="/logo.png" alt="BlueOcean" width={100} height={50} className="h-9 w-auto object-contain" />
+                    <Image src="/logo-new.png" alt="BlueOcean" width={100} height={50} className="h-9 w-auto object-contain" />
                 </Link>
 
                 {/* Desktop links */}

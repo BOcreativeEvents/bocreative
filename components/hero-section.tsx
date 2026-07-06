@@ -259,7 +259,7 @@ const HeroHeader = () => {
 const BlueOceanLogo = ({ className }: { className?: string }) => {
     return (
         <Image
-            src="/logo.png"
+            src="/logo-new.png"
             alt="BlueOcean Events · Production · Design"
             width={160}
             height={80}

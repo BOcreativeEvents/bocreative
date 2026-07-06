@@ -138,7 +138,7 @@ export function MomentumTemplate() {
                     <div className="flex items-center justify-between h-[68px]">
 
                         <Link href="/" className="flex-shrink-0 mt-2 sm:mt-8">
-                            <Image src="/logo.png" alt="BlueOcean" width={320} height={160} className="h-12 sm:h-20 w-auto object-contain" priority />
+                            <Image src="/logo-new.png" alt="BlueOcean" width={320} height={160} className="h-5 sm:h-6 w-auto object-contain" priority />
                         </Link>
 
                         {/* Desktop nav */}
