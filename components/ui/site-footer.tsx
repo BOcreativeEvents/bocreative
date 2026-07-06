@@ -76,7 +76,7 @@ export default function SiteFooter() {
                     {/* Brand column */}
                     <div className='flex flex-col gap-6 lg:w-[280px] flex-shrink-0'>
                         <Link href='/'>
-                            <Image src='/logo-new.png' alt='BlueOcean' width={110} height={55} className='h-10 w-auto object-contain opacity-90' />
+                            <Image src='/logo-new.png' alt='BlueOcean' width={110} height={55} className='h-4 w-auto object-contain opacity-90' />
                         </Link>
                         <p style={{ ...MONO, fontSize: '10px', color: C.muted, lineHeight: 1.9 }}>
                             Strategy · Experience Design<br />Orchestration · Est. 2009
