@@ -378,7 +378,7 @@ export const events: EventData[] = [
         category: 'Real Estate',
         location: 'Kempinski Hotel, Cairo',
         year: '2026',
-        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A1160_nvyhfp',
+        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0299_dixmgc',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0397_jfb7ij',
         featuredVideo: 'https://res.cloudinary.com/dwlznbqoi/video/upload/AMER_Horizontal_CUT_2_lxnwmr',
         videoAspects: {
