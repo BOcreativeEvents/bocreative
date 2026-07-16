@@ -406,6 +406,7 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0325_fmpoot',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0333_a2yrwe',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0369_jq5rkz',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0397_jfb7ij',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0405_ailawf',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0438_pg0e0c',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/7D9A0454_whyina',
