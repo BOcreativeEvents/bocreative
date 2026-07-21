@@ -12,8 +12,8 @@ export function useSignedVideo(cloudinaryUrl: string | undefined): string | unde
         let cancelled = false
         fetch(`/api/signed-video?url=${encodeURIComponent(cloudinaryUrl)}`)
             .then(r => r.json())
-            .then(({ src }) => { if (!cancelled) setSrc(src) })
-            .catch(() => { if (!cancelled) setSrc(cloudinaryUrl) }) // silent fallback
+            .then(data => { if (!cancelled) setSrc(data.src ?? cloudinaryUrl) })
+            .catch(() => { if (!cancelled) setSrc(cloudinaryUrl) })
         return () => { cancelled = true }
     }, [cloudinaryUrl])
 
