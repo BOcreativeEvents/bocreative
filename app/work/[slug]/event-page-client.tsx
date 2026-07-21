@@ -58,6 +58,8 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
                     src={nativeSrc(src)}
                     poster={poster}
                     controls playsInline
+                    controlsList="nodownload"
+                    onContextMenu={e => e.preventDefault()}
                     style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
                 />
             )}
@@ -89,6 +91,8 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                     src={nativeSrc(src)}
                     poster={poster}
                     controls playsInline
+                    controlsList="nodownload"
+                    onContextMenu={e => e.preventDefault()}
                     style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
                 />
             )}
@@ -137,6 +141,8 @@ function YearSectionGrid({ sections, videoPosters }: {
                                 src={nativeSrc(section.video)}
                                 poster={videoPosters?.[section.video]}
                                 controls playsInline
+                                controlsList="nodownload"
+                                onContextMenu={e => e.preventDefault()}
                                 style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
                             />
                         )}
