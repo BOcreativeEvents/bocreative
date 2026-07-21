@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight, MapPin, X, ChevronLeft, ChevronRight } from 'l
 import { motion } from 'motion/react'
 import ScrollExpandMedia from '@/components/ui/scroll-expand-media'
 import { EventData, events } from '@/lib/events'
+import { useSignedVideo } from '@/hooks/useSignedVideo'
 
 const C = {
     black:    '#010101',
@@ -36,6 +37,7 @@ function nativeSrc(src: string) {
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
 function VideoReel({ src, index, poster }: { src: string; index: number; poster?: string }) {
+    const signedSrc = useSignedVideo(isVimeo(src) ? undefined : src)
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +57,7 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
                 </div>
             ) : (
                 <video
-                    src={nativeSrc(src)}
+                    src={signedSrc}
                     poster={poster}
                     controls playsInline
                     controlsList="nodownload"
@@ -73,6 +75,7 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
 
 /* ── Featured full-width video ───────────────────────────────────────────── */
 function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
+    const signedSrc = useSignedVideo(isVimeo(src) ? undefined : src)
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
             {isVimeo(src) ? (
@@ -88,7 +91,7 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                 </div>
             ) : (
                 <video
-                    src={nativeSrc(src)}
+                    src={signedSrc}
                     poster={poster}
                     controls playsInline
                     controlsList="nodownload"
@@ -97,6 +100,33 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                 />
             )}
         </div>
+    )
+}
+
+function YearVideo({ src, poster }: { src: string; poster?: string }) {
+    const signedSrc = useSignedVideo(src.includes('vimeo.com') ? undefined : src)
+    if (src.includes('vimeo.com')) {
+        return (
+            <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
+                <iframe
+                    src={vimeoSrc(src)}
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+                    frameBorder={0}
+                    allow='autoplay; fullscreen; picture-in-picture'
+                    allowFullScreen
+                />
+            </div>
+        )
+    }
+    return (
+        <video
+            src={signedSrc}
+            poster={poster}
+            controls playsInline
+            controlsList="nodownload"
+            onContextMenu={e => e.preventDefault()}
+            style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
+        />
     )
 }
 
@@ -125,27 +155,7 @@ function YearSectionGrid({ sections, videoPosters }: {
                         viewport={{ once: true, amount: 0 }}
                         transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                         style={{ width: '100%', minWidth: 0 }}>
-                        {section.video.includes('vimeo.com') ? (
-                            <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
-                                <iframe
-                                    src={vimeoSrc(section.video)}
-                                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-                                    frameBorder={0}
-                                    allow='autoplay; fullscreen; picture-in-picture'
-                                    allowFullScreen
-                                    title={`edition-${section.year}`}
-                                />
-                            </div>
-                        ) : (
-                            <video
-                                src={nativeSrc(section.video)}
-                                poster={videoPosters?.[section.video]}
-                                controls playsInline
-                                controlsList="nodownload"
-                                onContextMenu={e => e.preventDefault()}
-                                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px', backgroundColor: '#050505' }}
-                            />
-                        )}
+                        <YearVideo src={section.video} poster={videoPosters?.[section.video]} />
                         <div className='mt-2 px-1'
                             style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', color: 'rgba(255,255,255,0.3)' }}>
                             {section.year}
