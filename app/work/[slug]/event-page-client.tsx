@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowUpRight, MapPin, X, ChevronLeft, ChevronRight } from 'l
 import { motion } from 'motion/react'
 import ScrollExpandMedia from '@/components/ui/scroll-expand-media'
 import { EventData, events } from '@/lib/events'
-import { useSignedVideo } from '@/hooks/useSignedVideo'
 
 const C = {
     black:    '#010101',
@@ -37,7 +36,6 @@ function nativeSrc(src: string) {
 
 /* ── Single reel card ─────────────────────────────────────────────────────── */
 function VideoReel({ src, index, poster }: { src: string; index: number; poster?: string }) {
-    const signedSrc = useSignedVideo(isVimeo(src) ? undefined : src)
     return (
         <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
@@ -57,7 +55,7 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
                 </div>
             ) : (
                 <video
-                    src={signedSrc}
+                    src={nativeSrc(src)}
                     poster={poster}
                     controls playsInline
                     controlsList="nodownload"
@@ -75,7 +73,6 @@ function VideoReel({ src, index, poster }: { src: string; index: number; poster?
 
 /* ── Featured full-width video ───────────────────────────────────────────── */
 function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
-    const signedSrc = useSignedVideo(isVimeo(src) ? undefined : src)
     return (
         <div className='mx-auto max-w-[1480px] px-6 lg:px-10 mb-10'>
             {isVimeo(src) ? (
@@ -91,7 +88,7 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
                 </div>
             ) : (
                 <video
-                    src={signedSrc}
+                    src={nativeSrc(src)}
                     poster={poster}
                     controls playsInline
                     controlsList="nodownload"
@@ -104,7 +101,6 @@ function FeaturedVideo({ src, poster }: { src: string; poster?: string }) {
 }
 
 function YearVideo({ src, poster }: { src: string; poster?: string }) {
-    const signedSrc = useSignedVideo(src.includes('vimeo.com') ? undefined : src)
     if (src.includes('vimeo.com')) {
         return (
             <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', backgroundColor: '#050505' }}>
@@ -120,7 +116,7 @@ function YearVideo({ src, poster }: { src: string; poster?: string }) {
     }
     return (
         <video
-            src={signedSrc}
+            src={nativeSrc(src)}
             poster={poster}
             controls playsInline
             controlsList="nodownload"
