@@ -136,6 +136,42 @@ export const events: EventData[] = [
         storyboardCaption: 'Creative Brief · Pre-Production Storyboard',
     },
     {
+        slug: 'shell-ahly-partnership',
+        title: 'Shell & Al Ahly Club Partnership',
+        category: 'Sales Event',
+        location: 'Cairo',
+        year: '2026',
+        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
+        heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
+        videoPosters: {
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_auto/v1793567019/el_ahly_htirmk.jpg',
+        },
+        gallery: [
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564255/Artboard_1_copy_18_2x_udyumc.png',   // 1
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_19_2x_j2nhnh.png',   // 20
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564243/Artboard_1_copy_12_2x_yv49rc.png',   // 5
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564221/Artboard_1_copy_9_2x_ipsygw.png',    // 17
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564225/Artboard_1_copy_17_2x_tdw0db.png',   // 4
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564253/Artboard_1_copy_13_2x_o1y6ax.png',   // 2
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564251/Artboard_1_copy_14_2x_pzi9cx.png',   // 7
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',           // 8
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_2x_embr2r.png',      // 9
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_copy_15_2x_cfwypj.png',   // 10
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564245/Artboard_1_copy_3_2x_eipe9x.png',    // 12
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564237/Artboard_1_copy_2_2x_mi1j7m.png',   // 11
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564230/Artboard_1_copy_6_2x_d2mhim.png',   // 15
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564248/Artboard_1_copy_11_2x_zjsnka.png',   // 18
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564227/Artboard_1_copy_8_2x_ycjcal.png',    // 3
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564235/Artboard_1_copy_16_2x_rb01ct.png',   // 19
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_4_2x_kolkm1.png',    // 13
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564228/Artboard_1_copy_5_2x_qqqrwr.png',    // 14
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564237/Artboard_1_copy_7_2x_wy14mr.png',    // 16
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_10_2x_zeusih.png',   // 6
+        ],
+        description: 'Shell & Al Ahly Club Partnership — a landmark brand experience celebrating the strategic alliance between Shell and one of Egypt\'s most iconic football clubs, Al Ahly SC, through an immersive event that brought together brand storytelling, fan culture, and corporate excellence.',
+    },
+    {
         slug: 'marriott-residence',
         title: 'Marriott Residence',
         category: 'Real Estate',
@@ -1515,42 +1551,6 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/LNG 1000 Cargo Celebration/Trophy_LNG_2.JPG',
         ],
         description: "Egyptian LNG's 1000th Cargo milestone celebration — a landmark gala marking a historic achievement in Egypt's energy sector, commemorated through an elegant ceremony, a VIP button-press moment, and a bespoke commemorative trophy for one of Egypt's most significant industrial milestones.",
-    },
-    {
-        slug: 'shell-ahly-partnership',
-        title: 'Shell & Al Ahly Club Partnership',
-        category: 'Sales Event',
-        location: 'Cairo',
-        year: '2026',
-        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
-        heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
-        videoPosters: {
-            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_auto/v1793567019/el_ahly_htirmk.jpg',
-        },
-        gallery: [
-            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4',
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564255/Artboard_1_copy_18_2x_udyumc.png',   // 1
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_19_2x_j2nhnh.png',   // 20
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564243/Artboard_1_copy_12_2x_yv49rc.png',   // 5
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564221/Artboard_1_copy_9_2x_ipsygw.png',    // 17
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564225/Artboard_1_copy_17_2x_tdw0db.png',   // 4
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564253/Artboard_1_copy_13_2x_o1y6ax.png',   // 2
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564251/Artboard_1_copy_14_2x_pzi9cx.png',   // 7
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',           // 8
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_2x_embr2r.png',      // 9
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_copy_15_2x_cfwypj.png',   // 10
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564245/Artboard_1_copy_3_2x_eipe9x.png',    // 12
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564237/Artboard_1_copy_2_2x_mi1j7m.png',   // 11
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564230/Artboard_1_copy_6_2x_d2mhim.png',   // 15
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564248/Artboard_1_copy_11_2x_zjsnka.png',   // 18
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564227/Artboard_1_copy_8_2x_ycjcal.png',    // 3
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564235/Artboard_1_copy_16_2x_rb01ct.png',   // 19
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_4_2x_kolkm1.png',    // 13
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564228/Artboard_1_copy_5_2x_qqqrwr.png',    // 14
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564237/Artboard_1_copy_7_2x_wy14mr.png',    // 16
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_10_2x_zeusih.png',   // 6
-        ],
-        description: 'Shell & Al Ahly Club Partnership — a landmark brand experience celebrating the strategic alliance between Shell and one of Egypt\'s most iconic football clubs, Al Ahly SC, through an immersive event that brought together brand storytelling, fan culture, and corporate excellence.',
     },
 ]
 
