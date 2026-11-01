@@ -1525,6 +1525,7 @@ export const events: EventData[] = [
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
         gallery: [
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564253/Artboard_1_copy_13_2x_o1y6ax.png',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564255/Artboard_1_copy_18_2x_udyumc.png',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564227/Artboard_1_copy_8_2x_ycjcal.png',
