@@ -22,6 +22,7 @@ export interface EventData {
     featuredVideos?: string[]  // multiple full-width videos stacked vertically
     videoAspects?: Record<string, 'portrait' | 'landscape'>  // per-video aspect override, keyed by gallery URL
     videoPosters?: Record<string, string>  // per-video poster image URL, keyed by gallery URL
+    draft?: boolean  // if true, hidden from /work listing but accessible via direct URL for preview
 }
 
 export const events: EventData[] = [
@@ -1514,6 +1515,39 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/LNG 1000 Cargo Celebration/Trophy_LNG_2.JPG',
         ],
         description: "Egyptian LNG's 1000th Cargo milestone celebration — a landmark gala marking a historic achievement in Egypt's energy sector, commemorated through an elegant ceremony, a VIP button-press moment, and a bespoke commemorative trophy for one of Egypt's most significant industrial milestones.",
+    },
+    {
+        slug: 'shell-ahly-partnership',
+        title: 'Shell & Al Ahly Club Partnership',
+        category: 'Sales Event',
+        location: 'Cairo',
+        year: '2026',
+        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_2x_qwtyk4.png',
+        heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_2x_qwtyk4.png',
+        gallery: [
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_2x_qwtyk4.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_2x_embr2r.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_2_2x_mi1j7m.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_3_2x_eipe9x.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_4_2x_kolkm1.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_5_2x_qqqrwr.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_6_2x_d2mhim.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_7_2x_wy14mr.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_8_2x_ycjcal.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_9_2x_ipsygw.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_10_2x_zeusih.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_11_2x_zjsnka.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_12_2x_yv49rc.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_13_2x_o1y6ax.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_14_2x_pzi9cx.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_15_2x_cfwypj.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_16_2x_rb01ct.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_17_2x_tdw0db.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_18_2x_udyumc.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Shell Ahly Event/Artboard_1_copy_19_2x_j2nhnh.png',
+        ],
+        description: 'Shell & Al Ahly Club Partnership — a landmark brand experience celebrating the strategic alliance between Shell and one of Egypt\'s most iconic football clubs, Al Ahly SC, through an immersive event that brought together brand storytelling, fan culture, and corporate excellence.',
+        draft: true,
     },
 ]
 

@@ -19,13 +19,14 @@ const T = {
 }
 
 const ALL = 'All'
-const categories = [ALL, ...Array.from(new Set(events.map(e => e.category)))]
+const publishedEvents = events.filter(e => !e.draft)
+const categories = [ALL, ...Array.from(new Set(publishedEvents.map(e => e.category)))]
 const FEATURED_PATTERN = new Set([0, 3, 7, 10, 14, 17])
 
 export default function WorkPage() {
     const [active, setActive] = useState(ALL)
     const [isMobile, setIsMobile] = useState(false)
-    const filtered = active === ALL ? events : events.filter(e => e.category === active)
+    const filtered = active === ALL ? publishedEvents : publishedEvents.filter(e => e.category === active)
 
     useEffect(() => {
         const check = () => setIsMobile(window.innerWidth < 768)
@@ -86,7 +87,7 @@ export default function WorkPage() {
                                 {cat}
                                 {cat !== ALL && (
                                     <span style={{ marginLeft: '6px', opacity: 0.5 }}>
-                                        {events.filter(e => e.category === cat).length}
+                                        {publishedEvents.filter(e => e.category === cat).length}
                                     </span>
                                 )}
                             </button>
