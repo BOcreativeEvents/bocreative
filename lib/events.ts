@@ -1524,6 +1524,9 @@ export const events: EventData[] = [
         year: '2026',
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
+        videoPosters: {
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_0/v1793567019/el_ahly_htirmk.jpg',
+        },
         gallery: [
             'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564253/Artboard_1_copy_13_2x_o1y6ax.png',
