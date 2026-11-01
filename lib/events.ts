@@ -1522,8 +1522,8 @@ export const events: EventData[] = [
         category: 'Sales Event',
         location: 'Cairo',
         year: '2026',
-        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',
-        heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',
+        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
+        heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
         gallery: [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_2x_embr2r.png',
