@@ -1551,7 +1551,6 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_10_2x_zeusih.png',   // 6
         ],
         description: 'Shell & Al Ahly Club Partnership — a landmark brand experience celebrating the strategic alliance between Shell and one of Egypt\'s most iconic football clubs, Al Ahly SC, through an immersive event that brought together brand storytelling, fan culture, and corporate excellence.',
-        draft: true,
     },
 ]
 
