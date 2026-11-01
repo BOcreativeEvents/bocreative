@@ -214,7 +214,7 @@ export const events: EventData[] = [
         location: 'New Mansoura',
         year: '2026',
         partnershipBadge: 'CAZAMOND',
-        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793571005/Artboard_1_copy_3_2x_edlpp2.png',
+        img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/c_fill,g_south,ar_4:3/v1793571005/Artboard_1_copy_3_2x_edlpp2.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793571005/Artboard_1_copy_3_2x_edlpp2.png',
         videoPosters: {
             'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793571173/A_different_kind_of_beginning._Abhor._q9u8yn.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_auto/v1793571173/A_different_kind_of_beginning._Abhor._q9u8yn.jpg',
