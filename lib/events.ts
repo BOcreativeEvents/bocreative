@@ -144,7 +144,7 @@ export const events: EventData[] = [
         img: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793619923/Screenshot_2026-11-02_at_1.44.36_PM_boawdd.png',
         heroImg: 'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793565195/Cover_Photo_rkb4eg.png',
         videoPosters: {
-            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_auto/v1793567019/el_ahly_htirmk.jpg',
+            'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4': 'https://res.cloudinary.com/dwlznbqoi/video/upload/so_35/v1793567019/el_ahly_htirmk.jpg',
         },
         gallery: [
             'https://res.cloudinary.com/dwlznbqoi/video/upload/v1793567019/el_ahly_htirmk.mp4',
