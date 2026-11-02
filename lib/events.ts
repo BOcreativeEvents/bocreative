@@ -153,7 +153,6 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564243/Artboard_1_copy_12_2x_yv49rc.png',   // 5
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564221/Artboard_1_copy_9_2x_ipsygw.png',    // 17
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564225/Artboard_1_copy_17_2x_tdw0db.png',   // 4
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564253/Artboard_1_copy_13_2x_o1y6ax.png',   // 2
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564251/Artboard_1_copy_14_2x_pzi9cx.png',   // 7
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564244/Artboard_1_2x_qwtyk4.png',           // 8
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564236/Artboard_1_copy_2x_embr2r.png',      // 9
@@ -168,6 +167,7 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564228/Artboard_1_copy_5_2x_qqqrwr.png',    // 14
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564237/Artboard_1_copy_7_2x_wy14mr.png',    // 16
             'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793564249/Artboard_1_copy_10_2x_zeusih.png',   // 6
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793619923/Screenshot_2026-11-02_at_1.44.36_PM_boawdd.png',
         ],
         description: 'Shell & Al Ahly Club Partnership — a landmark brand experience celebrating the strategic alliance between Shell and one of Egypt\'s most iconic football clubs, Al Ahly SC, through an immersive event that brought together brand storytelling, fan culture, and corporate excellence.',
     },
