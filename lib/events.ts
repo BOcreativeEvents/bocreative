@@ -58,8 +58,8 @@ export const events: EventData[] = [
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/20250904-20250903-DSC09518.JPEG',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/20250904-20250903-DSC09582.JPG',
             // ── Crowd / Atmosphere ──
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/sckylers-new-1.png',
-            'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/sckylers-new-2.png',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793623003/magnific_use-img1-as-the-exact-sou_mEHA4ovhJQ_m1hrye.jpg',
+            'https://res.cloudinary.com/dwlznbqoi/image/upload/v1793623002/magnific_use-img1-as-the-exact-sou_rg7dF98xtc_ap63j0.jpg',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/sckylers-86.JPG',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/sckylers-87.JPG',
             'https://res.cloudinary.com/dwlznbqoi/image/upload/f_auto,q_auto/Events/Sckylers/sckylers-96.JPG',
